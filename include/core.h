@@ -1,5 +1,5 @@
-#ifndef MINECRAFT_CLONE_CORE_H
-#define MINECRAFT_CLONE_CORE_H
+#ifndef CORE_H
+#define CORE_H
 
 // Glad and GLFW
 #include <glad/glad.h>
@@ -9,5 +9,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
+// #include "Error.h"
 
 #endif 
