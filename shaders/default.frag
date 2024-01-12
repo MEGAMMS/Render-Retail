@@ -6,9 +6,10 @@ out vec4 FragColor;
 
 // Inputs the color from the Vertex Shader
 in vec3 color;
-
+in float scaleForFrag;
 
 void main()
 {
-	FragColor = vec4(color, 1.0f);
+	vec3 colorInverted = vec3(color.x + scaleForFrag/3, color.y+ scaleForFrag/3,  color.z+ scaleForFrag/3);
+	FragColor = vec4(colorInverted, 1.0f);
 }

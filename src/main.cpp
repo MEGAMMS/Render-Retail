@@ -8,6 +8,7 @@
 #include"VBO.h"
 #include"EBO.h"
 
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 
 // Vertices coordinates
@@ -19,6 +20,15 @@ GLfloat vertices[] =
     -0.25f, 0.5f * float(sqrt(3)) * 1 / 6, 0.0f,     0.9f, 0.45f, 0.17f, // Inner left
      0.25f, 0.5f * float(sqrt(3)) * 1 / 6, 0.0f,     0.9f, 0.45f, 0.17f, // Inner right
      0.0f, -0.5f * float(sqrt(3)) * 1 / 3, 0.0f,     0.8f, 0.3f,  0.02f  // Inner down
+};
+GLfloat vertices2[] =
+{ //               COORDINATES                  /     COLORS           //
+    -0.5f, -0.5f * float(sqrt(3)) * 1 / 3, 0.0f,     1.0f, 0.0f,  0.0f, // Lower left corner
+     0.5f, -0.5f * float(sqrt(3)) * 1 / 3, 0.0f,     0.0f, 1.0f,  0.0f, // Lower right corner
+     0.0f,  0.5f * float(sqrt(3)) * 2 / 3, 0.0f,     0.0f, 0.0f,  1.0f, // Upper corner
+    -0.25f, 0.5f * float(sqrt(3)) * 1 / 6, 0.0f,     0.5f, 0.0f, 0.5f, // Inner left
+     0.25f, 0.5f * float(sqrt(3)) * 1 / 6, 0.0f,     0.0f, 0.5f, 0.5f, // Inner right
+     0.0f, -0.5f * float(sqrt(3)) * 1 / 3, 0.0f,     0.5f, 0.5f,  0.0f  // Inner down
 };
 
 // Indices for vertices order
@@ -59,7 +69,7 @@ int main() {
     // Specify the viewport of OpenGL in the Window
     // In this case the viewport goes from x = 0, y = 0, to x = 800, y = 800
     glViewport(0, 0, 800, 800);
-
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 
     // Generates Shader object using shaders defualt.vert and default.frag
@@ -93,7 +103,7 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT);
         // Tell OpenGL which Shader Program we want to use
         shaderProgram.Activate();
-        glUniform1f(scaleUniID, 0.5f);
+        glUniform1f(scaleUniID, (sin(glfwGetTime()) * 6) / 10 + 0.1);
         // Bind the VAO so OpenGL knows to use it
         VAO1.Bind();
         // Draw primitives, number of indices, datatype of indices, index of indices
@@ -117,4 +127,9 @@ int main() {
     // Terminate GLFW before ending the program
     glfwTerminate();
     return 0;
+}
+void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+    // make sure the viewport matches the new window dimensions; note that width and 
+    // height will be significantly larger than specified on retina displays.
+    glViewport(0, 0, width, height);
 }
