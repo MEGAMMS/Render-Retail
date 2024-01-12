@@ -1,9 +1,8 @@
 #include "core.h"
 #include "core/Window.h"
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void processInput(GLFWwindow* window);
-
+void processInput(Window window);
+void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
@@ -12,21 +11,23 @@ int main() {
     // glfw: initialize and configure
     // ------------------------------
     Window window(SCR_WIDTH, SCR_HEIGHT, "LearningOpenGL");
-    glfwSetFramebufferSizeCallback(window.nativeWindow, framebuffer_size_callback);
-
+    window.installMainCallbacks();
+    glfwSetKeyCallback(window.nativeWindow,keyCallback);
     // glad: load all OpenGL function pointers
     // ---------------------------------------
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
-        std::cout << "Failed to initialize GLAD" << std::endl;
-        return -1;
+        Error::exitWithMassage("Failed to initialize GLAD");
     }
 
     // render loop
     // -----------
+    int isFullscreen = window.isFullscreen();
+
     while (!glfwWindowShouldClose(window.nativeWindow)) {
+        window.updateView();
         // input
         // -----
-        processInput(window.nativeWindow);
+        processInput(window);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
@@ -42,16 +43,14 @@ int main() {
 
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 // ---------------------------------------------------------------------------------------------------------
-void processInput(GLFWwindow* window) {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
+void processInput(Window window) {
+    
 }
 
-// glfw: whenever the window size changed (by OS or user resize) this callback function executes
-// ---------------------------------------------------------------------------------------------
-void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
-    // make sure the viewport matches the new window dimensions; note that width and 
-    // height will be significantly larger than specified on retina displays.
-    glViewport(0, 0, width, height);
+void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    if(action == GLFW_REPEAT)return;
+    std::cout << key << " " << action << std::endl;
+    
+
 }
 

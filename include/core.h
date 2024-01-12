@@ -9,6 +9,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-// #include "Error.h"
+#include "Error.h"
 
 #endif 
