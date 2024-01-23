@@ -1,12 +1,10 @@
-
-
 #include "core.h"
 #include "core/Window.h"
 #include <math.h>
-#include"shaderClass.h"
-#include"VAO.h"
-#include"VBO.h"
-#include"EBO.h"
+#include "shaderClass.h"
+#include "VAO.h"
+#include "VBO.h"
+#include "EBO.h"
 
 void processInput(Window window);
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
