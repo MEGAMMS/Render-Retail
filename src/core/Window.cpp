@@ -1,33 +1,36 @@
 #include "core/Window.h"
 #include "Error.h"
 
-Window::Window(int width, int height, const char* title, bool fullscreen) {
-    // glfw: initialize and configure
-    // ------------------------------
+Window* Window::instancePtr = nullptr;
+
+Window::Window() {
+    assert(instancePtr == nullptr && "The window is already instantiated");
+    instancePtr = this;
     glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
+    glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
-#ifdef __APPLE__
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-#endif
+    _window = glfwCreateWindow(windowWidth, windowHeight, name, nullptr, nullptr);
+    glfwMakeContextCurrent(_window);
 
-    // glfw window creation
-    // --------------------
-    nativeWindow = glfwCreateWindow(width, height, title, nullptr, nullptr);
-
-    if (nativeWindow == NULL) {
-        glfwTerminate();
-        Error::exitWithMassage("Failed to create GLFW window");
+    if (_window == nullptr) {
+        std::cerr << "Failed to create GLFW window" << std::endl;
+        return;
     }
-    glfwMakeContextCurrent(nativeWindow);
 
-    glfwSetWindowUserPointer(nativeWindow, this);
+    if (!setupGlad()) {
+        std::cerr << "Failed to initialize OpenGL context" << std::endl;
+        _window = nullptr;
+        return;
+    }
+
+
+    installMainCallbacks();
 
     _monitor = glfwGetPrimaryMonitor();
-    glfwGetWindowSize(nativeWindow, &_wndSize[0], &_wndSize[1]);
-    glfwGetWindowPos(nativeWindow, &_wndPos[0], &_wndPos[1]);
     _updateViewport = true;
 
 }
@@ -37,39 +40,103 @@ void Window::setFullscreen(bool fullscreen) {
 
     if (fullscreen) {
         // backup window position and window size
-        glfwGetWindowPos(nativeWindow, &_wndPos[0], &_wndPos[1]);
-        glfwGetWindowSize(nativeWindow, &_wndSize[0], &_wndSize[1]);
+        glfwGetWindowSize(_window, &windowWidth, &windowHeight);
 
         // get resolution of monitor
         const GLFWvidmode* mode = glfwGetVideoMode(_monitor);
 
         // switch to full screen
-        glfwSetWindowMonitor(nativeWindow, _monitor, 0, 0, mode->width, mode->height, 0);
+        glfwSetWindowMonitor(_window, _monitor, 0, 0, mode->width, mode->height, 0);
     } else {
         // restore last window size and position
-        glfwSetWindowMonitor(nativeWindow, nullptr, _wndPos[0], _wndPos[1], _wndSize[0], _wndSize[1], 0);
+        glfwSetWindowMonitor(_window, nullptr, 100, 100, windowHeight, windowWidth, 0);
     }
 
     _updateViewport = true;
 }
+
 bool Window::isFullscreen() {
-    return glfwGetWindowMonitor(nativeWindow) != nullptr;
+    return glfwGetWindowMonitor(_window) != nullptr;
 }
+
+void Window::finalizeFrame() {
+    glfwSwapBuffers(_window);
+}
+
+void Window::pollEvents() {
+    glfwPollEvents();
+}
+
+void Window::update() {
+    updateView();
+    glClearColor(clearColor.x, clearColor.y, clearColor.z, clearColor.w);
+    glClear(GL_COLOR_BUFFER_BIT);
+}
+
 void Window::installMainCallbacks() {
-    
+    glfwSetKeyCallback(_window, onKeyEvent);
+    glfwSetMouseButtonCallback(_window, onMouseButtonEvent);
+    glfwSetCursorPosCallback(_window, onCursorPosition);
+    glfwSetFramebufferSizeCallback(_window, onResized);
+
+    glEnable(GL_DEBUG_OUTPUT);
+    glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+    glDebugMessageCallback(onOpenGlMessage, nullptr);
+    glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_TRUE);
+    // glfwSwapInterval(2);
+
+    glfwSetWindowRefreshCallback(_window, onRefreshWindow);
+    glfwSetErrorCallback(Window::onWindowError);
 
 }
-void Window::Resize(int cx, int cy) {
-    _updateViewport = true;
-}
+
 void Window::updateView() {
     if (_updateViewport) {
-        glfwGetFramebufferSize(nativeWindow, &_vpSize[0], &_vpSize[1]);
-        glViewport(0, 0, _vpSize[0], _vpSize[1]);
+        glfwGetFramebufferSize(_window, &windowWidth, &windowHeight);
+        glViewport(0, 0, windowWidth, windowHeight);
         _updateViewport = false;
     }
 }
+
 void Window::close() {
-    glfwSetWindowShouldClose(nativeWindow, GLFW_TRUE);
+    glfwSetWindowShouldClose(_window, GLFW_TRUE);
 }
 
+Window::~Window() {
+    instancePtr = nullptr;
+    glfwTerminate();
+}
+
+bool Window::setupGlad() {
+    if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
+        std::cerr << "Failed to initialize OpenGL context" << std::endl;
+        return false;
+    }
+
+    // glEnable(GL_DEPTH_TEST);
+    // glEnable(GL_CULL_FACE);
+
+    return true;
+}
+
+void Window::onKeyEvent(GLFWwindow* window, int32_t key, int32_t scancode, int32_t action, int32_t mode) {
+}
+
+void Window::onResized(GLFWwindow* window, int32_t width, int32_t height) {
+}
+
+void Window::onMouseButtonEvent(GLFWwindow* window, int32_t button, int32_t action, int32_t mods) {
+}
+
+void Window::onCursorPosition(GLFWwindow* window, double x, double y) {
+}
+
+void Window::onRefreshWindow(GLFWwindow* window) {
+}
+
+void Window::onWindowError(int32_t errorCode, const char* description) {
+    std::cerr << "GLFW: **ERROR** error=" << errorCode << " description=" << description << std::endl;
+}
+
+void Window::onOpenGlMessage(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam) {
+}

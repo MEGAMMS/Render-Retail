@@ -29,20 +29,11 @@ GLuint indices[] =
     5, 4, 1 // Upper triangle
 };
 
-// settings
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 800;
+
 
 int main() {
-    Window window(SCR_WIDTH, SCR_HEIGHT, "LearningOpenGL");
-    window.installMainCallbacks();
-    glfwSetKeyCallback(window.nativeWindow, keyCallback);
-    // glad: load all OpenGL function pointers
-    // ---------------------------------------
-    if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
-        std::cout << "Failed to initialize GLAD" << std::endl;
-        return -1;
-    }
+    auto window = new Window();
+    // glfwSetKeyCallback(window.nativeWindow, keyCallback);
     // Generates Shader object using shaders defualt.vert and default.frag
     Shader shaderProgram("assets/shaders/default.vert", "assets/shaders/default.frag");
 
@@ -68,12 +59,8 @@ int main() {
     // GLuint scaleUniID = glGetUniformLocation(shaderProgram.ID, "scale");
     // render loop
     // -----------
-    while (!glfwWindowShouldClose(window.nativeWindow)) {
-        window.updateView();
-        // Specify the color of the background
-        glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
-        // Clean the back buffer and assign the new color to it
-        glClear(GL_COLOR_BUFFER_BIT);
+    while (!window->shouldClose()) {
+        window->update();
         // Tell OpenGL which Shader Program we want to use
         shaderProgram.Activate();
         // Bind the VAO so OpenGL knows to use it
@@ -82,9 +69,9 @@ int main() {
         glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, (void*) (0 * sizeof(GLuint)));
 
         // Swap the back buffer with the front buffer
-        glfwSwapBuffers(window.nativeWindow);
+        window->finalizeFrame();
         // Take care of all GLFW events
-        glfwPollEvents();
+        window->pollEvents();
     }
 
 
@@ -94,10 +81,6 @@ int main() {
     VBO1.Delete();
     EBO1.Delete();
     shaderProgram.Delete();
-    // Delete window before ending the program
-    glfwDestroyWindow(window.nativeWindow);
-    // Terminate GLFW before ending the program
-    glfwTerminate();
     return 0;
 }
 

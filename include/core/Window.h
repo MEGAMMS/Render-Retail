@@ -1,23 +1,60 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 #include "core.h"
-#include "array"
 
 class Window {
+
 public:
-    GLFWwindow* nativeWindow;
-    std::array< int, 2 > _wndPos;
-    std::array< int, 2 > _wndSize;
-    std::array< int, 2 > _vpSize;
-    bool _updateViewport;
-    GLFWmonitor* _monitor;
-    Window(int width, int height, const char* title, bool fullScreenMode = false);
+    Window();
+    Window(const Window&) = delete;
+    Window(Window&) = delete;
+    Window(Window&&) = delete;
+
+    inline int32_t getWindowHeight() const { return windowHeight; }
+    inline int32_t getWindowWidth() const { return windowWidth; }
+    inline GLFWwindow* getContext() { return _window; };
+    inline bool isValid() { return _window != nullptr; };
+    inline bool shouldClose() const { return glfwWindowShouldClose(_window); };
+
+    inline static Window& instance() { return *instancePtr; }
     void setFullscreen(bool fullscreen);
     bool isFullscreen();
-    void installMainCallbacks();
-    void Resize(int cx, int cy);
-    void updateView();
+    void update();
+    void finalizeFrame();
+    void pollEvents();
     void close();
+    ~Window();
+private:
+
+    static Window* instancePtr;
+
+    const char* name = "glCraft";
+    int32_t windowWidth = 800;
+    int32_t windowHeight = 800;
+    GLFWwindow* _window = nullptr;
+    GLFWmonitor* _monitor = nullptr;
+    bool _updateViewport = true;
+    glm::vec4 clearColor = { 0.17, 0.145, 0.133, 1 };
+
+
+    void updateView();
+    void installMainCallbacks();
+    static bool setupGlad();
+
+    static void onKeyEvent(GLFWwindow* window, int32_t key, int32_t scancode, int32_t action, int32_t mode);
+    static void onResized(GLFWwindow* window, int32_t width, int32_t height);
+    static void onMouseButtonEvent(GLFWwindow* window, int32_t button, int32_t action, int32_t mods);
+    static void onCursorPosition(GLFWwindow* window, double x, double y);
+    static void onRefreshWindow(GLFWwindow* window);
+
+    static void onWindowError(int32_t errorCode, const char* description);
+    static void onOpenGlMessage(GLenum source,
+        GLenum type,
+        GLuint id,
+        GLenum severity,
+        GLsizei length,
+        const GLchar* message,
+        const void* userParam);
 };
 
 #endif 
