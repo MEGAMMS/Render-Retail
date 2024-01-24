@@ -2,7 +2,7 @@
 #include "Error.h"
 
 Window* Window::instancePtr = nullptr;
-
+bool Window::_updateViewport = true;
 Window::Window() {
     assert(instancePtr == nullptr && "The window is already instantiated");
     instancePtr = this;
@@ -41,7 +41,6 @@ void Window::setFullscreen(bool fullscreen) {
     if (fullscreen) {
         // backup window position and window size
         glfwGetWindowSize(_window, &windowWidth, &windowHeight);
-
         // get resolution of monitor
         const GLFWvidmode* mode = glfwGetVideoMode(_monitor);
 
@@ -49,7 +48,7 @@ void Window::setFullscreen(bool fullscreen) {
         glfwSetWindowMonitor(_window, _monitor, 0, 0, mode->width, mode->height, 0);
     } else {
         // restore last window size and position
-        glfwSetWindowMonitor(_window, nullptr, 100, 100, windowHeight, windowWidth, 0);
+        glfwSetWindowMonitor(_window, nullptr, 100, 100, windowWidth,windowHeight , 0);
     }
 
     _updateViewport = true;
@@ -92,8 +91,9 @@ void Window::installMainCallbacks() {
 
 void Window::updateView() {
     if (_updateViewport) {
-        glfwGetFramebufferSize(_window, &windowWidth, &windowHeight);
-        glViewport(0, 0, windowWidth, windowHeight);
+        int currWidth,currHeight;
+        glfwGetFramebufferSize(_window, &currWidth, &currHeight);
+        glViewport(0, 0, currWidth, currHeight);
         _updateViewport = false;
     }
 }
@@ -120,9 +120,13 @@ bool Window::setupGlad() {
 }
 
 void Window::onKeyEvent(GLFWwindow* window, int32_t key, int32_t scancode, int32_t action, int32_t mode) {
+    // bool isFullscreenn = 
+    if (key == GLFW_KEY_F11 and action == GLFW_PRESS)Window::instance().setFullscreen(!instance().isFullscreen());
+    if (key == GLFW_KEY_ESCAPE and action == GLFW_PRESS)Window::instance().close();
 }
 
 void Window::onResized(GLFWwindow* window, int32_t width, int32_t height) {
+    _updateViewport = true;
 }
 
 void Window::onMouseButtonEvent(GLFWwindow* window, int32_t button, int32_t action, int32_t mods) {

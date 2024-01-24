@@ -33,7 +33,7 @@ private:
     int32_t windowHeight = 800;
     GLFWwindow* _window = nullptr;
     GLFWmonitor* _monitor = nullptr;
-    bool _updateViewport = true;
+    static bool _updateViewport;
     glm::vec4 clearColor = { 0.17, 0.145, 0.133, 1 };
 
 
