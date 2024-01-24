@@ -10,6 +10,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <memory>
+#include <math.h>
 #include "Error.h"
 
 #endif 
