@@ -7,21 +7,19 @@
 
 // Vertices coordinates
 GLfloat vertices[] =
-{ //               COORDINATES                  /     COLORS           //
-    -0.5f, -0.5f * float(sqrt(3)) * 1 / 3, 0.0f,     0.8f, 0.3f,  0.02f, // Lower left corner
-     0.5f, -0.5f * float(sqrt(3)) * 1 / 3, 0.0f,     0.8f, 0.3f,  0.02f, // Lower right corner
-     0.0f,  0.5f * float(sqrt(3)) * 2 / 3, 0.0f,     1.0f, 0.6f,  0.32f, // Upper corner
-    -0.25f, 0.5f * float(sqrt(3)) * 1 / 6, 0.0f,     0.9f, 0.45f, 0.17f, // Inner left
-     0.25f, 0.5f * float(sqrt(3)) * 1 / 6, 0.0f,     0.9f, 0.45f, 0.17f, // Inner right
-     0.0f, -0.5f * float(sqrt(3)) * 1 / 3, 0.0f,     0.8f, 0.3f,  0.02f  // Inner down
+{ //               COORDINATES                  
+  -1.,-1.,
+  1.,-1.,
+  -1.,1.,
+  1.,1.
+
 };
 
 // Indices for vertices order
 GLuint indices[] =
 {
-    0, 3, 5, // Lower left triangle
-    3, 2, 4, // Lower right triangle
-    5, 4, 1 // Upper triangle
+    0, 1, 2,
+    3, 1, 2
 };
 
 Application* Application::instancePtr = nullptr;
@@ -46,24 +44,27 @@ void Application::run() {
     EBO EBO1(indices, sizeof(indices));
 
     // Links VBO to VAO
-    VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 6 * sizeof(float), (void*) 0);
-    VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 6 * sizeof(float), (void*) (3 * sizeof(float)));
+    VAO1.LinkAttrib(VBO1, 0, 2, GL_FLOAT, 2 * sizeof(float), (void*) 0);
     // Unbind all to prevent accidentally modifying them
     VAO1.Unbind();
     VBO1.Unbind();
     EBO1.Unbind();
 
-    // GLuint scaleUniID = glGetUniformLocation(shaderProgram.ID, "scale");
+    shaderProgram.Activate();
+    GLuint timeUniID = glGetUniformLocation(shaderProgram.ID, "u_time");
+    GLuint resUniID = glGetUniformLocation(shaderProgram.ID, "u_resolution");
+    glUniform2f(resUniID,window->getWindowWidth(),window->getWindowHeight());
     // render loop
     // -----------
     while (!window->shouldClose()) {
         window->update();
         // Tell OpenGL which Shader Program we want to use
         shaderProgram.Activate();
+        glUniform1f(timeUniID, glfwGetTime());
         // Bind the VAO so OpenGL knows to use it
         VAO1.Bind();
         // Draw primitives, number of indices, datatype of indices, index of indices
-        glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, (void*) (0 * sizeof(GLuint)));
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*) (0 * sizeof(GLuint)));
 
         // Swap the back buffer with the front buffer
         window->finalizeFrame();
