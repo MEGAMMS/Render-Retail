@@ -4,10 +4,14 @@
 layout (location = 0) in vec2 aPos;
 
 
-
+uniform float u_move;
 
 void main()
 {
 	// Outputs the positions/coordinates of all vertices
-	gl_Position = vec4(aPos,0.0, 1.0);
+	float a = .5;
+
+	vec2 finalPos = aPos*a*0.5;
+	finalPos.x += u_move;
+	gl_Position = vec4(finalPos,0.0, 1.0);
 }

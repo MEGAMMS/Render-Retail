@@ -17,6 +17,8 @@ public:
     Application& operator=(Application&) = delete;
     Application& operator=(Application&&) noexcept = delete;
 
+    void onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode);
+
     inline static Application& instance() { return *instancePtr; };
 
     void run();
