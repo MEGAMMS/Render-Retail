@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 3.5)
 project (Sandbox)
 
 # Add source files
-file(GLOB SOURCE_FILES "src/*/*.cpp" "src/*.cpp")
+file(GLOB_RECURSE SOURCE_FILES "src/*.cpp")
 
 # Add include directories
 include_directories(include)
