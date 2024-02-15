@@ -48,7 +48,8 @@ SquarePlayer::SquarePlayer() {
 }
 
 void SquarePlayer::update(float dt) {
-    pos += move * dt;
+    glm::vec2 dpos = {(move.x - move.y)*playerSpeed.x,(move.z - move.w)*playerSpeed.y};
+    pos += dpos*dt;
     // Tell OpenGL which Shader Program we want to use
     shaderProgram->Activate();
     glUniform1f(timeUniID, glfwGetTime());
@@ -64,10 +65,11 @@ void SquarePlayer::Delete() {
     shaderProgram->Delete();
 }
 void SquarePlayer::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
-    if (key == GLFW_KEY_RIGHT)move.x = SPEED * (action == GLFW_PRESS);
-    if (key == GLFW_KEY_LEFT)move.x = -SPEED * (action == GLFW_PRESS);
-    if (key == GLFW_KEY_UP)move.y = SPEED * (action == GLFW_PRESS);
-    if (key == GLFW_KEY_DOWN)move.y = -SPEED * (action == GLFW_PRESS);
+    bool pressed = action == GLFW_PRESS;
+    if (key == GLFW_KEY_RIGHT)move.x = pressed ;
+    if (key == GLFW_KEY_LEFT)move.y = pressed;
+    if (key == GLFW_KEY_UP)move.z = pressed;
+    if (key == GLFW_KEY_DOWN)move.w = pressed;
 
 }
 

@@ -14,8 +14,8 @@ private:
     GLuint resUniID;
     GLuint moveUniID;
 
-    const float SPEED = 1.;
-    glm::vec2 move = { 0.,0. };
+    const glm::vec2 playerSpeed = {0.8,0.8};
+    glm::bvec4 move = { 0,0,0,0 };
     glm::vec2 pos = {0.,0.};
 
 public:
