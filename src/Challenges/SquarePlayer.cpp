@@ -1,12 +1,32 @@
 #include "Challenges/SquarePlayer.h"
+#include "buffers/EBO.h"
+#include "core/Window.h"
 
 
+SquarePlayer::SquarePlayer() {
+    shaderProgram = std::make_shared<Shader>("assets/shaders/default.vert", "assets/shaders/default.frag");
+    GLfloat vertices[] =
+    { //               COORDINATES                  
+      -1.,-1.,
+      1.,-1.,
+      -1.,1.,
+      1.,1.
 
-void SquarePlayer::setup() {
-    Window &window = Window::instance();
-    // Generates Shader object using shaders defualt.vert and default.frag
+    };
+
+    GLuint indices[] =
+    {
+        0, 1, 2,
+        3, 1, 2
+    };
+
+
+    VAO1 = VAO();
     VAO1.Bind();
-
+    // Generates Vertex Buffer Object and links it to vertices
+    VBO VBO1(vertices, sizeof(vertices));
+    // Generates Element Buffer Object and links it to indices
+    EBO EBO1(indices, sizeof(indices));
 
     // Links VBO to VAO
     VAO1.LinkAttrib(VBO1, 0, 2, GL_FLOAT, 2 * sizeof(float), (void*) 0);
@@ -14,28 +34,22 @@ void SquarePlayer::setup() {
     VAO1.Unbind();
     VBO1.Unbind();
     EBO1.Unbind();
+    shaderProgram->Activate();
 
-    shaderProgram.Activate();
-    timeUniID = glGetUniformLocation(shaderProgram.ID, "u_time");
-    resUniID = glGetUniformLocation(shaderProgram.ID, "u_resolution");
+    Window& window = Window::instance();
+
+    timeUniID = glGetUniformLocation(shaderProgram->ID, "u_time");
+
+    resUniID = glGetUniformLocation(shaderProgram->ID, "u_resolution");
     glUniform2f(resUniID, window.getWindowWidth(), window.getWindowHeight());
 
-
-    moveUniID = glGetUniformLocation(shaderProgram.ID, "u_move");
-
-}
-void SquarePlayer::destroy() {
-    // Delete all the objects we've created
-    VAO1.Delete();
-    VBO1.Delete();
-    EBO1.Delete();
-    shaderProgram.Delete();
+    moveUniID = glGetUniformLocation(shaderProgram->ID, "u_move");
 }
 
 void SquarePlayer::update(float dt) {
     if (move)pos += 0.2 * dt;
     // Tell OpenGL which Shader Program we want to use
-    shaderProgram.Activate();
+    shaderProgram->Activate();
     glUniform1f(timeUniID, glfwGetTime());
     glUniform1f(moveUniID, pos);
     // Bind the VAO so OpenGL knows to use it
@@ -43,3 +57,9 @@ void SquarePlayer::update(float dt) {
     // Draw primitives, number of indices, datatype of indices, index of indices
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*) (0 * sizeof(GLuint)));
 }
+
+void SquarePlayer::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
+    if (key == GLFW_KEY_RIGHT)move = action == GLFW_PRESS;
+
+}
+

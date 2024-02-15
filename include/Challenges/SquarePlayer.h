@@ -2,39 +2,13 @@
 
 #include "core.h"
 #include "shaderClass.h"
-#include "shaderClass.h"
 #include "buffers/VAO.h"
-#include "buffers/VBO.h"
-#include "buffers/EBO.h"
-#include "core/Window.h"
-#include "Application/Application.h"
 
-namespace SquarePlayer
-{
-    // Vertices coordinates
-    GLfloat vertices[] =
-    { //               COORDINATES                  
-      -1.,-1.,
-      1.,-1.,
-      -1.,1.,
-      1.,1.
-
-    };
-
-    // Indices for vertices order
-    GLuint indices[] =
-    {
-        0, 1, 2,
-        3, 1, 2
-    };
+class SquarePlayer {
+private:
 
     VAO VAO1;
-
-    // Generates Vertex Buffer Object and links it to vertices
-    VBO VBO1(vertices, sizeof(vertices));
-    // Generates Element Buffer Object and links it to indices
-    EBO EBO1(indices, sizeof(indices));
-    Shader shaderProgram("assets/shaders/default.vert", "assets/shaders/default.frag");
+    std::shared_ptr<Shader> shaderProgram;
 
     GLuint timeUniID;
     GLuint resUniID;
@@ -42,7 +16,10 @@ namespace SquarePlayer
 
     bool move = 0;
     float pos = 0;
-    void setup();
-    void destroy();
+
+public:
+    SquarePlayer();
     void update(float dt);
-}
+
+    void onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode);
+};
