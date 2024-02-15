@@ -12,6 +12,7 @@
 #include <vector>
 #include <memory>
 #include <math.h>
+#include <array>
 #include "Error.h"
 
 #endif 

@@ -4,7 +4,7 @@
 layout (location = 0) in vec2 aPos;
 
 
-uniform float u_move;
+uniform vec2 u_move;
 
 void main()
 {
@@ -12,6 +12,6 @@ void main()
 	float a = .5;
 
 	vec2 finalPos = aPos*a*0.5;
-	finalPos.x += u_move;
+	finalPos += u_move;
 	gl_Position = vec4(finalPos,0.0, 1.0);
 }
