@@ -1,5 +1,4 @@
 #include "core/Window.h"
-#include "Error.h"
 #include "Application/Application.h"
 
 Window* Window::instancePtr = nullptr;
@@ -121,7 +120,7 @@ bool Window::setupGlad() {
 }
 
 void Window::onKeyEvent(GLFWwindow* window, int32_t key, int32_t scancode, int32_t action, int32_t mode) {
-    if(action == GLFW_REPEAT)return;
+    if (action == GLFW_REPEAT)return;
     if (key == GLFW_KEY_F11 and action == GLFW_PRESS)Window::instance().setFullscreen(!instance().isFullscreen());
     if (key == GLFW_KEY_ESCAPE and action == GLFW_PRESS)Window::instance().close();
     Application::instance().onKeyEvent(key, scancode, action, mode);
@@ -145,92 +144,94 @@ void Window::onWindowError(int32_t errorCode, const char* description) {
 }
 
 void GLAPIENTRY Window::onOpenGlMessage(GLenum source,
-                                        GLenum type,
-                                        GLuint id,
-                                        GLenum severity,
-                                        GLsizei,
-                                        const GLchar *message,
-                                        const void *) {
-  if (id == 131185 || id == 131218) {
-    return;
-  }
+    GLenum type,
+    GLuint id,
+    GLenum severity,
+    GLsizei,
+    const GLchar* message,
+    const void*) {
+    if (id == 131185 || id == 131218) {
+        return;
+    }
 
-  std::cerr << "---------------" << std::endl;
-  std::cerr << "Debug message (" << id << "): " << message << std::endl;
+    std::cerr << "---------------" << std::endl;
+    std::cerr << "Debug message (" << id << "): " << message << std::endl;
 
-  switch (source) {
+    switch (source) {
     case GL_DEBUG_SOURCE_API:
-      std::cerr << "Source: API";
-      break;
+        std::cerr << "Source: API";
+        break;
     case GL_DEBUG_SOURCE_WINDOW_SYSTEM:
-      std::cerr << "Source: Window System";
-      break;
+        std::cerr << "Source: Window System";
+        break;
     case GL_DEBUG_SOURCE_SHADER_COMPILER:
-      std::cerr << "Source: Shader Compiler";
-      break;
+        std::cerr << "Source: Shader Compiler";
+        break;
     case GL_DEBUG_SOURCE_THIRD_PARTY:
-      std::cerr << "Source: Third Party";
-      break;
+        std::cerr << "Source: Third Party";
+        break;
     case GL_DEBUG_SOURCE_APPLICATION:
-      std::cerr << "Source: Application";
-      break;
+        std::cerr << "Source: Application";
+        break;
     case GL_DEBUG_SOURCE_OTHER:
-      std::cerr << "Source: Other";
-      break;
+        std::cerr << "Source: Other";
+        break;
     default:
-      break;
-  }
-  std::cerr << std::endl;
+        break;
+    }
+    std::cerr << std::endl;
 
-  switch (type) {
+    switch (type) {
     case GL_DEBUG_TYPE_ERROR:
-      std::cerr << "Type: Error";
-      break;
+        std::cerr << "Type: Error";
+        break;
     case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR:
-      std::cerr << "Type: Deprecated Behaviour";
-      break;
+        std::cerr << "Type: Deprecated Behaviour";
+        break;
     case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:
-      std::cerr << "Type: Undefined Behaviour";
-      break;
+        std::cerr << "Type: Undefined Behaviour";
+        break;
     case GL_DEBUG_TYPE_PORTABILITY:
-      std::cerr << "Type: Portability";
-      break;
+        std::cerr << "Type: Portability";
+        break;
     case GL_DEBUG_TYPE_PERFORMANCE:
-      std::cerr << "Type: Performance";
-      break;
+        std::cerr << "Type: Performance";
+        break;
     case GL_DEBUG_TYPE_MARKER:
-      std::cerr << "Type: Marker";
-      break;
+        std::cerr << "Type: Marker";
+        break;
     case GL_DEBUG_TYPE_PUSH_GROUP:
-      std::cerr << "Type: Push Group";
-      break;
+        std::cerr << "Type: Push Group";
+        break;
     case GL_DEBUG_TYPE_POP_GROUP:
-      std::cerr << "Type: Pop Group";
-      break;
+        std::cerr << "Type: Pop Group";
+        break;
     case GL_DEBUG_TYPE_OTHER:
-      std::cerr << "Type: Other";
-      break;
+        std::cerr << "Type: Other";
+        break;
     default:
-      break;
-  }
-  std::cerr << std::endl;
+        break;
+    }
+    std::cerr << std::endl;
 
-  switch (severity) {
+    switch (severity) {
     case GL_DEBUG_SEVERITY_HIGH:
-      std::cerr << "Severity: high";
-      break;
+        std::cerr << "Severity: high";
+        break;
     case GL_DEBUG_SEVERITY_MEDIUM:
-      std::cerr << "Severity: medium";
-      break;
+        std::cerr << "Severity: medium";
+        break;
     case GL_DEBUG_SEVERITY_LOW:
-      std::cerr << "Severity: low";
-      break;
+        std::cerr << "Severity: low";
+        break;
     case GL_DEBUG_SEVERITY_NOTIFICATION:
-      std::cerr << "Severity: notification";
-      break;
+        std::cerr << "Severity: notification";
+        break;
     default:
-      break;
-  }
-  std::cerr << std::endl;
-  std::cerr << std::endl;
+        break;
+    }
+    std::cerr << std::endl;
+    std::cerr << std::endl;
+
+    if (type == GL_DEBUG_TYPE_ERROR)exit(1);
 }

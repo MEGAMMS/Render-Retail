@@ -1,5 +1,4 @@
-#ifndef CORE_H
-#define CORE_H
+#pragma once
 
 // Glad and GLFW
 #include <glad/glad.h>
@@ -12,7 +11,6 @@
 #include <vector>
 #include <memory>
 #include <math.h>
+#include <fstream>
+#include <sstream>
 #include <array>
-#include "Error.h"
-
-#endif 

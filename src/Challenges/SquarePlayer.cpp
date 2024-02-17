@@ -7,7 +7,6 @@ struct Vertex {
     glm::vec2 position;
 };
 SquarePlayer::SquarePlayer() {
-    shaderProgram = std::make_shared<Shader>("assets/shaders/default.vert", "assets/shaders/default.frag");
     static std::array<Vertex, 4> vertices = {
       Vertex{ glm::vec2{-1.,-1.} },
       Vertex{ glm::vec2{1.,-1.} },
@@ -33,27 +32,24 @@ SquarePlayer::SquarePlayer() {
     vao.Unbind();
     vbo.Unbind();
     ebo.Unbind();
-    shaderProgram->Activate();
 
     Window& window = Window::instance();
 
-    timeUniID = glGetUniformLocation(shaderProgram->ID, "u_time");
+    shaderProgram = std::make_shared<Shader>("assets/shaders/default.vert", "assets/shaders/default.frag");
+    shaderProgram->Activate();
+    shaderProgram->setVec2("u_resolution", glm::vec2{ window.getWindowWidth(),window.getWindowHeight() });
 
-    resUniID = glGetUniformLocation(shaderProgram->ID, "u_resolution");
-    glUniform2f(resUniID, window.getWindowWidth(), window.getWindowHeight());
-
-    moveUniID = glGetUniformLocation(shaderProgram->ID, "u_move");
     vbo.Delete();
     ebo.Delete();
 }
 
 void SquarePlayer::update(float dt) {
-    glm::vec2 dpos = {(move.x - move.y)*playerSpeed.x,(move.z - move.w)*playerSpeed.y};
-    pos += dpos*dt;
+    glm::vec2 dpos = { (move.x - move.y) * playerSpeed.x,(move.z - move.w) * playerSpeed.y };
+    pos += dpos * dt;
     // Tell OpenGL which Shader Program we want to use
     shaderProgram->Activate();
-    glUniform1f(timeUniID, glfwGetTime());
-    glUniform2f(moveUniID, pos.x, pos.y);
+    shaderProgram->setFloat("u_time", glfwGetTime());
+    shaderProgram->setVec2("u_move", pos);
     // Bind the VAO so OpenGL knows to use it
     vao.Bind();
     // Draw primitives, number of indices, datatype of indices, index of indices
@@ -62,11 +58,10 @@ void SquarePlayer::update(float dt) {
 
 void SquarePlayer::Delete() {
     vao.Delete();
-    shaderProgram->Delete();
 }
 void SquarePlayer::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
     bool pressed = action == GLFW_PRESS;
-    if (key == GLFW_KEY_RIGHT)move.x = pressed ;
+    if (key == GLFW_KEY_RIGHT)move.x = pressed;
     if (key == GLFW_KEY_LEFT)move.y = pressed;
     if (key == GLFW_KEY_UP)move.z = pressed;
     if (key == GLFW_KEY_DOWN)move.w = pressed;
