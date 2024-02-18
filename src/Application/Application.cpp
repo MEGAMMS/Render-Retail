@@ -1,9 +1,16 @@
 #include "Application/Application.h"
 
+Application* Application::instancePtr = nullptr;
+
 float dt = 0.016f;
 float frameStart = 0.0f;
 
-Application* Application::instancePtr = nullptr;
+enum class Program {
+    SQUARE, TRIANGLE, Count
+};
+
+int programIdx = 0;
+
 
 Application::Application() {
     assert(instancePtr == nullptr && "The application is already instantiated");
@@ -22,9 +29,15 @@ void Application::run() {
 
         dt = glfwGetTime() - frameStart;
         frameStart = glfwGetTime();
-
-        // square->update(dt);
-        triangle->update();
+        
+        switch ((Program) programIdx) {
+        case Program::SQUARE:
+            square->update(dt);
+            break;
+        case Program::TRIANGLE:
+            triangle->update();
+            break;
+        }
 
         // Swap the back buffer with the front buffer
         window->finalizeFrame();
@@ -35,6 +48,7 @@ void Application::run() {
 
 }
 void Application::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
-    // square->onKeyEvent(key, scancode, action, mode);
-    triangle->onKeyEvent(key,scancode,action,mode);
+    square->onKeyEvent(key, scancode, action, mode);
+    triangle->onKeyEvent(key, scancode, action, mode);
+    if (key == GLFW_KEY_LEFT_CONTROL and action == GLFW_PRESS)programIdx = ((++programIdx) % (int) Program::Count);
 }
