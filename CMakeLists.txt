@@ -13,11 +13,13 @@ add_executable(main ${SOURCE_FILES})
 add_subdirectory(lib/glfw EXCLUDE_FROM_ALL)
 add_subdirectory(lib/glm EXCLUDE_FROM_ALL)
 add_subdirectory(lib/glad EXCLUDE_FROM_ALL)
+add_subdirectory(lib/lodepng EXCLUDE_FROM_ALL)
 
 target_link_libraries(main
     glfw
     glad
     glm
+    lodepng
 )
 
 
