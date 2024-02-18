@@ -1,8 +1,5 @@
 #include "Application/Application.h"
-#include "Challenges/SquarePlayer.h"
 
-
-std::unique_ptr<SquarePlayer> square;
 float dt = 0.016f;
 float frameStart = 0.0f;
 
@@ -14,6 +11,7 @@ Application::Application() {
 
     window = std::make_unique<Window>();
     square = std::make_unique<SquarePlayer>();
+    triangle = std::make_unique<TriangleExample>();
 }
 void Application::run() {
 
@@ -25,7 +23,8 @@ void Application::run() {
         dt = glfwGetTime() - frameStart;
         frameStart = glfwGetTime();
 
-        square->update(dt);
+        // square->update(dt);
+        triangle->update();
 
         // Swap the back buffer with the front buffer
         window->finalizeFrame();
@@ -36,5 +35,6 @@ void Application::run() {
 
 }
 void Application::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
-    square->onKeyEvent(key, scancode, action, mode);
+    // square->onKeyEvent(key, scancode, action, mode);
+    triangle->onKeyEvent(key,scancode,action,mode);
 }

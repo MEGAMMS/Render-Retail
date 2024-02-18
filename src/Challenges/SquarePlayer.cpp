@@ -33,11 +33,13 @@ SquarePlayer::SquarePlayer() {
     vbo.Unbind();
     ebo.Unbind();
 
-    Window& window = Window::instance();
 
-    shaderProgram = std::make_shared<Shader>("assets/shaders/default.vert", "assets/shaders/default.frag");
+    shaderProgram = std::make_shared<Shader>(
+        "assets/shaders/SquarePlayer.vert",
+        "assets/shaders/SquarePlayer.frag");
     shaderProgram->Activate();
-    shaderProgram->setVec2("u_resolution", glm::vec2{ window.getWindowWidth(),window.getWindowHeight() });
+
+    shaderProgram->setVec2("u_resolution", Window::instance().getWindowRes());
 
     vbo.Delete();
     ebo.Delete();

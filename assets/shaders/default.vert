@@ -1,17 +1,18 @@
 #version 330 core
 
 //Positions/Coordinates
-layout (location = 0) in vec2 aPos;
+layout(location = 0) in vec2 aPos;
 
+out vec3 verPos;
 
-uniform vec2 u_move;
+uniform float u_down;
 
-void main()
-{
-	// Outputs the positions/coordinates of all vertices
-	float a = .5;
+void main() {
+    vec2 finalPos = aPos * 0.5;
+    
+    verPos = vec3(finalPos,0.0);
 
-	vec2 finalPos = aPos*a*0.5;
-	finalPos += u_move;
-	gl_Position = vec4(finalPos,0.0, 1.0);
+    finalPos.y *= 1. - u_down * 2;
+
+    gl_Position = vec4(finalPos, 0.0, 1.0);
 }

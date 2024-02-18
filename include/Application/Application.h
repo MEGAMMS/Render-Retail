@@ -2,12 +2,16 @@
 
 #include "core.h"
 #include "core/Window.h"
+#include "Challenges/SquarePlayer.h"
+#include "Challenges/TriangleExample.h"
 
 class Application {
 private:
     static Application* instancePtr;
     std::unique_ptr<Window> window;
 
+    std::unique_ptr<TriangleExample> triangle;
+    std::unique_ptr<SquarePlayer> square;
 
 public:
     Application();
