@@ -1,18 +1,14 @@
 #version 330 core
+layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec3 aColor;
+layout (location = 2) in vec2 aTexCoord;
 
-//Positions/Coordinates
-layout(location = 0) in vec2 aPos;
+out vec3 ourColor;
+out vec2 TexCoord;
 
-out vec3 verPos;
-
-uniform float u_down;
-
-void main() {
-    vec2 finalPos = aPos * 0.5;
-    
-    verPos = vec3(finalPos,0.0);
-
-    finalPos.y *= 1. - u_down * 2;
-
-    gl_Position = vec4(finalPos, 0.0, 1.0);
+void main()
+{
+    gl_Position = vec4(aPos, 1.0);
+    ourColor = aColor;
+    TexCoord = aTexCoord;
 }

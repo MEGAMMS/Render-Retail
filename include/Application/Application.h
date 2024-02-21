@@ -4,6 +4,7 @@
 #include "core/Window.h"
 #include "Challenges/SquarePlayer.h"
 #include "Challenges/TriangleExample.h"
+#include "Challenges/TextureExample.h"
 
 class Application {
 private:
@@ -12,6 +13,7 @@ private:
 
     std::unique_ptr<TriangleExample> triangle;
     std::unique_ptr<SquarePlayer> square;
+    std::unique_ptr<TextureExample> textureExample;
 
 public:
     Application();

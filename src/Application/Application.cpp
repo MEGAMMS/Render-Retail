@@ -17,8 +17,11 @@ Application::Application() {
     instancePtr = this;
 
     window = std::make_unique<Window>();
+
     square = std::make_unique<SquarePlayer>();
     triangle = std::make_unique<TriangleExample>();
+    textureExample = std::make_unique<TextureExample>();
+
 }
 void Application::run() {
 
@@ -29,15 +32,19 @@ void Application::run() {
 
         dt = glfwGetTime() - frameStart;
         frameStart = glfwGetTime();
-        
-        switch ((Program) programIdx) {
-        case Program::SQUARE:
-            square->update(dt);
-            break;
-        case Program::TRIANGLE:
-            triangle->update();
-            break;
-        }
+
+        // textureExample->update();
+
+        // switch ((Program) programIdx) {
+        // case Program::SQUARE:
+        //     square->update(dt);
+        //     break;
+        // case Program::TRIANGLE:
+        //     triangle->update();
+        //     break;
+        // }
+
+
 
         // Swap the back buffer with the front buffer
         window->finalizeFrame();

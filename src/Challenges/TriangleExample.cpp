@@ -12,7 +12,7 @@ TriangleExample::TriangleExample() {
       Vertex{ glm::vec2{1.,-1 * sqrt(3) / 2} },
       Vertex{ glm::vec2{0.,1.} },
     };
-    static std::array<GLuint, 6> indices = {
+    static std::array<GLuint, 3> indices = {
         0, 1, 2
     };
 
@@ -31,7 +31,7 @@ TriangleExample::TriangleExample() {
     vbo.Unbind();
     ebo.Unbind();
 
-    shaderProgram = std::make_shared<Shader>("assets/shaders/default.vert", "assets/shaders/default.frag");
+    shaderProgram = std::make_shared<Shader>("assets/shaders/Triangle.vert", "assets/shaders/Triangle.frag");
     shaderProgram->Activate();
     shaderProgram->setVec2("u_resolution", Window::instance().getWindowRes());
 
