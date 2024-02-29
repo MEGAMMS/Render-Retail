@@ -9,6 +9,7 @@ class TextureExample {
 private:
     VAO vao;
     std::shared_ptr<Shader> shaderProgram;
+    float mix_portion = 0.2f;
 
 public:
 

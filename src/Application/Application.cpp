@@ -6,7 +6,7 @@ float dt = 0.016f;
 float frameStart = 0.0f;
 
 enum class Program {
-    SQUARE, TRIANGLE, Count
+    SQUARE, TRIANGLE, TEXTURE, Count
 };
 
 int programIdx = 0;
@@ -33,16 +33,18 @@ void Application::run() {
         dt = glfwGetTime() - frameStart;
         frameStart = glfwGetTime();
 
-        // textureExample->update();
 
-        // switch ((Program) programIdx) {
-        // case Program::SQUARE:
-        //     square->update(dt);
-        //     break;
-        // case Program::TRIANGLE:
-        //     triangle->update();
-        //     break;
-        // }
+        switch ((Program) programIdx) {
+        case Program::SQUARE:
+            square->update(dt);
+            break;
+        case Program::TRIANGLE:
+            triangle->update();
+            break;
+        case Program::TEXTURE:
+            textureExample->update();
+            break;
+        }
 
 
 
@@ -57,5 +59,6 @@ void Application::run() {
 void Application::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
     square->onKeyEvent(key, scancode, action, mode);
     triangle->onKeyEvent(key, scancode, action, mode);
+    textureExample->onKeyEvent(key, scancode, action, mode);
     if (key == GLFW_KEY_LEFT_CONTROL and action == GLFW_PRESS)programIdx = ((++programIdx) % (int) Program::Count);
 }
