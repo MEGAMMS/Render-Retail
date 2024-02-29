@@ -99,7 +99,7 @@ TextureExample::TextureExample() {
     ebo.Unbind();
 
 
-    shaderProgram = std::make_shared<Shader>("assets/shaders/default.vert", "assets/shaders/default.frag");
+    shaderProgram = std::make_shared<Shader>("assets/shaders/TextureExample.vert", "assets/shaders/TextureExample.frag");
     shaderProgram->Activate();
     shaderProgram->setVec2("u_resolution", Window::instance().getWindowRes());
     shaderProgram->setInt("texture1", 0);
