@@ -10,9 +10,13 @@ private:
     VAO vao;
     std::shared_ptr<Shader> shaderProgram;
 
-    const glm::vec2 playerSpeed = {0.8,0.8};
+    const glm::vec2 playerSpeed = { 5,5 };
+
     glm::bvec4 move = { 0,0,0,0 };
-    glm::vec2 pos = {0.,0.};
+    glm::vec2 pos = { 0.,0. };
+
+    bool rotate = false;
+    float degree = 0.0f;
 
 public:
     SquarePlayer();

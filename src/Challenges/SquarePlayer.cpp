@@ -9,9 +9,9 @@ struct Vertex {
 SquarePlayer::SquarePlayer() {
     static std::array<Vertex, 4> vertices = {
       Vertex{ glm::vec2{-1.,-1.} },
-      Vertex{ glm::vec2{1.,-1.} },
-      Vertex{ glm::vec2{-1.,1.} },
-      Vertex{ glm::vec2{1.,1.} }
+      Vertex{ glm::vec2{ 1.,-1.} },
+      Vertex{ glm::vec2{-1., 1.} },
+      Vertex{ glm::vec2{ 1., 1.} }
     };
     static std::array<GLuint, 6> indices = {
         0, 1, 2,
@@ -46,12 +46,21 @@ SquarePlayer::SquarePlayer() {
 }
 
 void SquarePlayer::update(float dt) {
+    
     glm::vec2 dpos = { (move.x - move.y) * playerSpeed.x,(move.z - move.w) * playerSpeed.y };
     pos += dpos * dt;
+
+    degree += rotate * dt * 90.;
+
+    glm::mat4 trans = glm::mat4(1.0f);
+    trans = scale(trans, glm::vec3(0.3));
+    trans = glm::translate(trans, glm::vec3(pos, 0.0f));
+    trans = glm::rotate(trans, glm::radians(degree), glm::vec3(0.0, 0.0, 1.0));
+
     // Tell OpenGL which Shader Program we want to use
     shaderProgram->Activate();
     shaderProgram->setFloat("u_time", glfwGetTime());
-    shaderProgram->setVec2("u_move", pos);
+    shaderProgram->setMat4("u_trans", trans);
     // Bind the VAO so OpenGL knows to use it
     vao.Bind();
     // Draw primitives, number of indices, datatype of indices, index of indices
@@ -67,6 +76,7 @@ void SquarePlayer::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int
     if (key == GLFW_KEY_LEFT)move.y = pressed;
     if (key == GLFW_KEY_UP)move.z = pressed;
     if (key == GLFW_KEY_DOWN)move.w = pressed;
+    if (key == GLFW_KEY_R and pressed)rotate = !rotate;
 
 }
 
