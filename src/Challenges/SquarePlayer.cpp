@@ -46,7 +46,7 @@ SquarePlayer::SquarePlayer() {
 }
 
 void SquarePlayer::update(float dt) {
-    
+
     glm::vec2 dpos = { (move.x - move.y) * playerSpeed.x,(move.z - move.w) * playerSpeed.y };
     pos += dpos * dt;
 
@@ -65,6 +65,15 @@ void SquarePlayer::update(float dt) {
     vao.Bind();
     // Draw primitives, number of indices, datatype of indices, index of indices
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*) (0 * sizeof(GLuint)));
+
+    glm::mat4 trans2 = glm::mat4(1.0f);
+    trans2 = scale(trans2, glm::vec3(0.1));
+    trans2 = glm::translate(trans2, glm::vec3(pos, 0.0f));
+    trans2 = glm::rotate(trans2, glm::radians(degree), glm::vec3(0.0, 0.0, 1.0));
+
+    shaderProgram->setMat4("u_trans", trans2);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*) (0 * sizeof(GLuint)));
+
 }
 
 void SquarePlayer::Delete() {
