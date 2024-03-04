@@ -9,7 +9,7 @@ enum class Program {
     SQUARE, TRIANGLE, TEXTURE, PYRAMID, Count
 };
 
-int programIdx = 0;
+int programIdx = 3;
 
 
 Application::Application() {

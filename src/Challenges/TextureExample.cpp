@@ -9,23 +9,9 @@ struct Vertex {
 
 };
 
-void vertical_flip(std::vector<unsigned char>& image, unsigned& width, unsigned& height) {
-    size_t number_of_channels = 4;
-    size_t bytes_per_pixel = sizeof(unsigned char) * number_of_channels;
-    size_t bytes_per_row = static_cast<size_t>(width) * bytes_per_pixel;
-
-    for (int row = 0; row < (height >> 1); ++row) {
-        auto row0 = image.begin() + row * bytes_per_row;
-        auto row1 = image.begin() + (height - row - 1) * bytes_per_row;
-
-        std::swap_ranges(row0, row0 + bytes_per_row, row1);
-    }
-}
-
 
 class Img {
 public:
-    // std::vector<std::array<unsigned char, 4>> data;
     std::vector<unsigned char> data; // Image buffer
     unsigned width, height;
     Img(std::string path) {
@@ -39,6 +25,19 @@ public:
         }
         vertical_flip(data, width, height);
     }
+private:
+    void vertical_flip(std::vector<unsigned char>& image, unsigned& width, unsigned& height) {
+        size_t number_of_channels = 4;
+        size_t bytes_per_pixel = sizeof(unsigned char) * number_of_channels;
+        size_t bytes_per_row = static_cast<size_t>(width) * bytes_per_pixel;
+
+        for (int row = 0; row < (height >> 1); ++row) {
+            auto row0 = image.begin() + row * bytes_per_row;
+            auto row1 = image.begin() + (height - row - 1) * bytes_per_row;
+
+            std::swap_ranges(row0, row0 + bytes_per_row, row1);
+        }
+    }
 };
 
 TextureExample::TextureExample() {
@@ -46,7 +45,7 @@ TextureExample::TextureExample() {
     glGenTextures(1, &conTex);
     glBindTexture(GL_TEXTURE_2D, conTex);
     Img container("assets/container.png");
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, container.width, container.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, container.data.data());
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, container.width, container.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, container.data.data());
     glGenerateMipmap(GL_TEXTURE_2D);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
