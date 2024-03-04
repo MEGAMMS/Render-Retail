@@ -5,6 +5,7 @@
 #include "Challenges/SquarePlayer.h"
 #include "Challenges/TriangleExample.h"
 #include "Challenges/TextureExample.h"
+#include "Challenges/Pyramid.h"
 
 class Application {
 private:
@@ -14,7 +15,8 @@ private:
     std::unique_ptr<TriangleExample> triangle;
     std::unique_ptr<SquarePlayer> square;
     std::unique_ptr<TextureExample> textureExample;
-
+    std::unique_ptr<Pyramid> pyramid;
+    
 public:
     Application();
     Application(const Application&) = delete;

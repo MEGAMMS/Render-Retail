@@ -6,7 +6,7 @@ float dt = 0.016f;
 float frameStart = 0.0f;
 
 enum class Program {
-    SQUARE, TRIANGLE, TEXTURE, Count
+    SQUARE, TRIANGLE, TEXTURE, PYRAMID, Count
 };
 
 int programIdx = 0;
@@ -21,6 +21,7 @@ Application::Application() {
     square = std::make_unique<SquarePlayer>();
     triangle = std::make_unique<TriangleExample>();
     textureExample = std::make_unique<TextureExample>();
+    pyramid = std::make_unique<Pyramid>();
 
 }
 void Application::run() {
@@ -43,6 +44,9 @@ void Application::run() {
             break;
         case Program::TEXTURE:
             textureExample->update();
+            break;
+        case Program::PYRAMID:
+            pyramid->update(dt);
             break;
         }
 
