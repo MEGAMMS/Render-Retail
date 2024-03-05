@@ -31,6 +31,10 @@ Window::Window() {
     installMainCallbacks();
 
     _monitor = glfwGetPrimaryMonitor();
+
+    glfwGetWindowSize(_window, &_wndSize[0], &_wndSize[1]);
+    glfwGetWindowPos(_window, &_wndPos[0], &_wndPos[1]);
+
     _updateViewport = true;
 
 }
@@ -40,7 +44,8 @@ void Window::setFullscreen(bool fullscreen) {
 
     if (fullscreen) {
         // backup window position and window size
-        glfwGetWindowSize(_window, &windowWidth, &windowHeight);
+        glfwGetWindowPos(_window, &_wndPos[0], &_wndPos[1]);
+        glfwGetWindowSize(_window, &_wndSize[0], &_wndSize[1]);
         // get resolution of monitor
         const GLFWvidmode* mode = glfwGetVideoMode(_monitor);
 
@@ -48,12 +53,12 @@ void Window::setFullscreen(bool fullscreen) {
         glfwSetWindowMonitor(_window, _monitor, 0, 0, mode->width, mode->height, 0);
     } else {
         // restore last window size and position
-        glfwSetWindowMonitor(_window, nullptr, 100, 100, windowWidth, windowHeight, 0);
+        // restore last window size and position
+        glfwSetWindowMonitor(_window, nullptr, _wndPos[0], _wndPos[1], _wndSize[0], _wndSize[1], 0);
+
+        _updateViewport = true;
     }
-
-    _updateViewport = true;
 }
-
 bool Window::isFullscreen() {
     return glfwGetWindowMonitor(_window) != nullptr;
 }
@@ -69,7 +74,7 @@ void Window::pollEvents() {
 void Window::update() {
     updateView();
     glClearColor(clearColor.x, clearColor.y, clearColor.z, clearColor.w);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void Window::installMainCallbacks() {
@@ -91,9 +96,8 @@ void Window::installMainCallbacks() {
 
 void Window::updateView() {
     if (_updateViewport) {
-        int currWidth, currHeight;
-        glfwGetFramebufferSize(_window, &currWidth, &currHeight);
-        glViewport(0, 0, currWidth, currHeight);
+        glfwGetFramebufferSize(_window, &windowWidth, &windowHeight);
+        glViewport(0, 0, windowWidth, windowHeight);
         _updateViewport = false;
     }
 }
@@ -113,7 +117,7 @@ bool Window::setupGlad() {
         return false;
     }
 
-    // glEnable(GL_DEPTH_TEST);
+    glEnable(GL_DEPTH_TEST);
     // glEnable(GL_CULL_FACE);
 
     return true;

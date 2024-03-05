@@ -12,7 +12,7 @@ public:
 
     inline int32_t getWindowHeight() const { return windowHeight; }
     inline int32_t getWindowWidth() const { return windowWidth; }
-    inline glm::vec2 getWindowRes() const { return glm::vec2{getWindowWidth(),getWindowHeight()}; }
+    inline glm::vec2 getWindowRes() const { return glm::vec2{ getWindowWidth(),getWindowHeight() }; }
     inline GLFWwindow* getContext() { return _window; };
     inline bool isValid() { return _window != nullptr; };
     inline bool shouldClose() const { return glfwWindowShouldClose(_window); };
@@ -34,7 +34,10 @@ private:
     int32_t windowHeight = 800;
     GLFWwindow* _window = nullptr;
     GLFWmonitor* _monitor = nullptr;
+    std::array< int, 2 > _wndPos{ 0, 0 };
+    std::array< int, 2 > _wndSize{ 0, 0 };
     static bool _updateViewport;
+
     glm::vec4 clearColor = { 0.17, 0.145, 0.133, 1 };
 
 
