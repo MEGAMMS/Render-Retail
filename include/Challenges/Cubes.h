@@ -1,14 +1,14 @@
 #pragma once
 
 #include "core.h"
-#include "Shader.h"
+#include "Render/Shader.h"
 #include "buffers/VAO.h"
+#include "Render/ShaderProgram.h"
 
 class Cubes {
 private:
-
     VAO vao;
-    std::shared_ptr<Shader> shaderProgram;
+    std::shared_ptr<const ShaderProgram> cubesShader;
 public:
     Cubes();
     void update(float dt);

@@ -1,6 +1,8 @@
 #include "Challenges/SquarePlayer.h"
 #include "buffers/EBO.h"
 #include "core/Window.h"
+#include "AssetManager/AssetManager.h"
+
 
 
 struct Vertex {
@@ -33,11 +35,8 @@ SquarePlayer::SquarePlayer() {
     vbo.Unbind();
     ebo.Unbind();
 
-
-    shaderProgram = std::make_shared<Shader>(
-        "assets/shaders/SquarePlayer.vert",
-        "assets/shaders/SquarePlayer.frag");
-    shaderProgram->Activate();
+    shaderProgram = AssetManager::instance().loadShaderProgram("SquarePlayer");
+    shaderProgram->activate();
 
     shaderProgram->setVec2("u_resolution", Window::instance().getWindowRes());
 
@@ -58,7 +57,7 @@ void SquarePlayer::update(float dt) {
     trans = glm::rotate(trans, glm::radians(degree), glm::vec3(0.0, 0.0, 1.0));
 
     // Tell OpenGL which Shader Program we want to use
-    shaderProgram->Activate();
+    shaderProgram->activate();
     shaderProgram->setFloat("u_time", glfwGetTime());
     shaderProgram->setMat4("u_trans", trans);
     // Bind the VAO so OpenGL knows to use it

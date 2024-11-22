@@ -2,6 +2,8 @@
 #include "buffers/EBO.h"
 #include "buffers/VBO.h"
 #include "core/Window.h"
+#include "AssetManager/AssetManager.h"
+
 
 struct Vertex {
     glm::vec2 position;
@@ -31,8 +33,9 @@ TriangleExample::TriangleExample() {
     vbo.Unbind();
     ebo.Unbind();
 
-    shaderProgram = std::make_shared<Shader>("assets/shaders/Triangle.vert", "assets/shaders/Triangle.frag");
-    shaderProgram->Activate();
+
+    shaderProgram = AssetManager::instance().loadShaderProgram("Triangle");
+    shaderProgram->activate();
     shaderProgram->setVec2("u_resolution", Window::instance().getWindowRes());
 
 
@@ -41,7 +44,7 @@ TriangleExample::TriangleExample() {
 
 }
 void TriangleExample::update() {
-    shaderProgram->Activate();
+    shaderProgram->activate();
     shaderProgram->setFloat("u_time", glfwGetTime());
     shaderProgram->setFloat("u_down", (float) upSideDown);
 

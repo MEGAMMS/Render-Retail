@@ -2,6 +2,8 @@
 #include "core/Window.h"
 #include "core/Image.h"
 #include "buffers/EBO.h"
+#include "AssetManager/AssetManager.h"
+
 
 struct Vertex {
     glm::vec3 position;
@@ -69,16 +71,15 @@ TextureExample::TextureExample() {
     vbo.Unbind();
     ebo.Unbind();
 
-
-    shaderProgram = std::make_shared<Shader>("assets/shaders/TextureExample.vert", "assets/shaders/TextureExample.frag");
-    shaderProgram->Activate();
+    shaderProgram = AssetManager::instance().loadShaderProgram("TextureExample");
+    shaderProgram->activate();
     shaderProgram->setVec2("u_resolution", Window::instance().getWindowRes());
     shaderProgram->setInt("texture1", 0);
     shaderProgram->setInt("texture2", 1);
 }
 
 void TextureExample::update() {
-    shaderProgram->Activate();
+    shaderProgram->activate();
     shaderProgram->setFloat("mix_portion", mix_portion);
     vao.Bind();
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

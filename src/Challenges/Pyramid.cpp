@@ -3,6 +3,8 @@
 #include "core/Window.h"
 #include "core/Image.h"
 #include "Application/Application.h"
+#include "AssetManager/AssetManager.h"
+
 
 struct Vertex {
     glm::vec3 position;
@@ -56,10 +58,8 @@ Pyramid::Pyramid() {
     ebo.Unbind();
 
 
-    shaderProgram = std::make_shared<Shader>(
-        "assets/shaders/Pyramid.vert",
-        "assets/shaders/Pyramid.frag");
-    shaderProgram->Activate();
+    shaderProgram = AssetManager::instance().loadShaderProgram("Pyramid");
+    shaderProgram->activate();
     shaderProgram->setVec2("u_resolution", Window::instance().getWindowRes());
     shaderProgram->setInt("tex", 2);
     vbo.Delete();
@@ -90,7 +90,7 @@ void Pyramid::update(float dt) {
     };
 
     vao.Bind();
-    shaderProgram->Activate();
+    shaderProgram->activate();
     shaderProgram->setFloat("u_time", glfwGetTime());
 
     glm::mat4 trans = glm::mat4(1.);

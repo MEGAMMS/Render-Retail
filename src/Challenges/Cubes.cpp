@@ -3,6 +3,7 @@
 #include "core/Window.h"
 #include "core/Image.h"
 #include "Application/Application.h"
+#include "AssetManager/AssetManager.h"
 
 
 struct Vertex {
@@ -51,12 +52,9 @@ Cubes::Cubes() {
     vao.Unbind();
     vbo.Unbind();
     ebo.Unbind();
-
-    shaderProgram = std::make_shared<Shader>(
-        "assets/shaders/Cubes.vert",
-        "assets/shaders/Cubes.frag");
-    shaderProgram->Activate();
-    shaderProgram->setVec2("u_resolution", Window::instance().getWindowRes());
+    cubesShader = AssetManager::instance().loadShaderProgram("Cubes");
+    cubesShader->activate();
+    cubesShader->setVec2("u_resolution", Window::instance().getWindowRes());
     vbo.Delete();
     ebo.Delete();
 
@@ -64,8 +62,8 @@ Cubes::Cubes() {
 void Cubes::update(float dt) {
 
     vao.Bind();
-    shaderProgram->Activate();
-    shaderProgram->setFloat("u_time", glfwGetTime());
+    cubesShader->activate();
+    cubesShader->setFloat("u_time", glfwGetTime());
 
     glm::mat4 model = glm::mat4(1.);
     model = glm::scale(model, glm::vec3(0.5));
@@ -80,10 +78,10 @@ void Cubes::update(float dt) {
     float angle = (int(glfwGetTime() * 50000) % 360000) / 1000.f;
     view = glm::rotate(view, glm::radians(angle), glm::vec3(0.6f, 0.8f, 0.4f));
 
-    shaderProgram->setMat4("projection", projection);
-    shaderProgram->setMat4("view", view);
+    cubesShader->setMat4("projection", projection);
+    cubesShader->setMat4("view", view);
 
-    shaderProgram->setMat4("model", model);
+    cubesShader->setMat4("model", model);
     glDrawElements(GL_TRIANGLES, 6 * 2 * 3, GL_UNSIGNED_INT, 0);
 
 }

@@ -1,14 +1,14 @@
 #pragma once
 
 #include "core.h"
-#include "Shader.h"
+#include "Render/ShaderProgram.h"
 #include "buffers/VAO.h"
 
 class TriangleExample {
 
 private:
     VAO vao;
-    std::shared_ptr<Shader> shaderProgram;
+    std::shared_ptr<const ShaderProgram> shaderProgram;
     bool upSideDown = false;
 
 public:
