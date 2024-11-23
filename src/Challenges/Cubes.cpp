@@ -12,7 +12,7 @@ struct Vertex {
 
 
 Cubes::Cubes() {
-    static std::array<Vertex, 9> vertices = {
+    static std::vector<Vertex> vertices = {
           Vertex{ glm::vec3{-1.,-1.,-1.} },
           Vertex{ glm::vec3{ 1.,-1.,-1.} },
           Vertex{ glm::vec3{-1., 1.,-1.} },
@@ -22,7 +22,7 @@ Cubes::Cubes() {
           Vertex{ glm::vec3{-1., 1.,1.} },
           Vertex{ glm::vec3{ 1., 1.,1.} }
     };
-    static std::array<GLuint, 6 * 2 * 3> indices = {
+    static std::vector<GLuint> indices = {
         0, 1 ,2,
         1, 2 ,3,
 
@@ -42,29 +42,15 @@ Cubes::Cubes() {
         2, 4 ,6
     };
 
+    vertexArray = std::make_shared<VertexArray>(vertices, indices);
+    vertexArray->addVertexAttributes(std::vector<VertexAttribute>{ {3, VertexAttribute::Float, 0} }, sizeof(Vertex));
 
-    vao = VAO();
-    vao.Bind();
-    VBO vbo((GLfloat*) vertices.data(), sizeof(vertices));
-    EBO ebo((GLuint*) indices.data(), sizeof(indices));
-
-    vao.LinkAttrib(vbo, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*) 0);
-    vao.Unbind();
-    vbo.Unbind();
-    ebo.Unbind();
     cubesShader = AssetManager::instance().loadShaderProgram("Cubes");
     cubesShader->activate();
     cubesShader->setVec2("u_resolution", Window::instance().getWindowRes());
-    vbo.Delete();
-    ebo.Delete();
 
 }
 void Cubes::update(float dt) {
-
-    vao.Bind();
-    cubesShader->activate();
-    cubesShader->setFloat("u_time", glfwGetTime());
-
     glm::mat4 model = glm::mat4(1.);
     model = glm::scale(model, glm::vec3(0.5));
     model = glm::rotate(model, glm::radians(45.f), glm::vec3(1., 1., 1.));
@@ -78,12 +64,12 @@ void Cubes::update(float dt) {
     float angle = (int(glfwGetTime() * 50000) % 360000) / 1000.f;
     view = glm::rotate(view, glm::radians(angle), glm::vec3(0.6f, 0.8f, 0.4f));
 
+    cubesShader->activate();
+    cubesShader->setFloat("u_time", glfwGetTime());
     cubesShader->setMat4("projection", projection);
     cubesShader->setMat4("view", view);
-
     cubesShader->setMat4("model", model);
-    glDrawElements(GL_TRIANGLES, 6 * 2 * 3, GL_UNSIGNED_INT, 0);
-
+    vertexArray->renderIndexed();
 }
 
 void Cubes::Delete() {
