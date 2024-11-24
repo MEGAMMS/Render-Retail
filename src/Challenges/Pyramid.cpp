@@ -1,6 +1,6 @@
 #include "Challenges/Pyramid.h"
 #include "core/Window.h"
-#include "core/Image.h"
+#include "Render/Image.h"
 #include "Application/Application.h"
 #include "AssetManager/AssetManager.h"
 
@@ -30,8 +30,8 @@ Pyramid::Pyramid() {
     unsigned int texture;
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
-    Img brick("assets/brick.png");
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, brick.width, brick.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, brick.data.data());
+    std::shared_ptr<const Image> brick = AssetManager::instance().loadImage("assets/brick.png");
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, brick->width, brick->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, brick->data.data());
     glGenerateMipmap(GL_TEXTURE_2D);
 
     vertexArray = std::make_shared<VertexArray>(vertices, indices);

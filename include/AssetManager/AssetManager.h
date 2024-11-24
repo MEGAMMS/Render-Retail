@@ -7,10 +7,11 @@
 #include "AssetManager/ShaderProgramRegistry.h"
 #include "AssetManager/ShaderRegistry.h"
 #include "AssetManager/TextRegistry.h"
+#include "AssetManager/ImageRegistry.h"
 
 class AssetManager {
   TextRegistry textRegistry;
-  // ImageRegistry imageRegistry;
+  ImageRegistry imageRegistry;
   // TextureRegistry textureRegistry;
   // CubeMapRegistry cubeMapRegistry;
   ShaderRegistry shaderRegistry;
@@ -29,14 +30,14 @@ public:
   };
 
   void removeTextFromRegistry(const std::string &name) { textRegistry.remove(name); }
-  // void removeImageFromRegistry(const std::string &name) { imageRegistry.remove(name); }
+  void removeImageFromRegistry(const std::string &name) { imageRegistry.remove(name); }
   // void removeTextureFromRegistry(const std::string &name) { textureRegistry.remove(name); }
   // void removeCubeMapFromRegistry(const std::string &name) { cubeMapRegistry.remove(name); };
   void removeShaderFromRegistry(const std::string &name) { shaderRegistry.remove(name); }
   void removeShaderProgramFromRegistry(const std::string &name) { shaderProgramRegistry.remove(name); }
 
   std::shared_ptr<const std::string> loadText(const std::string &name) { return textRegistry.get(name); };
-  // std::shared_ptr<const Image> loadImage(const std::string &name) { return imageRegistry.get(name); };
+  std::shared_ptr<const Image> loadImage(const std::string &name) { return imageRegistry.get(name); };
   // std::shared_ptr<const Texture> loadTexture(const std::string &name) { return textureRegistry.get(name); };
 
   /// the expected input format: right;left;top;bottom;front;back

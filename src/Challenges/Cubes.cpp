@@ -1,6 +1,5 @@
 #include "Challenges/Cubes.h"
 #include "core/Window.h"
-#include "core/Image.h"
 #include "Application/Application.h"
 #include "AssetManager/AssetManager.h"
 

@@ -1,14 +1,14 @@
 #include "Challenges/TextureExample.h"
 #include "core/Window.h"
-#include "core/Image.h"
+#include "Render/Image.h"
 #include "AssetManager/AssetManager.h"
 
 TextureExample::TextureExample() {
     unsigned int conTex;
     glGenTextures(1, &conTex);
     glBindTexture(GL_TEXTURE_2D, conTex);
-    Img container("assets/container.png");
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, container.width, container.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, container.data.data());
+    std::shared_ptr<const Image> container = AssetManager::instance().loadImage("assets/container.png");
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, container->width, container->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, container->data.data());
     glGenerateMipmap(GL_TEXTURE_2D);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -19,8 +19,8 @@ TextureExample::TextureExample() {
     unsigned int faceTex;
     glGenTextures(1, &faceTex);
     glBindTexture(GL_TEXTURE_2D, faceTex);
-    Img face("assets/awesomeface.png");
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, face.width, face.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, face.data.data());
+    std::shared_ptr<const Image> face = AssetManager::instance().loadImage("assets/awesomeface.png");
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, face->width, face->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, face->data.data());
     glGenerateMipmap(GL_TEXTURE_2D);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
