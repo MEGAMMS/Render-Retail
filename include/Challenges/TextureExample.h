@@ -2,12 +2,18 @@
 
 #include "core.h"
 #include "Render/ShaderProgram.h"
-#include "buffers/VAO.h"
+#include "Render/VertexArray.h"
 
 class TextureExample {
 
 private:
-    VAO vao;
+    struct Vertex {
+        glm::vec3 position;
+        glm::vec3 color;
+        glm::vec2 textureCorr;
+
+    };
+    std::shared_ptr<VertexArray> vertexArray;
     std::shared_ptr<const ShaderProgram> shaderProgram;
     float mix_portion = 0.2f;
 

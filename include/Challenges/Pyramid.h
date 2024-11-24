@@ -2,12 +2,23 @@
 
 #include "core.h"
 #include "Render/ShaderProgram.h"
-#include "buffers/VAO.h"
+#include "Render/VertexArray.h"
 
 class Pyramid {
 private:
+    struct Vertex {
+    public:
+        glm::vec3 position;
+        glm::vec2 texCoord;
+        static std::vector<VertexAttribute> vertexAttributes() {
+            return {
+                {3, VertexAttribute::Float, 0},
+                {2, VertexAttribute::Float, 3 * sizeof(float)},
+            };
+        }
+    };
 
-    VAO vao;
+    std::shared_ptr<VertexArray> vertexArray;
     std::shared_ptr<const ShaderProgram> shaderProgram;
 public:
     Pyramid();

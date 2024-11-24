@@ -1,18 +1,7 @@
 #include "Challenges/TextureExample.h"
 #include "core/Window.h"
 #include "core/Image.h"
-#include "buffers/EBO.h"
 #include "AssetManager/AssetManager.h"
-
-
-struct Vertex {
-    glm::vec3 position;
-    glm::vec3 color;
-    glm::vec2 textureCorr;
-
-};
-
-
 
 TextureExample::TextureExample() {
     unsigned int conTex;
@@ -43,33 +32,31 @@ TextureExample::TextureExample() {
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, faceTex);
 
-    static std::array<Vertex, 4> vertices = {
+    static std::vector<TextureExample::Vertex> vertices = {
         Vertex{glm::vec3{ 0.5f,  0.5f, 0.0f},glm::vec3{1.0f, 0.0f, 0.0f},glm::vec2{1.0f, 1.0f}},
         Vertex{glm::vec3{ 0.5f, -0.5f, 0.0f},glm::vec3{0.0f, 1.0f, 0.0f},glm::vec2{1.0f, 0.0f}},
         Vertex{glm::vec3{-0.5f, -0.5f, 0.0f},glm::vec3{1.0f, 0.0f, 1.0f},glm::vec2{0.0f, 0.0f}},
         Vertex{glm::vec3{-0.5f,  0.5f, 0.0f},glm::vec3{1.0f, 1.0f, 0.0f},glm::vec2{0.0f, 1.0f}}
     };
+    std::cerr << vertices.size() << std::endl;
 
-    static std::array<GLuint, 6> indices = {
+    static std::vector<GLuint> indices = {
         0, 1, 2,
         0, 2, 3
     };
 
+    vertexArray = std::make_shared<VertexArray>(vertices, indices);
+    vertexArray->addVertexAttributes(
+        std::vector<VertexAttribute>{
+            { 3, VertexAttribute::Float, 0 },
+            { 3, VertexAttribute::Float, 3 * sizeof(float) },
+            { 2, VertexAttribute::Float, 6 * sizeof(float) }
+    }, sizeof(Vertex));
 
-    vao = VAO();
-    vao.Bind();
-    // Generates Vertex Buffer Object and links it to vertices
-    VBO vbo((GLfloat*) vertices.data(), sizeof(vertices));
-    // Generates Element Buffer Object and links it to indices
-    EBO ebo((GLuint*) indices.data(), sizeof(indices));
-
-    vao.LinkAttrib(vbo, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*) (0 * sizeof(float)));
-    vao.LinkAttrib(vbo, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*) (3 * sizeof(float)));
-    vao.LinkAttrib(vbo, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*) (6 * sizeof(float)));
-
-    vao.Unbind();
-    vbo.Unbind();
-    ebo.Unbind();
+    std::cerr << sizeof(Vertex) << " " << 8 * sizeof(float) << std::endl;
+    // vao.LinkAttrib(vbo, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*) (0 * sizeof(float)));
+    // vao.LinkAttrib(vbo, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*) (3 * sizeof(float)));
+    // vao.LinkAttrib(vbo, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*) (6 * sizeof(float)));
 
     shaderProgram = AssetManager::instance().loadShaderProgram("TextureExample");
     shaderProgram->activate();
@@ -81,8 +68,7 @@ TextureExample::TextureExample() {
 void TextureExample::update() {
     shaderProgram->activate();
     shaderProgram->setFloat("mix_portion", mix_portion);
-    vao.Bind();
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    vertexArray->renderIndexed();
 }
 
 void TextureExample::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {

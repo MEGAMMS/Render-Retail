@@ -2,12 +2,22 @@
 
 #include "core.h"
 #include "Render/ShaderProgram.h"
-#include "buffers/VAO.h"
+#include "Render/VertexArray.h"
+
 
 class TriangleExample {
 
 private:
-    VAO vao;
+    struct Vertex {
+        glm::vec2 position;
+        static std::vector<VertexAttribute> vertexAttributes() {
+            return {
+                {2, VertexAttribute::Float, 0},
+            };
+        }
+    };
+
+    std::shared_ptr<VertexArray> vertexArray;
     std::shared_ptr<const ShaderProgram> shaderProgram;
     bool upSideDown = false;
 

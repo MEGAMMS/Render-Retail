@@ -1,5 +1,4 @@
 #include "Challenges/Cubes.h"
-#include "buffers/EBO.h"
 #include "core/Window.h"
 #include "core/Image.h"
 #include "Application/Application.h"

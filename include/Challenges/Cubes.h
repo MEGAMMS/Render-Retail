@@ -2,14 +2,12 @@
 
 #include "core.h"
 #include "Render/Shader.h"
-#include "buffers/VAO.h"
 #include "Render/ShaderProgram.h"
 #include "Render/VertexArray.h"
 
 
 class Cubes {
 private:
-    VAO vao;
     std::shared_ptr<VertexArray> vertexArray;
     std::shared_ptr<const ShaderProgram> cubesShader;
 public:

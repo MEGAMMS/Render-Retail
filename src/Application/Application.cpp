@@ -68,5 +68,5 @@ void Application::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int3
     square->onKeyEvent(key, scancode, action, mode);
     triangle->onKeyEvent(key, scancode, action, mode);
     textureExample->onKeyEvent(key, scancode, action, mode);
-    if (key == GLFW_KEY_LEFT_CONTROL and action == GLFW_PRESS)programIdx = ((++programIdx) % (int) Program::Count);
+    if (key == GLFW_KEY_SPACE and action == GLFW_PRESS)programIdx = ((++programIdx) % (int) Program::Count);
 }
