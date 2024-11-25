@@ -1,9 +1,15 @@
 #version 330 core
-out vec4 FragColor;
-  
 in vec3 ourColor;
+in vec2 TexCoord;
+
+uniform sampler2D cubeFace;
+
+out vec4 FragColor;
 
 void main()
 {
-    FragColor = vec4(ourColor,1.0);
+    // vec2 TexCoordCopy = TexCoord* float(cubeFace);
+    // FragColor = vec4(TexCoordCopy,0.0,1.0);
+    vec4 textColor =  texture(cubeFace,TexCoord);
+    FragColor = textColor;
 }

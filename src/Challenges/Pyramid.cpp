@@ -34,6 +34,7 @@ Pyramid::Pyramid() {
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, brick->width, brick->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, brick->data.data());
     glGenerateMipmap(GL_TEXTURE_2D);
 
+    glActiveTexture(GL_TEXTURE7);
     vertexArray = std::make_shared<VertexArray>(vertices, indices);
     vertexArray->addVertexAttributes(Pyramid::Vertex::vertexAttributes(), sizeof(Pyramid::Vertex));
 

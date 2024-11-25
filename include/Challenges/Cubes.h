@@ -8,8 +8,13 @@
 
 class Cubes {
 private:
+    struct Vertex {
+        glm::vec3 position;
+        glm::vec2 texCoord;
+    };
     std::shared_ptr<VertexArray> vertexArray;
     std::shared_ptr<const ShaderProgram> cubesShader;
+    std::shared_ptr<const Texture> brick;
 public:
     Cubes();
     void update(float dt);

@@ -2,6 +2,7 @@
 
 #include "AssetManager/AssetManager.h"
 #include "Render/Shader.h"
+#include "Render/Texture.h"
 
 ShaderProgram::ShaderProgram(const std::string& name) {
   std::shared_ptr<const Shader> vertexShader = AssetManager::instance().loadShader(name + ".vert");
@@ -60,7 +61,7 @@ ShaderProgram::~ShaderProgram() {
     glDeleteProgram(shaderProgram);
   }
 }
-// void ShaderProgram::setTexture(const std::string &location, const std::shared_ptr<const Texture> &texture, int32_t slot) const {
-//   texture->bindToSlot(slot);
-//   glProgramUniform1i(shaderProgram, getUniformLocation(location), slot);
-// }
+void ShaderProgram::setTexture(const std::string &location, const std::shared_ptr<const Texture> &texture, int32_t slot) const {
+  texture->bindToSlot(slot);
+  glProgramUniform1i(shaderProgram, getUniformLocation(location), slot);
+}

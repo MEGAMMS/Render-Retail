@@ -4,21 +4,19 @@
 #include "AssetManager/AssetManager.h"
 
 
-struct Vertex {
-    glm::vec3 position;
-};
+
 
 
 Cubes::Cubes() {
-    static std::vector<Vertex> vertices = {
-          Vertex{ glm::vec3{-1.,-1.,-1.} },
-          Vertex{ glm::vec3{ 1.,-1.,-1.} },
-          Vertex{ glm::vec3{-1., 1.,-1.} },
-          Vertex{ glm::vec3{ 1., 1.,-1.} },
-          Vertex{ glm::vec3{-1.,-1.,1.} },
-          Vertex{ glm::vec3{ 1.,-1.,1.} },
-          Vertex{ glm::vec3{-1., 1.,1.} },
-          Vertex{ glm::vec3{ 1., 1.,1.} }
+    static std::vector<Cubes::Vertex> vertices = {
+          { glm::vec3{-1.,-1.,-1.}, glm::vec2{0.,0.} },
+          { glm::vec3{ 1.,-1.,-1.}, glm::vec2{1.,0.} },
+          { glm::vec3{-1., 1.,-1.}, glm::vec2{0.,1.} },
+          { glm::vec3{ 1., 1.,-1.}, glm::vec2{1.,1.} },
+          { glm::vec3{-1.,-1.,1.}, glm::vec2{0.,0.} },
+          { glm::vec3{ 1.,-1.,1.}, glm::vec2{1.,0.} },
+          { glm::vec3{-1., 1.,1.}, glm::vec2{0.,1.} },
+          { glm::vec3{ 1., 1.,1.}, glm::vec2{1.,1.} }
     };
     static std::vector<GLuint> indices = {
         0, 1 ,2,
@@ -41,12 +39,16 @@ Cubes::Cubes() {
     };
 
     vertexArray = std::make_shared<VertexArray>(vertices, indices);
-    vertexArray->addVertexAttributes(std::vector<VertexAttribute>{ {3, VertexAttribute::Float, 0} }, sizeof(Vertex));
-
+    vertexArray->addVertexAttributes(std::vector<VertexAttribute>{
+        { 3, VertexAttribute::Float, 0 },
+        { 2, VertexAttribute::Float, 3 * sizeof(float) }
+    }, sizeof(Vertex));
     cubesShader = AssetManager::instance().loadShaderProgram("Cubes");
     cubesShader->activate();
     cubesShader->setVec2("u_resolution", Window::instance().getWindowRes());
 
+    brick = AssetManager::instance().loadTexture("assets/brick.png");
+    cubesShader->setTexture("cubeFace", brick, 3);
 }
 void Cubes::update(float dt) {
     glm::mat4 model = glm::mat4(1.);

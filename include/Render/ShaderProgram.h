@@ -2,7 +2,7 @@
 
 #include "core.h"
 #include "Render/Shader.h"
-// #include "Texture.h"
+#include "Render/Texture.h"
 
 class ShaderProgram {
     uint32_t shaderProgram = 0;
@@ -24,7 +24,7 @@ public:
     void setVec2(const std::string& location, const glm::vec2& value) const;
     void setVec3(const std::string& location, const glm::vec3& value) const;
     void setMat4(const std::string& location, const glm::mat4& value) const;
-    //   void setTexture(const std::string &location, const std::shared_ptr<const Texture> &texture, int32_t slot) const;
+      void setTexture(const std::string &location, const std::shared_ptr<const Texture> &texture, int32_t slot) const;
 
     ~ShaderProgram();
 };
