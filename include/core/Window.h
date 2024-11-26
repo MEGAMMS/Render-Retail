@@ -16,8 +16,11 @@ public:
     inline GLFWwindow* getContext() { return _window; };
     inline bool isValid() { return _window != nullptr; };
     inline bool shouldClose() const { return glfwWindowShouldClose(_window); };
-
     inline static Window& instance() { return *instancePtr; }
+
+    void unlockMouse();
+    void lockMouse();
+
     void setFullscreen(bool fullscreen);
     bool isFullscreen();
     void update();

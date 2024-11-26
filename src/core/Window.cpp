@@ -91,7 +91,6 @@ void Window::installMainCallbacks() {
 
     glfwSetWindowRefreshCallback(_window, onRefreshWindow);
     glfwSetErrorCallback(Window::onWindowError);
-
 }
 
 void Window::updateView() {
@@ -123,6 +122,14 @@ bool Window::setupGlad() {
     return true;
 }
 
+void Window::lockMouse() {
+    glfwSetInputMode(_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+}
+
+void Window::unlockMouse() {
+    glfwSetInputMode(_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+}
+
 void Window::onKeyEvent(GLFWwindow* window, int32_t key, int32_t scancode, int32_t action, int32_t mode) {
     if (action == GLFW_REPEAT)return;
     if (key == GLFW_KEY_F11 and action == GLFW_PRESS)Window::instance().setFullscreen(!instance().isFullscreen());
@@ -138,6 +145,7 @@ void Window::onMouseButtonEvent(GLFWwindow* window, int32_t button, int32_t acti
 }
 
 void Window::onCursorPosition(GLFWwindow* window, double x, double y) {
+    Application::instance().onCursorPosition(x, y);
 }
 
 void Window::onRefreshWindow(GLFWwindow* window) {

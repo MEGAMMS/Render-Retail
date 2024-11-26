@@ -12,7 +12,6 @@ class Application {
 private:
     static Application* instancePtr;
     std::unique_ptr<Window> window;
-
     std::unique_ptr<TriangleExample> triangle;
     std::unique_ptr<SquarePlayer> square;
     std::unique_ptr<TextureExample> textureExample;
@@ -28,6 +27,7 @@ public:
     Application& operator=(Application&&) noexcept = delete;
 
     void onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode);
+    void onCursorPosition(double x,double y);
 
     inline static Application& instance() { return *instancePtr; };
 
