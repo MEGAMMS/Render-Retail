@@ -13,10 +13,26 @@ Cubes::Cubes() {
           { glm::vec3{ 1.,-1.,-1.}, glm::vec2{1.,0.} },
           { glm::vec3{-1., 1.,-1.}, glm::vec2{0.,1.} },
           { glm::vec3{ 1., 1.,-1.}, glm::vec2{1.,1.} },
+
           { glm::vec3{-1.,-1.,1.}, glm::vec2{0.,0.} },
           { glm::vec3{ 1.,-1.,1.}, glm::vec2{1.,0.} },
           { glm::vec3{-1., 1.,1.}, glm::vec2{0.,1.} },
-          { glm::vec3{ 1., 1.,1.}, glm::vec2{1.,1.} }
+          { glm::vec3{ 1., 1.,1.}, glm::vec2{1.,1.} },
+
+          { glm::vec3{-1.,-1.,1.}, glm::vec2{0.,0.} },
+          { glm::vec3{ 1.,-1.,1.}, glm::vec2{1.,0.} },
+          { glm::vec3{-1., -1.,-1.}, glm::vec2{0.,1.} },
+          { glm::vec3{ 1., -1.,-1.}, glm::vec2{1.,1.} },
+
+          { glm::vec3{-1.,-1.,-1.}, glm::vec2{0.,0.} },
+          { glm::vec3{ 1.,-1.,-1.}, glm::vec2{1.,0.} },
+          { glm::vec3{ 1., 1.,1.}, glm::vec2{0.,1.} },
+          { glm::vec3{ -1., 1.,1.}, glm::vec2{1.,1.} },
+
+          { glm::vec3{-1.,-1.,1.}, glm::vec2{0.,0.} },
+          { glm::vec3{ 1.,-1.,1.}, glm::vec2{1.,0.} },
+          { glm::vec3{-1., 1.,1.}, glm::vec2{0.,1.} },
+          { glm::vec3{ 1., 1.,1.}, glm::vec2{1.,1.} },
     };
     static std::vector<GLuint> indices = {
         0, 1 ,2,
@@ -25,17 +41,17 @@ Cubes::Cubes() {
         4, 5 ,6,
         5, 6 ,7,
 
-        1, 5 ,3,
-        5, 3 ,7,
+        8, 9 ,10,
+        9, 10 ,11,
 
-        0, 1 ,4,
-        1, 4 ,5,
+        12, 13 ,14,
+        13, 14 ,15,
 
-        2, 3 ,6,
-        3, 6 ,7,
+        16, 17 ,18,
+        17, 18 ,19,
 
-        0, 2 ,4,
-        2, 4 ,6
+        20, 21 ,22,
+        21, 22 ,23
     };
 
     vertexArray = std::make_shared<VertexArray>(vertices, indices);
@@ -62,6 +78,7 @@ void Cubes::update(float dt) {
     glm::mat4 view = glm::mat4(1.0f);
     view = glm::translate(view, glm::vec3(0.0f, 0.0f, -4.f));
     float angle = (int(glfwGetTime() * 50000) % 360000) / 1000.f;
+    // angle = 0;
     view = glm::rotate(view, glm::radians(angle), glm::vec3(0.6f, 0.8f, 0.4f));
 
     cubesShader->activate();
