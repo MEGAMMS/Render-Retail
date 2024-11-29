@@ -5,7 +5,7 @@ Application* Application::instancePtr = nullptr;
 float dt = 0.016f;
 float frameStart = 0.0f;
 
-int sceneIndex = 4;
+int sceneIndex = 5;
 
 
 Application::Application() {
@@ -21,6 +21,7 @@ Application::Application() {
     scenes.push_back(std::make_shared<TextureExample>());
     scenes.push_back(std::make_shared<Pyramid>());
     scenes.push_back(std::make_shared<Cubes>());
+    scenes.push_back(std::make_shared<AngryNeighbor>());
 
 }
 void Application::run() {

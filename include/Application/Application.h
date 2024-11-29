@@ -7,6 +7,7 @@
 #include "Challenges/TextureExample.h"
 #include "Challenges/Pyramid.h"
 #include "Challenges/Cubes.h"
+#include "AngryNeighbor/AngryNeighbor.h"
 
 class Application {
 private:
