@@ -38,7 +38,6 @@ TextureExample::TextureExample() {
         Vertex{glm::vec3{-0.5f, -0.5f, 0.0f},glm::vec3{1.0f, 0.0f, 1.0f},glm::vec2{0.0f, 0.0f}},
         Vertex{glm::vec3{-0.5f,  0.5f, 0.0f},glm::vec3{1.0f, 1.0f, 0.0f},glm::vec2{0.0f, 1.0f}}
     };
-    std::cerr << vertices.size() << std::endl;
 
     static std::vector<GLuint> indices = {
         0, 1, 2,
@@ -52,11 +51,6 @@ TextureExample::TextureExample() {
             { 3, VertexAttribute::Float, 3 * sizeof(float) },
             { 2, VertexAttribute::Float, 6 * sizeof(float) }
     }, sizeof(Vertex));
-
-    std::cerr << sizeof(Vertex) << " " << 8 * sizeof(float) << std::endl;
-    // vao.LinkAttrib(vbo, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*) (0 * sizeof(float)));
-    // vao.LinkAttrib(vbo, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*) (3 * sizeof(float)));
-    // vao.LinkAttrib(vbo, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*) (6 * sizeof(float)));
 
     shaderProgram = AssetManager::instance().loadShaderProgram("TextureExample");
     shaderProgram->activate();

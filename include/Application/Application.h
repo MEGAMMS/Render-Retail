@@ -27,7 +27,7 @@ public:
     Application& operator=(Application&&) noexcept = delete;
 
     void onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode);
-    void onCursorPosition(double x,double y);
+    void onCursorPositionEvent(double x, double y);
 
     inline static Application& instance() { return *instancePtr; };
 

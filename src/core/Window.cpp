@@ -80,7 +80,7 @@ void Window::update() {
 void Window::installMainCallbacks() {
     glfwSetKeyCallback(_window, onKeyEvent);
     glfwSetMouseButtonCallback(_window, onMouseButtonEvent);
-    glfwSetCursorPosCallback(_window, onCursorPosition);
+    glfwSetCursorPosCallback(_window, onCursorPositionEvent);
     glfwSetFramebufferSizeCallback(_window, onResized);
 
     glEnable(GL_DEBUG_OUTPUT);
@@ -144,8 +144,8 @@ void Window::onResized(GLFWwindow* window, int32_t width, int32_t height) {
 void Window::onMouseButtonEvent(GLFWwindow* window, int32_t button, int32_t action, int32_t mods) {
 }
 
-void Window::onCursorPosition(GLFWwindow* window, double x, double y) {
-    Application::instance().onCursorPosition(x, y);
+void Window::onCursorPositionEvent(GLFWwindow* window, double x, double y) {
+    Application::instance().onCursorPositionEvent(x, y);
 }
 
 void Window::onRefreshWindow(GLFWwindow* window) {
