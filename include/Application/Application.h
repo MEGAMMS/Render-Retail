@@ -16,7 +16,7 @@ private:
     std::unique_ptr<SquarePlayer> square;
     std::unique_ptr<TextureExample> textureExample;
     std::unique_ptr<Pyramid> pyramid;
-    std::unique_ptr<Cubes> cubes;
+    std::unique_ptr<Scene> cubes;
 
 public:
     Application();

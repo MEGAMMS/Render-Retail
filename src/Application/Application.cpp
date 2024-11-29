@@ -53,6 +53,7 @@ void Application::run() {
 
         case Program::CUBES:
             cubes->update(dt);
+            cubes->render();
             break;
         }
 

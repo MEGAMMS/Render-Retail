@@ -3,10 +3,6 @@
 #include "Application/Application.h"
 #include "AssetManager/AssetManager.h"
 
-
-
-
-
 Cubes::Cubes() {
     camera1 = std::make_shared<Camera>();
     camera2 = std::make_shared<Camera>();
@@ -76,30 +72,28 @@ Cubes::Cubes() {
     cubesShader->setTexture("cubeFace", brick, 3);
 }
 void Cubes::update(float dt) {
-    glm::mat4 model = glm::mat4(1.);
+    model = glm::mat4(1.);
     model = glm::scale(model, glm::vec3(0.5));
-    // model = glm::rotate(model, glm::radians(45.f), glm::vec3(1., 1., 1.));
+    model = glm::rotate(model, glm::radians(45.f), glm::vec3(1., 1., 1.));
     float angle = (int(glfwGetTime() * 50000) % 360000) / 1000.f;
-    angle = 0;
+    // angle = 0;
     model = glm::rotate(model, glm::radians(angle), glm::vec3(0.6f, 0.8f, 0.4f));
 
     Window& window = Window::instance();
     float aspect = (float) window.getWindowWidth() / window.getWindowHeight();
-    glm::mat4 projection = glm::perspective(glm::radians(80.f), aspect, 0.001f, 100.0f);
+    projection = glm::perspective(glm::radians(80.f), aspect, 0.001f, 100.0f);
 
     activeCamera->update(dt);
-    glm::mat4 view = activeCamera->getViewMatrix();
+    view = activeCamera->getViewMatrix();
+}
 
+void Cubes::render() {
     cubesShader->activate();
     cubesShader->setFloat("u_time", glfwGetTime());
     cubesShader->setMat4("projection", projection);
     cubesShader->setMat4("view", view);
     cubesShader->setMat4("model", model);
     vertexArray->renderIndexed();
-}
-
-void Cubes::Delete() {
-
 }
 
 void Cubes::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
