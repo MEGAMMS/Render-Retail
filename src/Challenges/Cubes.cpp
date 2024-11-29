@@ -7,7 +7,7 @@ Cubes::Cubes() {
     camera1 = std::make_shared<Camera>();
     camera2 = std::make_shared<Camera>();
     activeCamera = camera1;
-
+    this->setProjectionMatrixParams(80.0f, 0.001f, 100.0f);
     static std::vector<Cubes::Vertex> vertices = {
           { glm::vec3{-1.,-1.,-1.}, glm::vec2{0.,0.} },
           { glm::vec3{ 1.,-1.,-1.}, glm::vec2{1.,0.} },
@@ -78,10 +78,6 @@ void Cubes::update(float dt) {
     float angle = (int(glfwGetTime() * 50000) % 360000) / 1000.f;
     // angle = 0;
     model = glm::rotate(model, glm::radians(angle), glm::vec3(0.6f, 0.8f, 0.4f));
-
-    Window& window = Window::instance();
-    float aspect = (float) window.getWindowWidth() / window.getWindowHeight();
-    projection = glm::perspective(glm::radians(80.f), aspect, 0.001f, 100.0f);
 
     activeCamera->update(dt);
     view = activeCamera->getViewMatrix();

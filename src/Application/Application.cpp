@@ -5,11 +5,7 @@ Application* Application::instancePtr = nullptr;
 float dt = 0.016f;
 float frameStart = 0.0f;
 
-enum class Program {
-    SQUARE, TRIANGLE, TEXTURE, PYRAMID, CUBES, Count
-};
-
-int programIdx = (int) Program::CUBES;
+int sceneIndex = 4;
 
 
 Application::Application() {
@@ -20,11 +16,12 @@ Application::Application() {
     // window->setFullscreen(1);
     window->lockMouse();
 
-    square = std::make_unique<SquarePlayer>();
-    triangle = std::make_unique<TriangleExample>();
-    textureExample = std::make_unique<TextureExample>();
-    pyramid = std::make_unique<Pyramid>();
-    cubes = std::make_unique<Cubes>();
+    scenes.push_back(std::make_shared<SquarePlayer>());
+    scenes.push_back(std::make_shared<TriangleExample>());
+    scenes.push_back(std::make_shared<TextureExample>());
+    scenes.push_back(std::make_shared<Pyramid>());
+    scenes.push_back(std::make_shared<Cubes>());
+
 }
 void Application::run() {
 
@@ -36,44 +33,22 @@ void Application::run() {
         dt = glfwGetTime() - frameStart;
         frameStart = glfwGetTime();
 
-
-        switch ((Program) programIdx) {
-        case Program::SQUARE:
-            square->update(dt);
-            break;
-        case Program::TRIANGLE:
-            triangle->update();
-            break;
-        case Program::TEXTURE:
-            textureExample->update();
-            break;
-        case Program::PYRAMID:
-            pyramid->update(dt);
-            break;
-
-        case Program::CUBES:
-            cubes->update(dt);
-            cubes->render();
-            break;
-        }
-
-
-
+        scenes[sceneIndex]->update(dt);
+        scenes[sceneIndex]->render();
         // Swap the back buffer with the front buffer
         window->finalizeFrame();
         // Take care of all GLFW events
         window->pollEvents();
     }
-    square->Delete();
 
 }
 void Application::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
-    square->onKeyEvent(key, scancode, action, mode);
-    triangle->onKeyEvent(key, scancode, action, mode);
-    textureExample->onKeyEvent(key, scancode, action, mode);
-    cubes->onKeyEvent(key, scancode, action, mode);
-    if (key == GLFW_KEY_LEFT_ALT and action == GLFW_PRESS)programIdx = ((++programIdx) % (int) Program::Count);
+    scenes[sceneIndex]->onKeyEvent(key, scancode, action, mode);
+    if (key == GLFW_KEY_LEFT_ALT and action == GLFW_PRESS)sceneIndex = (++sceneIndex % scenes.size());
 }
 void Application::onCursorPositionEvent(double x, double y) {
-    cubes->onCursorPositionEvent(x, y);
+    scenes[sceneIndex]->onCursorPositionEvent(x, y);
 }
+void Application::onResized() {
+    for (auto scene : scenes)scene->onResized();
+};

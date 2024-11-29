@@ -17,6 +17,7 @@ Pyramid::Pyramid() {
       Vertex{ glm::vec3{-1., 1.,0.} ,glm::vec2{0,2.5}},
       Vertex{ glm::vec3{ 1., 1.,0.} ,glm::vec2{2.5,2.5}}
     };
+
     static std::vector<GLuint> indices = {
         0, 1, 4,
         0, 2, 4,
@@ -26,25 +27,7 @@ Pyramid::Pyramid() {
         5, 6, 7,
         8, 6, 7
     };
-    glActiveTexture(GL_TEXTURE2);
-    unsigned int texture;
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    std::shared_ptr<const Image> brick = AssetManager::instance().loadImage("assets/brick.png");
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, brick->width, brick->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, brick->data.data());
-    glGenerateMipmap(GL_TEXTURE_2D);
 
-    glActiveTexture(GL_TEXTURE7);
-    vertexArray = std::make_shared<VertexArray>(vertices, indices);
-    vertexArray->addVertexAttributes(Pyramid::Vertex::vertexAttributes(), sizeof(Pyramid::Vertex));
-
-    shaderProgram = AssetManager::instance().loadShaderProgram("Pyramid");
-    shaderProgram->activate();
-    shaderProgram->setVec2("u_resolution", Window::instance().getWindowRes());
-    shaderProgram->setInt("tex", 2);
-}
-
-void Pyramid::update(float dt) {
     std::array<glm::vec3, 19> pyramidsPositions{
         glm::vec3(0.0f,  0.0f,  0.0f),
         glm::vec3(2.0f,  5.0f, -15.0f),
@@ -67,46 +50,57 @@ void Pyramid::update(float dt) {
         glm::vec3(-1.3f,  1.0f, 1.5f)
     };
 
+    glActiveTexture(GL_TEXTURE2);
+    unsigned int texture;
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    std::shared_ptr<const Image> brick = AssetManager::instance().loadImage("assets/brick.png");
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, brick->width, brick->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, brick->data.data());
+    glGenerateMipmap(GL_TEXTURE_2D);
+
+    glActiveTexture(GL_TEXTURE7);
+    vertexArray = std::make_shared<VertexArray>(vertices, indices);
+    vertexArray->addVertexAttributes(Pyramid::Vertex::vertexAttributes(), sizeof(Pyramid::Vertex));
+
+    shaderProgram = AssetManager::instance().loadShaderProgram("Pyramid");
     shaderProgram->activate();
-    shaderProgram->setFloat("u_time", glfwGetTime());
+    shaderProgram->setVec2("u_resolution", Window::instance().getWindowRes());
+    shaderProgram->setInt("tex", 2);
 
-    glm::mat4 trans = glm::mat4(1.);
-    trans = glm::scale(trans, glm::vec3(0.5));
-    trans = glm::translate(trans, glm::vec3(0, 0, 0));
-    trans = glm::rotate(trans, glm::radians(-90.f), glm::vec3(1.0, 0.0, 0.0));
-    trans = glm::rotate(trans, glm::radians((float) (int(glfwGetTime() * 100) % 360)), glm::vec3(0.0, 0.0, 1.0));
+    model = glm::mat4(1.);
+    model = glm::scale(model, glm::vec3(0.5));
+    model = glm::translate(model, glm::vec3(0, 0, 0));
+    model = glm::rotate(model, glm::radians(-90.f), glm::vec3(1.0, 0.0, 0.0));
+    model = glm::rotate(model, glm::radians((float) (int(glfwGetTime() * 100) % 360)), glm::vec3(0.0, 0.0, 1.0));
+    for (int i = 0;i < pyramidsPositions.size();i++) {
+        model = glm::mat4(1.);
+        model = glm::scale(model, glm::vec3(0.7));
+        model = glm::translate(model, pyramidsPositions[i] * glm::vec3(2.1));
+        float angle = i * 20.f;
+        model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+        angle = angle * 2.;
+        model = glm::rotate(model, glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::rotate(model, glm::radians(-70.f), glm::vec3(1.0f, 0.1f, 0.0f));
+        pyramidsModelMatrixes.push_back(model);
+    }
+}
 
-    Window& window = Window::instance();
-    float aspect = (float) window.getWindowWidth() / window.getWindowHeight();
-    glm::mat4 projection = glm::perspective(glm::radians(45.0f), aspect, 0.1f, 100.0f);
-
-    glm::mat4 view = glm::mat4(1.0f);
+void Pyramid::update(float dt) {
+    view = glm::mat4(1.0f);
     // note that we're translating the scene in the reverse direction of where we want to move
     view = glm::translate(view, glm::vec3(0.0f, -0.4f, -4.f));
     float angle = (int(glfwGetTime() * 5000) % 360000) / 1000.f;
     view = glm::rotate(view, glm::radians(angle), glm::vec3(0.6f, 0.8f * glfwGetTime(), 0.4f));
+}
+
+void Pyramid::render() {
+    shaderProgram->activate();
+    shaderProgram->setFloat("u_time", glfwGetTime());
     shaderProgram->setMat4("projection", projection);
     shaderProgram->setMat4("view", view);
-
-    for (int i = 0;i < pyramidsPositions.size();i++) {
-        trans = glm::mat4(1.);
-        trans = glm::scale(trans, glm::vec3(0.7));
-        trans = glm::translate(trans, pyramidsPositions[i] * glm::vec3(2.1));
-        float angle = i * 20.f;
-        trans = glm::rotate(trans, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
-        angle = glfwGetTime() * 2.;
-        trans = glm::rotate(trans, glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
-        trans = glm::rotate(trans, glm::radians(-70.f), glm::vec3(1.0f, 0.1f, 0.0f));
-        shaderProgram->setMat4("model", trans);
+    for (auto model : pyramidsModelMatrixes) {
+        shaderProgram->setMat4("model", model);
         vertexArray->renderIndexed();
     }
-
-}
-
-void Pyramid::Delete() {
-
-}
-void Pyramid::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
-    bool pressed = action == GLFW_PRESS;
 }
 

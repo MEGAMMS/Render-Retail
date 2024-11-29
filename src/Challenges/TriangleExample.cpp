@@ -19,13 +19,14 @@ TriangleExample::TriangleExample() {
     shaderProgram = AssetManager::instance().loadShaderProgram("Triangle");
     shaderProgram->activate();
     shaderProgram->setVec2("u_resolution", Window::instance().getWindowRes());
-
 }
-void TriangleExample::update() {
+void TriangleExample::update(float dt) {
+}
+
+void TriangleExample::render(){
     shaderProgram->activate();
     shaderProgram->setFloat("u_time", glfwGetTime());
     shaderProgram->setFloat("u_down", (float) upSideDown);
-
     vertexArray->renderIndexed();
 }
 void TriangleExample::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {

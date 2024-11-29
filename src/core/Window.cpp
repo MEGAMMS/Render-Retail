@@ -97,6 +97,7 @@ void Window::updateView() {
     if (_updateViewport) {
         glfwGetFramebufferSize(_window, &windowWidth, &windowHeight);
         glViewport(0, 0, windowWidth, windowHeight);
+        Application::instance().onResized();
         _updateViewport = false;
     }
 }

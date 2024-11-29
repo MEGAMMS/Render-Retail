@@ -3,8 +3,9 @@
 #include "core.h"
 #include "Render/ShaderProgram.h"
 #include "Render/VertexArray.h"
+#include "Application/Scene.h"
 
-class SquarePlayer {
+class SquarePlayer : public Scene{
 private:
     struct Vertex {
         glm::vec2 position;
@@ -28,8 +29,7 @@ private:
 
 public:
     SquarePlayer();
-    void update(float dt);
-    void Delete();
-
-    void onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode);
+    void update(float dt) override;
+    void render() override;
+    void onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) override;
 };

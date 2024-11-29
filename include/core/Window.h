@@ -12,6 +12,7 @@ public:
 
     inline int32_t getWindowHeight() const { return windowHeight; }
     inline int32_t getWindowWidth() const { return windowWidth; }
+    inline float getWindowAspectRatio() const { return (float) getWindowWidth() / getWindowHeight(); }
     inline glm::vec2 getWindowRes() const { return glm::vec2{ getWindowWidth(),getWindowHeight() }; }
     inline GLFWwindow* getContext() { return _window; };
     inline bool isValid() { return _window != nullptr; };

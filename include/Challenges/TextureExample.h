@@ -3,8 +3,9 @@
 #include "core.h"
 #include "Render/ShaderProgram.h"
 #include "Render/VertexArray.h"
+#include "Application/Scene.h"
 
-class TextureExample {
+class TextureExample : public Scene {
 
 private:
     struct Vertex {
@@ -20,7 +21,8 @@ private:
 public:
 
     TextureExample();
-    void update();
+    void update(float dt);
+    void render();
     void onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode);
 
 };

@@ -12,11 +12,8 @@ class Application {
 private:
     static Application* instancePtr;
     std::unique_ptr<Window> window;
-    std::unique_ptr<TriangleExample> triangle;
-    std::unique_ptr<SquarePlayer> square;
-    std::unique_ptr<TextureExample> textureExample;
-    std::unique_ptr<Pyramid> pyramid;
-    std::unique_ptr<Scene> cubes;
+
+    std::vector<std::shared_ptr<Scene>> scenes = std::vector<std::shared_ptr<Scene>>();
 
 public:
     Application();
@@ -28,6 +25,7 @@ public:
 
     void onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode);
     void onCursorPositionEvent(double x, double y);
+    void onResized();
 
     inline static Application& instance() { return *instancePtr; };
 

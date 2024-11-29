@@ -59,7 +59,10 @@ TextureExample::TextureExample() {
     shaderProgram->setInt("texture2", 1);
 }
 
-void TextureExample::update() {
+void TextureExample::update(float dt) {
+    
+}
+void TextureExample::render(){
     shaderProgram->activate();
     shaderProgram->setFloat("mix_portion", mix_portion);
     vertexArray->renderIndexed();
