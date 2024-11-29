@@ -11,7 +11,7 @@ Cubes::Cubes() {
     camera1 = std::make_shared<Camera>();
     camera2 = std::make_shared<Camera>();
     activeCamera = camera1;
-    
+
     static std::vector<Cubes::Vertex> vertices = {
           { glm::vec3{-1.,-1.,-1.}, glm::vec2{0.,0.} },
           { glm::vec3{ 1.,-1.,-1.}, glm::vec2{1.,0.} },
@@ -25,18 +25,23 @@ Cubes::Cubes() {
 
           { glm::vec3{-1.,-1.,1.}, glm::vec2{0.,0.} },
           { glm::vec3{ 1.,-1.,1.}, glm::vec2{1.,0.} },
-          { glm::vec3{-1., -1.,-1.}, glm::vec2{0.,1.} },
-          { glm::vec3{ 1., -1.,-1.}, glm::vec2{1.,1.} },
+          { glm::vec3{-1.,-1.,-1.}, glm::vec2{0.,1.} },
+          { glm::vec3{ 1.,-1.,-1.}, glm::vec2{1.,1.} },
+
+          { glm::vec3{-1., 1.,1.}, glm::vec2{0.,0.} },
+          { glm::vec3{ 1., 1.,1.}, glm::vec2{1.,0.} },
+          { glm::vec3{-1., 1.,-1.}, glm::vec2{0.,1.} },
+          { glm::vec3{ 1., 1.,-1.}, glm::vec2{1.,1.} },
+
+          { glm::vec3{ 1.,-1.,-1.}, glm::vec2{0.,0.} },
+          { glm::vec3{ 1.,-1., 1.}, glm::vec2{1.,0.} },
+          { glm::vec3{ 1., 1.,-1.}, glm::vec2{0.,1.} },
+          { glm::vec3{ 1., 1., 1.}, glm::vec2{1.,1.} },
 
           { glm::vec3{-1.,-1.,-1.}, glm::vec2{0.,0.} },
-          { glm::vec3{ 1.,-1.,-1.}, glm::vec2{1.,0.} },
-          { glm::vec3{ 1., 1.,1.}, glm::vec2{0.,1.} },
-          { glm::vec3{ -1., 1.,1.}, glm::vec2{1.,1.} },
-
-          { glm::vec3{-1.,-1.,1.}, glm::vec2{0.,0.} },
-          { glm::vec3{ 1.,-1.,1.}, glm::vec2{1.,0.} },
-          { glm::vec3{-1., 1.,1.}, glm::vec2{0.,1.} },
-          { glm::vec3{ 1., 1.,1.}, glm::vec2{1.,1.} },
+          { glm::vec3{-1.,-1., 1.}, glm::vec2{1.,0.} },
+          { glm::vec3{-1., 1.,-1.}, glm::vec2{0.,1.} },
+          { glm::vec3{-1., 1., 1.}, glm::vec2{1.,1.} },
     };
     static std::vector<GLuint> indices = {
         0, 1 ,2,
