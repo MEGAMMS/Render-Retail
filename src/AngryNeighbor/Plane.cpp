@@ -1,8 +1,8 @@
 #include "AngryNeighbor/Plane.h"
 #include "AssetManager/AssetManager.h"
 
-Plane::Plane(glm::vec3 position, glm::vec2 size, glm::vec3 orientation, glm::vec3 color) :
-    position(position), size(size), orientation(orientation), color(color) {
+Plane::Plane(glm::vec3 position, glm::vec2 size, glm::vec3 orientation) :
+    position(position), size(size), orientation(orientation) {
 
     static std::vector<Plane::Vertex> vertices = {
       Vertex{ glm::vec3{0.,0.,0.} ,glm::vec2{0,0} },
@@ -21,11 +21,6 @@ Plane::Plane(glm::vec3 position, glm::vec2 size, glm::vec3 orientation, glm::vec
     model = glm::mat4(1.0f);
     model = glm::translate(model, position);
 
-
-
-    // model = glm::rotate(model, glm::radians(45.f), glm::vec3(1., 0., 0.));
-    // Step 2: Rotate the plane to align with the given orientation
-
     glm::vec3 defaultNormal(0.f, 0.f, 1.f); // Assuming the plane initially faces the +Z direction
     orientation = glm::normalize(orientation);
     glm::vec3 axis = glm::cross(defaultNormal, orientation);
@@ -40,6 +35,16 @@ Plane::Plane(glm::vec3 position, glm::vec2 size, glm::vec3 orientation, glm::vec
     model = glm::scale(model, glm::vec3(size, 1.0f));
 }
 
+Plane::Plane(glm::vec3 position, glm::vec2 size, glm::vec3 orientation, glm::vec3 color) :
+    Plane(position, size, orientation) {
+    this->color = color;
+}
+Plane::Plane(glm::vec3 position, glm::vec2 size, glm::vec3 orientation, const std::string& textureName) :
+    Plane(position, size, orientation) {
+    useTexture = 1;
+    texture = AssetManager::instance().loadTexture(textureName);
+
+}
 void Plane::update(float dt) {
 }
 
@@ -47,6 +52,9 @@ void Plane::render(glm::mat4& mvp) {
     shaderProgram->setMat4("MVP", mvp);
     shaderProgram->setMat4("model", model);
     shaderProgram->setVec3("color", color);
+    shaderProgram->setVec2("scale", size);
+    shaderProgram->setInt("useTexture", useTexture);
+    if (useTexture)shaderProgram->setTexture("textureSlot", texture, 1);
     shaderProgram->activate();
     vertexArray->renderIndexed();
 }

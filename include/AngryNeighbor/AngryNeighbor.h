@@ -8,7 +8,7 @@
 class AngryNeighbor : public Scene {
 private:
     std::shared_ptr<Camera> camera;
-    std::shared_ptr<Plane> ground;
+    std::vector<std::shared_ptr<Plane>> planes;
 
     glm::mat4 mvp = glm::mat4(1.f);
 public:

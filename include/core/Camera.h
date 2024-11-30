@@ -22,9 +22,6 @@ class Camera {
     float pitch = 0.0f;
     float lastX, lastY;
 
-
-    float walkingSpeed = 2.317;
-    float runningSpeed = 10.321;
     glm::vec2 mouseSensitivity = glm::vec2(0.2);
 
     bool resetMouse = true;
@@ -38,6 +35,8 @@ class Camera {
     void updateOrientation();
 
 public:
+    float walkingSpeed = 2.317;
+    float runningSpeed = 10.321;
     Camera() {};
 
     glm::mat4& setPosition(glm::vec3 eye);
