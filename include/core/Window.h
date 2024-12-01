@@ -33,7 +33,7 @@ private:
 
     static Window* instancePtr;
 
-    const char* name = "glCraft";
+    const char* name = "MEGA-Window";
     int32_t windowWidth = 800;
     int32_t windowHeight = 800;
     GLFWwindow* _window = nullptr;

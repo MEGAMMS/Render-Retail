@@ -35,11 +35,18 @@ AngryNeighbor::AngryNeighbor() {
         glm::vec2{ 1,9 },
         glm::vec3{ 0,0,1 },
             "assets/test-textures/default_brick.png"),
-            std::make_shared<Plane>(
-        glm::vec3{ 0,1,0 },
-        glm::vec2{ 24,9 },
-        glm::vec3{ 0,1,0 },
-            "assets/test-textures/default_pine_wood.png"),
+
+    };
+    boxes = {
+        std::make_shared<Box>(
+            glm::vec3{ 0,1,0 },
+            glm::vec3{ 24,10,10},
+            glm::vec3{ 0,1,0 },
+            std::vector<int>{1,2,4,5,6},
+            // glm::vec3{0.3,0.5,0.9}
+            "assets/test-textures/default_pine_wood.png"
+            ),
+            
 
     };
 
@@ -52,6 +59,9 @@ void AngryNeighbor::update(float dt) {
 void AngryNeighbor::render() {
     for (auto plane : planes)
         plane->render(mvp);
+    for (auto box : boxes)
+        box->render(mvp);
+
 }
 
 void AngryNeighbor::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
