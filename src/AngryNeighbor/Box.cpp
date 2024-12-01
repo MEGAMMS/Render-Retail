@@ -5,6 +5,16 @@ Box::Box(glm::vec3 position, glm::vec3 size, glm::vec3 orientation, std::vector<
     position(position), size(size), orientation(orientation) {
 
     auto [vertices, indices] = generateVerticesAndIndices(facesToRender);
+    for (int i = 0;i < facesToRender.size();i++) {
+        int face = facesToRender[i];
+        int dem = face / 2;
+        for (int j = i * 4;j < (i + 1) * 4;j++) {
+            auto& vertex = vertices[j];
+
+
+
+        }
+    }
     vertexArray = std::make_shared<VertexArray>(vertices, indices);
     vertexArray->addVertexAttributes(Box::Vertex::vertexAttributes(), sizeof(Box::Vertex));
     shaderProgram = AssetManager::instance().loadShaderProgram("Plane");
@@ -17,12 +27,10 @@ Box::Box(glm::vec3 position, glm::vec3 size, glm::vec3 orientation, std::vector<
     glm::vec3 axis = glm::cross(defaultNormal, orientation);
     float angle = glm::acos(glm::dot(defaultNormal, orientation));
 
-    std::cerr << axis.x << " " << axis.y << " " << axis.z << std::endl;
-    std::cerr << glm::length(axis) << " " << glm::degrees(angle) << std::endl;
     if (glm::length(axis) > 0.0001f) { // Avoid invalid axis when vectors are aligned
         model = glm::rotate(model, angle, glm::normalize(axis));
-    }
 
+    }
     model = glm::scale(model, glm::vec3(size));
 }
 
@@ -70,16 +78,16 @@ std::pair<std::vector<Box::Vertex>, std::vector<GLuint>> Box::generateVerticesAn
             {glm::vec3{1., 1., 1.}, glm::vec2{1., 1.}}
         },
         { // Face 3
-            {glm::vec3{0., 0., 1.}, glm::vec2{0., 0.}},
-            {glm::vec3{1., 0., 1.}, glm::vec2{1., 0.}},
-            {glm::vec3{0., 0., 0.}, glm::vec2{0., 1.}},
-            {glm::vec3{1., 0., 0.}, glm::vec2{1., 1.}}
+            {glm::vec3{0., 0., 0.}, glm::vec2{0., 0.}},
+            {glm::vec3{1., 0., 0.}, glm::vec2{1., 0.}},
+            {glm::vec3{0., 0., 1.}, glm::vec2{0., 1.}},
+            {glm::vec3{1., 0., 1.}, glm::vec2{1., 1.}}
         },
         { // Face 4
-            {glm::vec3{0., 1., 1.}, glm::vec2{0., 0.}},
-            {glm::vec3{1., 1., 1.}, glm::vec2{1., 0.}},
-            {glm::vec3{0., 1., 0.}, glm::vec2{0., 1.}},
-            {glm::vec3{1., 1., 0.}, glm::vec2{1., 1.}}
+            {glm::vec3{0., 1., 0.}, glm::vec2{0., 0.}},
+            {glm::vec3{1., 1., 0.}, glm::vec2{1., 0.}},
+            {glm::vec3{0., 1., 1.}, glm::vec2{0., 1.}},
+            {glm::vec3{1., 1., 1.}, glm::vec2{1., 1.}}
         },
         { // Face 5
             {glm::vec3{1., 0., 0.}, glm::vec2{0., 0.}},

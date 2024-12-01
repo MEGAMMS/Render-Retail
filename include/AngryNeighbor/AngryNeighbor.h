@@ -5,12 +5,14 @@
 #include "core/Camera.h"
 #include "AngryNeighbor/Plane.h"
 #include "AngryNeighbor/Box.h"
+#include "AngryNeighbor/Door.h"
 
 class AngryNeighbor : public Scene {
 private:
     std::shared_ptr<Camera> camera;
     std::vector<std::shared_ptr<Plane>> planes;
     std::vector<std::shared_ptr<Box>> boxes;
+    std::vector<std::shared_ptr<Door>> doors;
 
     glm::mat4 mvp = glm::mat4(1.f);
 public:

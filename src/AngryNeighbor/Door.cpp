@@ -1,10 +1,10 @@
-#include "AngryNeighbor/Plane.h"
+#include "AngryNeighbor/Door.h"
 #include "AssetManager/AssetManager.h"
 
-Plane::Plane(glm::vec3 position, glm::vec2 size, glm::vec3 orientation) :
+Door::Door(glm::vec3 position, glm::vec2 size, glm::vec3 orientation) :
     position(position), size(size), orientation(orientation) {
 
-    static std::vector<Plane::Vertex> vertices = {
+    static std::vector<Door::Vertex> vertices = {
       Vertex{ glm::vec3{0.,0.,0.} ,glm::vec2{0,0} },
       Vertex{ glm::vec3{1.,0.,0.} ,glm::vec2{1,0}},
       Vertex{ glm::vec3{0.,1.,0.} ,glm::vec2{0,1}},
@@ -15,8 +15,22 @@ Plane::Plane(glm::vec3 position, glm::vec2 size, glm::vec3 orientation) :
         1, 2, 3
     };
     vertexArray = std::make_shared<VertexArray>(vertices, indices);
-    vertexArray->addVertexAttributes(Plane::Vertex::vertexAttributes(), sizeof(Plane::Vertex));
+    vertexArray->addVertexAttributes(Door::Vertex::vertexAttributes(), sizeof(Door::Vertex));
     shaderProgram = AssetManager::instance().loadShaderProgram("Plane");
+
+}
+
+Door::Door(glm::vec3 position, glm::vec2 size, glm::vec3 orientation, glm::vec3 color) :
+    Door(position, size, orientation) {
+    this->color = color;
+}
+Door::Door(glm::vec3 position, glm::vec2 size, glm::vec3 orientation, const std::string& textureName) :
+    Door(position, size, orientation) {
+    useTexture = 1;
+    texture = AssetManager::instance().loadTexture(textureName);
+
+}
+void Door::update(float dt) {
     // Compute the model matrix
     model = glm::mat4(1.0f);
     model = glm::translate(model, position);
@@ -25,37 +39,29 @@ Plane::Plane(glm::vec3 position, glm::vec2 size, glm::vec3 orientation) :
     orientation = glm::normalize(orientation);
     glm::vec3 axis = glm::cross(defaultNormal, orientation);
     float angle = glm::acos(glm::dot(defaultNormal, orientation));
-
     if (glm::length(axis) > 0.0001f) { // Avoid invalid axis when vectors are aligned
         model = glm::rotate(model, angle, glm::normalize(axis));
     }
+    angle = (int(glfwGetTime() * 50000) % 360000) / 1000.f;
+    // angle = 0;
+    model = glm::rotate(model, glm::radians(open*(-90.f)), glm::vec3(0.f, 1.f, 0.f));
 
     model = glm::scale(model, glm::vec3(size, 1.0f));
-}
-
-Plane::Plane(glm::vec3 position, glm::vec2 size, glm::vec3 orientation, glm::vec3 color) :
-    Plane(position, size, orientation) {
-    this->color = color;
-}
-Plane::Plane(glm::vec3 position, glm::vec2 size, glm::vec3 orientation, const std::string& textureName) :
-    Plane(position, size, orientation) {
-    useTexture = 1;
-    texture = AssetManager::instance().loadTexture(textureName);
 
 }
-void Plane::update(float dt) {
-}
 
-void Plane::render(glm::mat4& mvp) {
+void Door::render(glm::mat4& mvp) {
     shaderProgram->setMat4("MVP", mvp);
     shaderProgram->setMat4("model", model);
     shaderProgram->setVec3("color", color);
-    shaderProgram->setVec2("scale", size);
+    shaderProgram->setVec2("scale", glm::vec3(1, 1, 1));
     shaderProgram->setInt("useTexture", useTexture);
     if (useTexture)shaderProgram->setTexture("textureSlot", texture, 1);
     shaderProgram->activate();
     vertexArray->renderIndexed();
 }
 
-void Plane::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
+void Door::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
+    bool pressed = action == GLFW_PRESS;
+    if(key == GLFW_KEY_R)open = pressed;
 }
