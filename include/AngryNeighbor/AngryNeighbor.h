@@ -6,6 +6,7 @@
 #include "AngryNeighbor/Plane.h"
 #include "AngryNeighbor/Box.h"
 #include "AngryNeighbor/Door.h"
+#include "AngryNeighbor/Clock.h"
 
 class AngryNeighbor : public Scene {
 private:
@@ -13,6 +14,7 @@ private:
     std::vector<std::shared_ptr<Plane>> planes;
     std::vector<std::shared_ptr<Box>> boxes;
     std::vector<std::shared_ptr<Door>> doors;
+    // std::vector<std::Clock> clock;
 
     glm::mat4 mvp = glm::mat4(1.f);
 public:
