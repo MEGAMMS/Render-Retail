@@ -6,7 +6,7 @@
 #include "Challenges/TriangleExample.h"
 #include "Challenges/TextureExample.h"
 #include "Challenges/Pyramid.h"
-#include "Challenges/Cubes.h"
+#include "Challenges/Cubes/Cubes.h"
 
 class Application {
 private:

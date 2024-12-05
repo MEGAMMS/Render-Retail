@@ -6,24 +6,19 @@
 #include "Render/ShaderProgram.h"
 #include "Render/VertexArray.h"
 #include "core/Camera.h"
+#include "Challenges/Cubes/Cube.h"
 
-class Cubes : public Scene{
+class Cubes : public Scene {
 private:
-    struct Vertex {
-        glm::vec3 position;
-        glm::vec2 texCoord;
-    };
-    std::shared_ptr<VertexArray> vertexArray;
-    std::shared_ptr<const ShaderProgram> cubesShader;
-    std::shared_ptr<const Texture> brick;
-
     std::shared_ptr<Camera> camera1;
     std::shared_ptr<Camera> camera2;
 
     std::shared_ptr<Camera> activeCamera;
 
-    glm::mat4 view;
-    glm::mat4 model;
+    std::shared_ptr<Cube> cube;
+    glm::mat4 mvp;
+
+    
 public:
     Cubes();
     void update(float dt) override;
