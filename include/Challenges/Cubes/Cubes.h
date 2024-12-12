@@ -6,6 +6,7 @@
 #include "Render/ShaderProgram.h"
 #include "Render/VertexArray.h"
 #include "core/Camera.h"
+#include "Challenges/Cubes/LightCube.h"
 #include "Challenges/Cubes/Cube.h"
 
 class Cubes : public Scene {
@@ -16,6 +17,7 @@ private:
     std::shared_ptr<Camera> activeCamera;
 
     std::shared_ptr<Cube> cube;
+    std::shared_ptr<LightCube> lightCube;
     glm::mat4 mvp;
 
     

@@ -42,7 +42,8 @@ private:
     std::array< int, 2 > _wndSize{ 0, 0 };
     static bool _updateViewport;
 
-    glm::vec4 clearColor = { 0.17, 0.145, 0.133, 1 };
+    // glm::vec4 clearColor = { 0.17, 0.145, 0.133, 1 };
+    glm::vec4 clearColor = { 0.1, 0.1, 0.1, 1 };
 
 
     void updateView();
