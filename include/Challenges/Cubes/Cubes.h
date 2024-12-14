@@ -1,10 +1,6 @@
 #pragma once
 
-#include "core.h"
 #include "Application/Scene.h"
-#include "Render/Shader.h"
-#include "Render/ShaderProgram.h"
-#include "Render/VertexArray.h"
 #include "core/Camera.h"
 #include "Challenges/Cubes/LightCube.h"
 #include "Challenges/Cubes/Cube.h"

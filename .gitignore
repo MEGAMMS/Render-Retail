@@ -1,3 +1,5 @@
 build
 .vscode
 assets/test-textures
+.exrc
+.cache

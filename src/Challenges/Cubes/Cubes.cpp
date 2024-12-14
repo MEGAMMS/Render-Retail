@@ -1,5 +1,4 @@
 #include "Challenges/Cubes/Cubes.h"
-#include "Application/Application.h"
 
 Cubes::Cubes() {
     camera1 = std::make_shared<Camera>();
@@ -9,7 +8,7 @@ Cubes::Cubes() {
 
     cube = std::make_shared<Cube>();
     lightCube = std::make_shared<LightCube>(
-        glm::vec3{ 1.2,1., 1. },
+        glm::vec3{ 1.7,1., 1. },
         // glm::vec3(.5f, 0.5f, 0.8f)
         glm::vec3(1., 1., 1.)
     );
