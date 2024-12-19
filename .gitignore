@@ -3,3 +3,4 @@ build
 assets/test-textures
 .exrc
 .cache
+compile_commands.json
