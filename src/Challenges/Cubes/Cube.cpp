@@ -14,7 +14,6 @@ Cube::Cube() {
     cubeShader->setVec2("u_resolution", Window::instance().getWindowRes());
 
     brick = AssetManager::instance().loadTexture("assets/brick.png");
-    cubeShader->setTexture("cubeFace", brick, 3);
 }
 
 void Cube::update(float dt) {
@@ -29,6 +28,7 @@ void Cube::update(float dt) {
 }
 
 void Cube::render(glm::mat4 mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos) {
+    cubeShader->setTexture("cubeFace", brick, 3);
     cubeShader->activate();
     cubeShader->setFloat("u_time", glfwGetTime());
     cubeShader->setMat4("mvp", mvp);

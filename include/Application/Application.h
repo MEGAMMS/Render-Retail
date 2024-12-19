@@ -2,15 +2,12 @@
 
 #include "Application/Scene.h"
 #include "core/Window.h"
-<<<<<<< HEAD
 #include "Challenges/SquarePlayer.h"
 #include "Challenges/TriangleExample.h"
 #include "Challenges/TextureExample.h"
 #include "Challenges/Pyramid.h"
 #include "Challenges/Cubes.h"
 #include "AngryNeighbor/AngryNeighbor.h"
-=======
->>>>>>> e38afa02146e740d334799357ce72ad028b60d81
 
 class Application {
 private:
