@@ -1,12 +1,11 @@
 #pragma once
 
-#include "core.h"
 #include "Application/Scene.h"
 #include "core/Camera.h"
 #include "AngryNeighbor/Plane.h"
 #include "AngryNeighbor/Box.h"
 #include "AngryNeighbor/Door.h"
-#include "AngryNeighbor/Clock.h"
+#include "Challenges/Cubes/LightCube.h"
 
 class AngryNeighbor : public Scene {
 private:
@@ -15,7 +14,7 @@ private:
     std::vector<std::shared_ptr<Box>> boxes;
     std::vector<std::shared_ptr<Door>> doors;
     // std::vector<std::Clock> clock;
-
+    std::shared_ptr<LightCube> lightCube;
     glm::mat4 mvp = glm::mat4(1.f);
 public:
     AngryNeighbor();

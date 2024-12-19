@@ -1,7 +1,6 @@
 #include "AngryNeighbor/AngryNeighbor.h"
-#include "core/Window.h"
-#include "Application/Application.h"
-#include "AssetManager/AssetManager.h"
+#include "Challenges/Cubes/LightCube.h"
+#include <memory>
 
 AngryNeighbor::AngryNeighbor() {
     camera = std::make_shared<Camera>();
@@ -9,6 +8,12 @@ AngryNeighbor::AngryNeighbor() {
     camera->walkingSpeed = 20;
     camera->runningSpeed = 200;
     this->setProjectionMatrixParams(80.f, 0.001, 100.f);
+    lightCube = std::make_shared<LightCube>(
+        glm::vec3{ 1.7,9., 10. },
+        // glm::vec3(.5f, 0.5f, 0.8f)
+        glm::vec3(1., 1., 1.)
+    );
+
     planes = {
         std::make_shared<Plane>(
         glm::vec3{ -60,0,60 },
@@ -124,12 +129,18 @@ AngryNeighbor::AngryNeighbor() {
 }
 void AngryNeighbor::update(float dt) {
     camera->update(dt);
+    lightCube->update(dt);
     for (auto door : doors)
         door->update(dt);
     mvp = projection * camera->getViewMatrix();
 }
 
 void AngryNeighbor::render() {
+    auto lightPos = lightCube->getLightPos();
+    auto lightColor = lightCube->getLightColor();
+    auto viewPos = camera->getPosition();
+    // cube->render(mvp, lightPos, lightColor, viewPos);
+    lightCube->render(mvp);
     for (auto plane : planes)
         plane->render(mvp);
     for (auto box : boxes)
