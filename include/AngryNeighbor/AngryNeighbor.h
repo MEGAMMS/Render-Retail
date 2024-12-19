@@ -1,7 +1,7 @@
 #pragma once
 
 #include "core.h"
-#include "Application/scene.h"
+#include "Application/Scene.h"
 #include "core/Camera.h"
 #include "AngryNeighbor/Plane.h"
 #include "AngryNeighbor/Box.h"
