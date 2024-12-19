@@ -45,7 +45,8 @@ Plane::Plane(glm::vec3 position, glm::vec2 size, glm::vec3 orientation,
 }
 void Plane::update(float dt) {}
 
-void Plane::render(glm::mat4 mvp) {
+void Plane::render(glm::mat4& mvp) {
+  shaderProgram->setMat4("MVP", mvp);
   shaderProgram->setMat4("model", model);
   shaderProgram->setVec3("color", color);
   shaderProgram->setVec2("scale", size);

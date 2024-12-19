@@ -1,5 +1,6 @@
 #pragma once
 
+#include "core.h"
 #include "Render/ShaderProgram.h"
 #include "Render/VertexArray.h"
 
@@ -32,6 +33,6 @@ public:
     Plane(glm::vec3 position, glm::vec2 size, glm::vec3 orientation, glm::vec3 color);
     Plane(glm::vec3 position, glm::vec2 size, glm::vec3 orientation, const std::string& textureName);
     void update(float dt);
-    void render(glm::mat4 mvp);
+    void render(glm::mat4& mvp);
     void onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode);
 };

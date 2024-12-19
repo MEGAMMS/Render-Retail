@@ -1,5 +1,6 @@
 #pragma once
 
+#include "core.h"
 #include "Application/Scene.h"
 #include "core/Camera.h"
 #include "AngryNeighbor/Plane.h"

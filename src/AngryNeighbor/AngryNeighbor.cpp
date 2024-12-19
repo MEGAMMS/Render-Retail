@@ -1,6 +1,5 @@
 #include "AngryNeighbor/AngryNeighbor.h"
 #include "Challenges/Cubes/LightCube.h"
-#include <memory>
 
 AngryNeighbor::AngryNeighbor() {
     camera = std::make_shared<Camera>();
