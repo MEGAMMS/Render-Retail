@@ -1,4 +1,3 @@
-#include "core.h"
 #include "Application/Application.h"
 
 int main() {
