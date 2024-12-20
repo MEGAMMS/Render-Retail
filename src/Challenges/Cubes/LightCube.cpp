@@ -13,12 +13,16 @@ LightCube::LightCube(glm::vec3 lightPos, glm::vec3 lightColor) : lightPos(lightP
 
 }
 
+void LightCube::updatePos(glm::vec3 newPos){
+    lightPos = newPos;
+}
+
 void LightCube::update(float dt) {
     model = glm::mat4(1.);
 
     model = glm::translate(model, lightPos);
 
-    model = glm::scale(model, glm::vec3(0.2));
+    model = glm::scale(model, glm::vec3(2));
     // model = glm::rotate(model, glm::radians(45.f), glm::vec3(1., 1., 1.));
 
 

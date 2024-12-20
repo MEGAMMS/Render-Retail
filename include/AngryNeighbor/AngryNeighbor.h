@@ -1,5 +1,6 @@
 #pragma once
 
+#include "AngryNeighbor/MoonAndSun.h"
 #include "core.h"
 #include "Application/Scene.h"
 #include "core/Camera.h"
@@ -16,6 +17,7 @@ private:
     std::vector<std::shared_ptr<Door>> doors;
     // std::vector<std::Clock> clock;
     std::shared_ptr<LightCube> lightCube;
+    std::shared_ptr<MoonAndSun> moonAndSun;
     glm::mat4 mvp = glm::mat4(1.f);
 public:
     AngryNeighbor();
