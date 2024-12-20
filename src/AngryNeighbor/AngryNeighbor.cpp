@@ -117,12 +117,14 @@ AngryNeighbor::AngryNeighbor() {
             glm::vec3{ 0.01,1,-2 },
             glm::vec2{ 1,2 },
             glm::vec3{ 1,0,0 },
+            GLFW_KEY_1,
             "assets/test-textures/doors_wood.png"),
 
             std::make_shared<Door>(
         glm::vec3{ 7,1,-4 },
         glm::vec2{ 1,2 },
         glm::vec3{ 0,0,-1 },
+        GLFW_KEY_2,
             "assets/test-textures/fridge.png")
     };
 

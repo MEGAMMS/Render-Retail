@@ -28,13 +28,13 @@ private:
     glm::vec2 size;
     glm::vec3 orientation;
     glm::vec3 color;
+    int32_t key;
     bool useTexture = false;
     bool open = false;
 
-    Door(glm::vec3 position, glm::vec2 size, glm::vec3 orientation);
+    Door(glm::vec3 position, glm::vec2 size, glm::vec3 orientation,int32_t key);
 public:
-    Door(glm::vec3 position, glm::vec2 size, glm::vec3 orientation, glm::vec3 color);
-    Door(glm::vec3 position, glm::vec2 size, glm::vec3 orientation, const std::string& textureName);
+    Door(glm::vec3 position, glm::vec2 size, glm::vec3 orientation,int32_t key, const std::string& textureName);
     void update(float dt);
     void render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos);
     void onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode);

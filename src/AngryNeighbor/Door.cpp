@@ -1,8 +1,9 @@
 #include "AngryNeighbor/Door.h"
 #include "AssetManager/AssetManager.h"
 
-Door::Door(glm::vec3 position, glm::vec2 size, glm::vec3 orientation)
-    : position(position), size(size), orientation(orientation) {
+Door::Door(glm::vec3 position, glm::vec2 size, glm::vec3 orientation,
+           int32_t key)
+    : position(position), size(size), orientation(orientation), key(key) {
 
   static std::vector<Door::Vertex> vertices = {
       Vertex{glm::vec3{0., 0., 0.}, glm::vec2{0, 0}, {0.0, 0.0, 1.0}},
@@ -17,13 +18,8 @@ Door::Door(glm::vec3 position, glm::vec2 size, glm::vec3 orientation)
 }
 
 Door::Door(glm::vec3 position, glm::vec2 size, glm::vec3 orientation,
-           glm::vec3 color)
-    : Door(position, size, orientation) {
-  this->color = color;
-}
-Door::Door(glm::vec3 position, glm::vec2 size, glm::vec3 orientation,
-           const std::string &textureName)
-    : Door(position, size, orientation) {
+           int32_t key, const std::string &textureName)
+    : Door(position, size, orientation, key) {
   useTexture = 1;
   texture = AssetManager::instance().loadTexture(textureName);
 }
@@ -49,8 +45,8 @@ void Door::update(float dt) {
   model = glm::scale(model, glm::vec3(size, 1.0f));
 }
 
-void Door::render(glm::mat4 &mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos) {
-
+void Door::render(glm::mat4 &mvp, glm::vec3 lightPos, glm::vec3 lightColor,
+                  glm::vec3 viewPos) {
 
   shaderProgram->setMat4("MVP", mvp);
   shaderProgram->setVec3("lightPos", lightPos);
@@ -69,6 +65,6 @@ void Door::render(glm::mat4 &mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm:
 void Door::onKeyEvent(int32_t key, int32_t scancode, int32_t action,
                       int32_t mode) {
   bool pressed = action == GLFW_PRESS;
-  if (key == GLFW_KEY_R)
+  if (key == this->key)
     open = pressed;
 }
