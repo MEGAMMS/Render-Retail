@@ -1,5 +1,6 @@
 #include "AngryNeighbor/Door.h"
 #include "AssetManager/AssetManager.h"
+#include "glm/detail/func_trigonometric.hpp"
 
 Door::Door(glm::vec3 position, glm::vec2 size, glm::vec3 orientation,
            int32_t key)
@@ -24,6 +25,9 @@ Door::Door(glm::vec3 position, glm::vec2 size, glm::vec3 orientation,
   texture = AssetManager::instance().loadTexture(textureName);
 }
 void Door::update(float dt) {
+
+
+  status.update(dt);
   // Compute the model matrix
   model = glm::mat4(1.0f);
   model = glm::translate(model, position);
@@ -39,7 +43,7 @@ void Door::update(float dt) {
   }
   angle = (int(glfwGetTime() * 50000) % 360000) / 1000.f;
   // angle = 0;
-  model = glm::rotate(model, glm::radians(open * (-90.f)),
+  model = glm::rotate(model, glm::radians(status.currentAngle),
                       glm::vec3(0.f, 1.f, 0.f));
 
   model = glm::scale(model, glm::vec3(size, 1.0f));
@@ -65,6 +69,5 @@ void Door::render(glm::mat4 &mvp, glm::vec3 lightPos, glm::vec3 lightColor,
 void Door::onKeyEvent(int32_t key, int32_t scancode, int32_t action,
                       int32_t mode) {
   bool pressed = action == GLFW_PRESS;
-  if (key == this->key)
-    open = pressed;
+  if (key == this->key and pressed)status.chagneStatus();
 }
