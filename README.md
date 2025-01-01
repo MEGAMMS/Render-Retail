@@ -1,2 +1,2 @@
 # Render-Retail
-OpenGL Project for our univercity.
+OpenGL Project for our university.
