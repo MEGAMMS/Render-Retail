@@ -1,2 +1,2 @@
-# OpenGL-Cpp-CMake
-OpenGL to for my testing using cmake.
+# Render-Retail
+OpenGL Project for our univercity.
