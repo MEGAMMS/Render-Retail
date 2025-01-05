@@ -1,0 +1,37 @@
+#pragma once
+
+#include "core.h"
+#include "core/Camera.h"
+#include "Render/ShaderProgram.h"
+#include "Render/VertexArray.h"
+#include "Application/Scene.h"
+#include "Challenges/Cubes/LightCube.h"
+
+
+
+class RenderRetail : public Scene 
+{
+    public:
+        RenderRetail();
+        void update(float dt) override;
+        void render() override;
+        void onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) override;
+        void onCursorPositionEvent(double x, double y);
+    private:
+    
+    struct Vertex {
+        glm::vec3 position;
+        glm::vec3 color;
+
+        static std::vector<VertexAttribute> vertexAttributes() {
+        return {
+            {3, VertexAttribute::Float, offsetof(Vertex, position)},
+            {3, VertexAttribute::Float, offsetof(Vertex, color)},
+        };
+        }
+    };
+    std::shared_ptr<VertexArray> vertexArray;
+    std::shared_ptr<const ShaderProgram> shaderProgram;
+    std::shared_ptr<Camera> camera;
+    std::shared_ptr<LightCube> cube;
+};
