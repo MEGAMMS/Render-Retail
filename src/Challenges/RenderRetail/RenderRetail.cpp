@@ -10,7 +10,11 @@ RenderRetail::RenderRetail()
 
     m_cube = std::make_shared<LightCube>(glm::vec3(1.),glm::vec3(1.));
 
-    m_plain;
+    m_plain = std::make_shared<Plain>(
+        glm::vec3{ -60,0,60 },
+        glm::vec2{ 120,120 },
+        glm::vec3{ 0,1,0 },
+            "assets/test-textures/dirt_128.png");
 }
 void RenderRetail::update(float dt)
 {
