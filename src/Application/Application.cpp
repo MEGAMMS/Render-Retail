@@ -4,7 +4,7 @@
 #include "Challenges/SquarePlayer.h"
 #include "Challenges/TextureExample.h"
 #include "Challenges/TriangleExample.h"
-#include "Challenges/RenderRetail.h"
+#include "Challenges/RenderRetail/RenderRetail.h"
 
 Application *Application::instancePtr = nullptr;
 

@@ -20,11 +20,14 @@ void RenderRetail::update(float dt)
 {
     m_cube->update(dt);
     m_camera->update(dt);
+    m_plain->update(dt);
 }
 
 void RenderRetail::render()
 {
     m_cube->render(projection*m_camera->getViewMatrix());
+    glm::mat4 mvp = projection*m_camera->getViewMatrix();
+    m_plain->render(mvp,m_cube->getLightPos(),m_cube->getLightColor(),m_camera->getPosition());
 }
 
 void RenderRetail::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode)
