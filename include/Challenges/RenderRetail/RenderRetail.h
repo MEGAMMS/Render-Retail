@@ -36,7 +36,7 @@ class RenderRetail : public Scene
 
     std::shared_ptr<Camera> m_camera;
     std::shared_ptr<LightCube> m_cube;
-    std::shared_ptr<Plain> m_plain;
+    std::vector<std::shared_ptr<Plain>> m_plains;
     std::shared_ptr<Box> Mall;
     
     glm::mat4 m_VP=glm::mat4(1.);
