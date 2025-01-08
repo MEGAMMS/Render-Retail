@@ -38,4 +38,6 @@ class RenderRetail : public Scene
     std::shared_ptr<LightCube> m_cube;
     std::shared_ptr<Plain> m_plain;
     std::shared_ptr<Box> Mall;
+    
+    glm::mat4 m_VP=glm::mat4(1.);
 };
