@@ -6,7 +6,8 @@
 #include "Render/VertexArray.h"
 #include "Application/Scene.h"
 #include "Challenges/Cubes/LightCube.h"
-
+#include "Challenges/RenderRetail/Plain.h"
+#include "Challenges/RenderRetail/Box.h"
 
 
 class RenderRetail : public Scene 
@@ -32,6 +33,9 @@ class RenderRetail : public Scene
     };
     std::shared_ptr<VertexArray> vertexArray;
     std::shared_ptr<const ShaderProgram> shaderProgram;
-    std::shared_ptr<Camera> camera;
-    std::shared_ptr<LightCube> cube;
+
+    std::shared_ptr<Camera> m_camera;
+    std::shared_ptr<LightCube> m_cube;
+    std::shared_ptr<Plain> m_plain;
+    std::shared_ptr<Box> Mall;
 };
