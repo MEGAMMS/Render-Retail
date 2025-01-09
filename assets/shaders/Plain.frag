@@ -1,16 +1,18 @@
 #version 330 core
+out vec4 FragColor;
+
+in vec3 ourColor;
 in vec2 TexCoord;
 in vec3 Normal;
-in vec3 FragPos;  
+in vec3 FragPos;
 
-uniform sampler2D cubeFace;
+uniform int useTexture;
+uniform sampler2D textureSlot;
+uniform vec2 scale;
 uniform vec3 lightColor;
 uniform vec3 lightPos;
 uniform vec3 viewPos;
-uniform vec3 cubeColor;
-
-out vec4 FragColor;
-
+uniform vec3 color;
 
 vec3 calcLight(vec3 Normal, vec3 FragPos, vec3 lightColor, vec3 lightPos, vec3 viewPos) {
     vec3 norm = normalize(Normal);
@@ -40,15 +42,12 @@ vec3 calcLight(vec3 Normal, vec3 FragPos, vec3 lightColor, vec3 lightPos, vec3 v
     return ambient + diffuse + specular;
 }
 
-
 void main()
 {
-    // vec2 TexCoordCopy = TexCoord* float(cubeFace);
-    // FragColor = vec4(TexCoordCopy,0.0,1.0);
-    vec4 textColor =  texture(cubeFace,TexCoord);
-
-    vec3 lightRes = calcLight(Normal,FragPos, lightColor,lightPos,viewPos);
-
-    FragColor =  vec4(cubeColor * lightRes,1.0);
-    FragColor = textColor * vec4(lightRes, 1.0);
+    vec2 TexCoordCopy = TexCoord*scale;
+    vec4 textureColor = texture(textureSlot, TexCoordCopy);
+    vec4 baseColor = mix(vec4(color,1.0),textureColor,float(useTexture));
+    vec3 lightRes = calcLight(Normal, FragPos, lightColor, lightPos, viewPos);
+    FragColor = baseColor * vec4(lightRes, 1.0); 
+    // FragColor = vec4(Normal, 1.0);
 }
