@@ -10,45 +10,18 @@ RenderRetail::RenderRetail()
 
     m_cube = std::make_shared<LightCube>(glm::vec3(1.),glm::vec3(1.));
 
+    glm::vec3 groundPosition(0.f, 0.f, 0.f);  // Position the ground at the origin
+    glm::vec2 groundSize(100.f, 100.f);       // Make the ground large (e.g., 100x100 units)
+    glm::vec3 groundOrientation(0.f, 1.f, 0.f); // Flat, facing the +Z axis
+
     m_plains = {
-
         std::make_shared<Plain>(
-        glm::vec3{ -60,0,60 },
-        glm::vec2{ 120,120 },
-        glm::vec3{ 0,1,0 },
-            "assets/test-textures/dirt_128.png"),
-
-        std::make_shared<Plain>(
-        glm::vec3{ -1,0,0 },
-        glm::vec2{ 19,1 },
-        glm::vec3{ 0,0,1 },
-            "assets/test-textures/default_brick.png"),
-            std::make_shared<Plain>(
-        glm::vec3{ -1,5,0 },
-        glm::vec2{ 19,1 },
-        glm::vec3{ 0,0,1 },
-            "assets/test-textures/default_brick.png"),
-            std::make_shared<Plain>(
-        glm::vec3{ -1,10,0 },
-        glm::vec2{ 19,1 },
-        glm::vec3{ 0,0,1 },
-            "assets/test-textures/default_brick.png"),
-            std::make_shared<Plain>(
-        glm::vec3{ -1,1,0 },
-        glm::vec2{ 1,9 },
-        glm::vec3{ 0,0,1 },
-            "assets/test-textures/default_brick.png"),
-            std::make_shared<Plain>(
-        glm::vec3{ 10,1,0 },
-        glm::vec2{ 1,9 },
-        glm::vec3{ 0,0,1 },
-            "assets/test-textures/default_brick.png"),
-            std::make_shared<Plain>(
-        glm::vec3{ 17,1,0 },
-        glm::vec2{ 1,9 },
-        glm::vec3{ 0,0,1 },
-            "assets/test-textures/default_brick.png"),
+        groundPosition,
+        groundSize,
+        groundOrientation,
+            "assets/test-textures/default_pine_wood.png"),
     };
+    
 }
 void RenderRetail::update(float dt)
 {
