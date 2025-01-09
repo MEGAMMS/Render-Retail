@@ -39,7 +39,7 @@ public:
 
   std::shared_ptr<const std::string> loadText(const std::string& name) { return textRegistry.get(name); };
   std::shared_ptr<const Image> loadImage(const std::string& name) { return imageRegistry.get(name); };
-  std::shared_ptr<const Texture> loadTexture(const std::string& name) { return textureRegistry.get(name); };
+  std::shared_ptr<const Texture> loadTexture(const std::string& name = "assets/default-texture.png") { return textureRegistry.get(name); };
 
   /// the expected input format: right;left;top;bottom;front;back
   // std::shared_ptr<const Texture> loadCubeMap(const std::string &name) { return cubeMapRegistry.get(name); };
