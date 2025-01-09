@@ -22,7 +22,14 @@ RenderRetail::RenderRetail()
             "assets/test-textures/default_pine_wood.png"),
     };
 
-    Mall=std::make_shared<Box>(groundPosition,glm::vec2{50.,50.},glm::vec3{0.,0.,1.},4);
+    Mall = std::make_shared<Box>(
+            glm::vec3{ 0,6,0 },
+            glm::vec3{ 10,5,4},
+            glm::vec3{ 0,1,0 },
+            std::vector<int>{1,2,4,5,6},
+            // glm::vec3{0.3,0.5,0.9}
+            "assets/test-textures/default_pine_wood.png"
+            );
 }
 void RenderRetail::update(float dt)
 {
@@ -37,6 +44,7 @@ void RenderRetail::render()
     
     for (auto m_plain :m_plains)
         m_plain->render(m_VP,m_cube->getLightPos(),m_cube->getLightColor(),m_camera->getPosition());
+    Mall->render(m_VP,m_cube->getLightPos(),m_cube->getLightColor(),m_camera->getPosition());
 }
 
 void RenderRetail::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode)
