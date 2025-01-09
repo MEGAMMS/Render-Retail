@@ -16,7 +16,7 @@ Box::Box(glm::vec3 position, glm::vec3 size, glm::vec3 orientation,
   vertexArray = std::make_shared<VertexArray>(vertices, indices);
   vertexArray->addVertexAttributes(Box::Vertex::vertexAttributes(),
                                    sizeof(Box::Vertex));
-  shaderProgram = AssetManager::instance().loadShaderProgram("Plane");
+  shaderProgram = AssetManager::instance().loadShaderProgram("Plain");
   // Compute the model matrix
   model = glm::mat4(1.0f);
   model = glm::translate(model, position);

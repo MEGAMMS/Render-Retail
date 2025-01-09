@@ -21,7 +21,8 @@ RenderRetail::RenderRetail()
         groundOrientation,
             "assets/test-textures/default_pine_wood.png"),
     };
-    
+
+    Mall=std::make_shared<Box>(groundPosition,glm::vec2{50.,50.},glm::vec3{0.,0.,1.},4);
 }
 void RenderRetail::update(float dt)
 {
