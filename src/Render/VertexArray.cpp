@@ -20,6 +20,18 @@ void VertexArray::renderIndexed(int32_t type) {
   unbind();
 }
 
+void VertexArray::renderSubIndexed(int32_t count, int32_t startOffset, int32_t type) {
+  assert(indexBuffer != nullptr && "No index buffer");
+  
+  // Ensure the specified range is valid
+  assert(startOffset >= 0 && count > 0 && "Invalid range for rendering");
+  assert((startOffset + count) <= indexBuffer->getSize() && "Range exceeds index buffer size");
+
+  bind();
+  glDrawElements(type, count, indexBuffer->getType(), reinterpret_cast<const void*>(startOffset * sizeof(indexBuffer->getType())));
+  unbind();
+}
+
 VertexArray::~VertexArray() {
   if (isValid()) {
     glDeleteVertexArrays(1, &id);

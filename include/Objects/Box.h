@@ -8,13 +8,13 @@
 enum Face {
     Front,
     Back,
-    Left,
-    Right,
     Up,
     Down,
+    Left,
+    Right,
 };
 
-class Box : Object {
+class Box : public Object {
    private:
     struct Vertex {
         glm::vec3 position;
@@ -31,13 +31,14 @@ class Box : Object {
 
     std::shared_ptr<VertexArray> vertexArray;
     std::shared_ptr<const ShaderProgram> shaderProgram;
-    std::shared_ptr<const Texture> texture;
-
-    // glm::vec3 orientation;
+    std::vector<std::shared_ptr<const Texture>> textures;
+    std::vector<bool> faceVisibility;
 
    public:
     Box();
-    // void setFaceTexture(Face face, const std::string& texturePath);
+    void setFaceTexture(Face face, const std::string& texturePath);
+    void setTexture(const std::string& texturePath);
+    void setFaceVisibility(Face face, bool visible);
     void update(float dt);
     void render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos);
     void onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode);

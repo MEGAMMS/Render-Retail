@@ -1,9 +1,6 @@
 #include "Objects/Box.h"
+
 #include "AssetManager/AssetManager.h"
-
-#include <sys/types.h>
-
-#include <vector>
 
 Box::Box() {
     std::vector<Box::Vertex> vertices = {
@@ -24,32 +21,35 @@ Box::Box() {
     vertexArray = std::make_shared<VertexArray>(vertices, indices);
     vertexArray->addVertexAttributes(Box::Vertex::vertexAttributes(), sizeof(Box::Vertex));
     shaderProgram = AssetManager::instance().loadShaderProgram("Plane");
-
-    // glm::vec3 defaultNormal(0.f, 0.f, 1.f);  // Assuming the plane initially faces the +Z direction
-    // orientation = glm::normalize(orientation);
-    // glm::vec3 axis = glm::cross(defaultNormal, orientation);
-    // float angle = glm::acos(glm::dot(defaultNormal, orientation));
-    //
-    // if (glm::length(axis) > 0.0001f) {  // Avoid invalid axis when vectors are aligned
-    //     model = glm::rotate(model, angle, glm::normalize(axis));
-    // }
-
-    texture = AssetManager::instance().loadTexture();
+    textures.assign(6, AssetManager::instance().loadTexture());
+    faceVisibility.assign(6, true);
 }
+
+void Box::setTexture(const std::string& texturePath) {
+    for (int i = 0; i < 6; i++) setFaceTexture((Face)i, texturePath);
+}
+
+void Box::setFaceTexture(Face face, const std::string& texturePath) {
+    textures[(int)face] = AssetManager::instance().loadTexture(texturePath);
+}
+
+void Box::setFaceVisibility(Face face, bool visible) { faceVisibility[face] = visible; }
 
 void Box::update(float dt) {}
 
-void Box::render(glm::mat4 &mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos) {
+void Box::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos) {
+    shaderProgram->activate();
     shaderProgram->setMat4("MVP", mvp);
     shaderProgram->setVec3("lightPos", lightPos);
     shaderProgram->setVec3("lightColor", lightColor);
     shaderProgram->setVec3("viewPos", viewPos);
-    shaderProgram->setMat4("model", model);
+    shaderProgram->setMat4("model", this->getModel());
     shaderProgram->setVec3("scale", size);
-    shaderProgram->setTexture("textureSlot", texture, 1);
-    shaderProgram->activate();
-    vertexArray->renderIndexed();
+    for (int i = 0; i < 6; i++) {
+        if (!faceVisibility[i]) continue;
+        shaderProgram->setTexture("textureSlot", textures[i], 1);
+        vertexArray->renderSubIndexed(6, i * 6);
+    }
 }
 
 void Box::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {}
-

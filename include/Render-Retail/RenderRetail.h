@@ -2,7 +2,7 @@
 
 #include "Application/Scene.h"
 #include "Challenges/Cubes/LightCube.h"
-#include "Objects/Box.h"
+#include "Render-Retail/Mall.h"
 #include "core.h"
 #include "core/Camera.h"
 
@@ -17,7 +17,7 @@ class RenderRetail : public Scene {
    private:
     std::shared_ptr<Camera> m_camera;
     std::shared_ptr<LightCube> m_cube;
-    std::shared_ptr<Box> m_box;
+    std::shared_ptr<Mall> m_mall;
 
     glm::mat4 m_VP = glm::mat4(1.);
 };
