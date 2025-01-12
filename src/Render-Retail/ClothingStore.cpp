@@ -11,6 +11,7 @@ ClothingStore::ClothingStore() {
     // m_room->setSize(glm::vec3(5.));
     // m_room->setOrientation(glm::vec3(-1.));
     // m_room->setTexture("assets/brick.png");
+    m_room->setWallTexture(Wall::Back,"assets/test-textures/default_stone_brick.png");
 }
 
 void ClothingStore::update(float dt) {}

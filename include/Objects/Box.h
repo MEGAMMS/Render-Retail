@@ -5,8 +5,8 @@
 #include "Render/VertexArray.h"
 #include "core.h"
 
-enum Face {
-    Front,
+enum class Face {
+    Front = 0,
     Back,
     Up,
     Down,

@@ -33,7 +33,7 @@ void Box::setFaceTexture(Face face, const std::string& texturePath) {
     textures[(int)face] = AssetManager::instance().loadTexture(texturePath);
 }
 
-void Box::setFaceVisibility(Face face, bool visible) { faceVisibility[face] = visible; }
+void Box::setFaceVisibility(Face face, bool visible) { faceVisibility[static_cast<int>(face)] = visible; }
 
 void Box::update(float dt) {}
 

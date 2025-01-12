@@ -49,3 +49,8 @@ void StoreWalls::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor
 }
 void StoreWalls::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {}
 void StoreWalls::onCursorPositionEvent(double x, double y) {}
+
+void StoreWalls::setWallTexture(Wall wall, const std::string& texturePath)
+{
+    walls[static_cast<int>(wall)]->setTexture(texturePath);
+}
