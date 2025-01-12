@@ -54,6 +54,6 @@ class Object {
     void setParent(std::shared_ptr<Object> in_Parent) { parent = in_Parent; };
     glm::mat4 getModel() {
         if (parent == nullptr) return model;
-        return model * parent->getModel();
+        return parent->getModel() * model;
     };
 };

@@ -4,6 +4,8 @@
 #include "Objects/Object.h"
 #include "core.h"
 
+#include "Render-Retail/ClothingStore.h"
+
 class Mall: public Object{
    public:
     Mall();
@@ -14,5 +16,6 @@ class Mall: public Object{
 
    private:
     std::shared_ptr<Box> m_box;
+    std::shared_ptr<ClothingStore> m_clothingStore;
 
 };

@@ -6,6 +6,11 @@
 
 ClothingStore::ClothingStore() {
     m_room = std::make_shared<StoreWalls>();
+    m_room->setParent(std::shared_ptr<Object>(this));
+    m_room->setPosition(glm::vec3(4));
+    // m_room->setSize(glm::vec3(5.));
+    // m_room->setOrientation(glm::vec3(-1.));
+    // m_room->setTexture("assets/brick.png");
 }
 
 void ClothingStore::update(float dt) {}
