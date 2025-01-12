@@ -3,19 +3,18 @@
 #include "Objects/Box.h"
 #include "Objects/Object.h"
 #include "core.h"
-#include "Render-Retail/Stores/StoreWalls.h"
 
-class ClothingStore : public Object
+class StoreWalls : public Object
 {
     public:
-        ClothingStore();
+        StoreWalls();
         void update(float dt) override;
         void render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos);
         void onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) override;
         void onCursorPositionEvent(double x, double y) override;
     private:
-        std::shared_ptr<StoreWalls> m_room;
-        std::shared_ptr<Box> m_desk;
-        
-
+        std::shared_ptr<Box> leftWall;
+        std::shared_ptr<Box> rightWall;
+        std::shared_ptr<Box> backWall;
+        std::vector<std::shared_ptr<Box>>frontWall;
 };

@@ -5,14 +5,7 @@
 #include "Objects/Object.h"
 
 ClothingStore::ClothingStore() {
-    m_room = std::make_shared<Box>();
-    m_room->setParent(std::shared_ptr<Object>(this));
-    m_room->setPosition(glm::vec3(-4));
-    m_room->setSize(glm::vec3(5.));
-    // m_room->setOrientation(glm::vec3(-1.));
-    // m_room->setTexture("assets/brick.png");
-    m_room->setFaceTexture(Face::Front, "assets/brick.png");
-    m_room->setFaceVisibility(Face::Right, false);
+    m_room = std::make_shared<StoreWalls>();
 }
 
 void ClothingStore::update(float dt) {}
