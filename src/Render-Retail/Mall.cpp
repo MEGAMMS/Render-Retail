@@ -7,7 +7,7 @@
 Mall::Mall() {
     m_box = std::make_shared<Box>();
     m_box->setParent(std::shared_ptr<Object>(this));
-    m_box->setPosition(glm::vec3(-4));
+    m_box->setPosition(glm::vec3(0));
     m_box->setSize(glm::vec3(5.));
     // m_box->setOrientation(glm::vec3(-1.));
     // m_box->setTexture("assets/brick.png");
