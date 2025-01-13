@@ -21,7 +21,7 @@ Mall::Mall() {
 
 void Mall::update(float dt) {}
 void Mall::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos) {
-    m_box->render(mvp, lightPos, lightColor, viewPos);
+    // m_box->render(mvp, lightPos, lightColor, viewPos);
     m_clothingStore->render(mvp,lightPos,lightColor,viewPos);
 }
 void Mall::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {}

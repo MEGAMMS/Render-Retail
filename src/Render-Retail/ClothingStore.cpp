@@ -21,7 +21,7 @@ ClothingStore::ClothingStore() {
 
 void ClothingStore::update(float dt) {}
 void ClothingStore::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos) {
-    m_room->render(mvp, lightPos, lightColor, viewPos);
+    // m_room->render(mvp, lightPos, lightColor, viewPos);
     m_desk->render(mvp, lightPos, lightColor, viewPos);
 }
 void ClothingStore::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {}
