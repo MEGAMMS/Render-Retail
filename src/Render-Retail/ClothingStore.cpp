@@ -13,11 +13,10 @@ ClothingStore::ClothingStore() {
     // m_room->setTexture("assets/brick.png");
     m_room->setWallTexture(Wall::Back,"assets/test-textures/default_stone_brick.png");
     
-    m_desk = std::make_shared<Box>();
+    m_desk = std::make_shared<Table>();
     m_desk->setParent(std::shared_ptr<Object>(this));
     m_desk->setPosition(glm::vec3(5.,0.,7.));
     m_desk->setSize(glm::vec3(4.,2.,2.));
-    m_desk->setFaceTexture(Face::Front, "assets/brick.png");
 }
 
 void ClothingStore::update(float dt) {}
