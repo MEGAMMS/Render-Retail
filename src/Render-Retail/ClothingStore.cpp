@@ -28,14 +28,20 @@ ClothingStore::ClothingStore() {
     m_hanger = std::make_shared<Hanger>();
     m_hanger->setParent(std::shared_ptr<Object>(this));
     m_hanger->setPosition(glm::vec3(12., 3, 9));
+
+    m_shirt = std::make_shared<Shirt>();
+    m_shirt->setParent(std::shared_ptr<Object>(this));
+    m_shirt->setPosition(glm::vec3(12,2,9));
+    m_shirt->setSize(glm::vec3(5));
 }
 
 void ClothingStore::update(float dt) {}
 void ClothingStore::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos) {
-    m_room->render(mvp, lightPos, lightColor, viewPos);
-    m_desk->render(mvp, lightPos, lightColor, viewPos);
-    m_shelf->render(mvp, lightPos, lightColor, viewPos);
-    m_hanger->render(mvp, lightPos, lightColor, viewPos);
+    //m_room->render(mvp, lightPos, lightColor, viewPos);
+    //m_desk->render(mvp, lightPos, lightColor, viewPos);
+    //m_shelf->render(mvp, lightPos, lightColor, viewPos);
+    // m_hanger->render(mvp, lightPos, lightColor, viewPos);
+    m_shirt->render(mvp, lightPos, lightColor, viewPos);
 }
 void ClothingStore::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {}
 void ClothingStore::onCursorPositionEvent(double x, double y) {}
