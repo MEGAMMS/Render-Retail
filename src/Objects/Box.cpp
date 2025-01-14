@@ -20,7 +20,7 @@ Box::Box() {
                                 12, 13, 14, 13, 14, 15, 16, 17, 18, 17, 18, 19, 20, 21, 22, 21, 22, 23};
     vertexArray = std::make_shared<VertexArray>(vertices, indices);
     vertexArray->addVertexAttributes(Box::Vertex::vertexAttributes(), sizeof(Box::Vertex));
-    shaderProgram = AssetManager::instance().loadShaderProgram("Plane");
+    shaderProgram = AssetManager::instance().loadShaderProgram("Box");
     textures.assign(6, AssetManager::instance().loadTexture());
     faceVisibility.assign(6, true);
 }
