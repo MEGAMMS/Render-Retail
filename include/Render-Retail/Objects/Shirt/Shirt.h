@@ -5,6 +5,8 @@
 #include "Objects/Object.h"
 #include "core.h"
 
+#include "Render-Retail/Objects/Shirt/ShirtSleeves.h"
+
 class Shirt : public Object {
    public:
     Shirt();
@@ -14,6 +16,6 @@ class Shirt : public Object {
     void onCursorPositionEvent(double x, double y) override;
 
    private:
-    std::vector<std::shared_ptr<Cone>> m_sleeves;
+    std::shared_ptr<ShirtSleeves> m_sleeves;
     std::shared_ptr<Box> m_body;
 };

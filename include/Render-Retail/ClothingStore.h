@@ -7,7 +7,7 @@
 #include "Render-Retail/Objects/Table.h"
 #include "Render-Retail/Objects/Shelves.h"
 #include "Render-Retail/Objects/Hanger.h"
-#include "Render-Retail/Objects/Shirt.h"
+#include "Render-Retail/Objects/Shirt/Shirt.h"
 
 class ClothingStore : public Object
 {
