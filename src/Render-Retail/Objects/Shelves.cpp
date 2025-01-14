@@ -11,7 +11,7 @@ Shelves::Shelves() {
     }
     for (int i = 0; i <3; ++i) {
         m_shelves[i]->setParent(std::shared_ptr<Object>(this));
-        m_shelves[i]->setSize(glm::vec3(2.,0.5,9.));        
+        m_shelves[i]->setSize(glm::vec3(2.,0.5,8.));        
     }
 
     m_shelves[0]->setPosition(glm::vec3(0));
@@ -19,6 +19,7 @@ Shelves::Shelves() {
 
     m_shelves[1]->setPosition(glm::vec3(0));
     m_shelves[1]->setOrientation(glm::vec3(1.,0,0));
+    m_shelves[1]->setSize(glm::vec3(2.5,0.5,8.)); 
 
     m_shelves[2]->setPosition(glm::vec3(7,0,0));
     m_shelves[2]->setOrientation(glm::vec3(0));
@@ -39,4 +40,16 @@ void Shelves::onCursorPositionEvent(double x, double y) {}
 void Shelves::setShelfVisibility(Shelf shelf, bool visible)
 {
     shelfVisibility[static_cast<int>(shelf)] = visible;
+}
+
+void Shelves::setTexture(const std::string& texturePath)
+{
+    for (const auto& shelf : m_shelves) {
+                shelf->setTexture(texturePath);
+            }
+}
+
+void Shelves::setShelfTexture(Shelf shelf,const std::string& texturePath)
+{
+    m_shelves[static_cast<int>(shelf)]->setTexture(texturePath);
 }

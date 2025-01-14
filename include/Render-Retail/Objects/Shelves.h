@@ -22,6 +22,7 @@ class Shelves : public Object
         void onCursorPositionEvent(double x, double y) override;
 
         void setTexture(const std::string& texturePath);
+        void setShelfTexture(Shelf shelf,const std::string& texturePath);
         void setShelfVisibility(Shelf shelf, bool visible);
     private:
         std::vector<std::shared_ptr<Box>>m_shelves;

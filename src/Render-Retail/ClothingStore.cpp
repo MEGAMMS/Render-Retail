@@ -22,7 +22,9 @@ ClothingStore::ClothingStore() {
     m_shelf->setParent(std::shared_ptr<Object>(this));
     m_shelf->setPosition(glm::vec3(5.,5.,7.));
     m_shelf->setSize(glm::vec3(0.88));
-    m_shelf->setShelfVisibility(Shelf::Back,0);
+    // m_shelf->setShelfVisibility(Shelf::Back,0);
+    m_shelf->setTexture("assets/test-textures/Bricks075.png");
+    m_shelf->setShelfTexture(Shelf::Right,"assets/test-textures/default_pine_wood.png");
 }
 
 void ClothingStore::update(float dt) {}
