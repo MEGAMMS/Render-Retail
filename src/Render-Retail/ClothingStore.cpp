@@ -22,6 +22,7 @@ ClothingStore::ClothingStore() {
     m_shelf->setParent(std::shared_ptr<Object>(this));
     m_shelf->setPosition(glm::vec3(5.,5.,7.));
     m_shelf->setSize(glm::vec3(0.88));
+    m_shelf->setShelfVisibility(Shelf::Back,0);
 }
 
 void ClothingStore::update(float dt) {}

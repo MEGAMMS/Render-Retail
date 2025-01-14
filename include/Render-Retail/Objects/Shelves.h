@@ -25,5 +25,6 @@ class Shelves : public Object
         void setShelfVisibility(Shelf shelf, bool visible);
     private:
         std::vector<std::shared_ptr<Box>>m_shelves;
+        std::vector<bool> shelfVisibility;
 
 };

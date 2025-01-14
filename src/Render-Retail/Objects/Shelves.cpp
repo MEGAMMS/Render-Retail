@@ -7,6 +7,7 @@
 Shelves::Shelves() {
     for (int i = 0; i <3; ++i) {
         m_shelves.push_back(std::make_shared<Box>());
+        shelfVisibility.push_back(1);
     }
     for (int i = 0; i <3; ++i) {
         m_shelves[i]->setParent(std::shared_ptr<Object>(this));
@@ -26,10 +27,16 @@ Shelves::Shelves() {
 
 void Shelves::update(float dt) {}
 void Shelves::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos) {
-    for (const auto& shelf : m_shelves) {
-                shelf->render(mvp, lightPos, lightColor, viewPos);
+    for (int i = 0; i <3; ++i) {
+            if (!shelfVisibility[i]) continue;
+                m_shelves[i]->render(mvp, lightPos, lightColor, viewPos);
             }
 }
 
 void Shelves::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {}
 void Shelves::onCursorPositionEvent(double x, double y) {}
+
+void Shelves::setShelfVisibility(Shelf shelf, bool visible)
+{
+    shelfVisibility[static_cast<int>(shelf)] = visible;
+}
