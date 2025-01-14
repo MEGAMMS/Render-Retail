@@ -82,7 +82,7 @@ void Cone::setTexture(const std::string& topTexturePath, const std::string& bott
         bottomTexture = AssetManager::instance().loadTexture(bottomTexturePath);
 }
 
-void Cone::setColor(glm::vec3 color) { color = color; }
+void Cone::setColor(glm::vec3 in_Color) { color = in_Color; }
 
 void Cone::setBaseVisibility(bool topVisible, bool bottomVisible) {
     topBaseVisible = topVisible;

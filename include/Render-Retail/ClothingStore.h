@@ -6,6 +6,7 @@
 #include "Render-Retail/Stores/StoreWalls.h"
 #include "Render-Retail/Objects/Table.h"
 #include "Render-Retail/Objects/Shelves.h"
+#include "Render-Retail/Objects/Hanger.h"
 
 class ClothingStore : public Object
 {
@@ -19,6 +20,7 @@ class ClothingStore : public Object
         std::shared_ptr<StoreWalls> m_room;
         std::shared_ptr<Table> m_desk;
         std::shared_ptr<Shelves>m_shelf;
+        std::shared_ptr<Hanger>m_hanger;
         
 
 };

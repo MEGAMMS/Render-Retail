@@ -23,8 +23,11 @@ ClothingStore::ClothingStore() {
     m_shelf->setPosition(glm::vec3(5.,5.,7.));
     m_shelf->setSize(glm::vec3(0.88));
     // m_shelf->setShelfVisibility(Shelf::Back,0);
-    m_shelf->setTexture("assets/test-textures/Bricks075.png");
-    m_shelf->setShelfTexture(Shelf::Right,"assets/test-textures/default_pine_wood.png");
+    m_shelf->setTexture("assets/test-textures/default_pine_wood.png");
+
+    m_hanger=std::make_shared<Hanger>();
+    m_hanger->setParent(std::shared_ptr<Object>(this));
+    m_hanger->setPosition(glm::vec3(12.,3,9));
 }
 
 void ClothingStore::update(float dt) {}
@@ -32,6 +35,7 @@ void ClothingStore::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightCo
     m_room->render(mvp, lightPos, lightColor, viewPos);
     m_desk->render(mvp, lightPos, lightColor, viewPos);
     m_shelf->render(mvp, lightPos, lightColor, viewPos);
+    m_hanger->render(mvp, lightPos, lightColor, viewPos);
 }
 void ClothingStore::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {}
 void ClothingStore::onCursorPositionEvent(double x, double y) {}
