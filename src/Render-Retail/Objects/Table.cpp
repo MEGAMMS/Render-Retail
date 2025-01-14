@@ -5,17 +5,16 @@
 #include "Objects/Object.h"
 
 Table::Table() {
-    m_body=std::make_shared<Box>();
+    m_body = std::make_shared<Box>();
     m_body->setParent(std::shared_ptr<Object>(this));
-    m_body->setPosition(glm::vec3(0.,.75,0.));
-    m_body->setSize(glm::vec3(0.84,0.15,1.));
-    //m_body->setOrientation(glm::vec3(1.,0.,0.));
+    m_body->setPosition(glm::vec3(0., .75, 0.));
+    m_body->setSize(glm::vec3(0.84, 0.15, 1.));
+    // m_body->setOrientation(glm::vec3(1.,0.,0.));
     m_body->setTexture("assets/test-textures/Wood1.png");
 
-    m_legs=std::make_shared<TableLegs>();
+    m_legs = std::make_shared<TableLegs>();
     m_legs->setParent(std::shared_ptr<Object>(this));
-    m_legs->setPosition(glm::vec3(0.,0,0.));
-
+    m_legs->setPosition(glm::vec3(0., 0, 0.));
 }
 
 void Table::update(float dt) {}

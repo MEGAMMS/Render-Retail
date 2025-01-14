@@ -11,23 +11,23 @@ ClothingStore::ClothingStore() {
     // m_room->setSize(glm::vec3(5.));
     // m_room->setOrientation(glm::vec3(-1.));
     // m_room->setTexture("assets/brick.png");
-    m_room->setWallTexture(Wall::Back,"assets/test-textures/default_stone_brick.png");
-    
+    m_room->setWallTexture(Wall::Back, "assets/test-textures/default_stone_brick.png");
+
     m_desk = std::make_shared<Table>();
     m_desk->setParent(std::shared_ptr<Object>(this));
-    m_desk->setPosition(glm::vec3(5.,0.,7.));
-    m_desk->setSize(glm::vec3(4.,2.,2.));
+    m_desk->setPosition(glm::vec3(5., 0., 7.));
+    m_desk->setSize(glm::vec3(4., 2., 2.));
 
     m_shelf = std::make_shared<Shelves>();
     m_shelf->setParent(std::shared_ptr<Object>(this));
-    m_shelf->setPosition(glm::vec3(5.,5.,7.));
+    m_shelf->setPosition(glm::vec3(5., 5., 7.));
     m_shelf->setSize(glm::vec3(0.88));
     // m_shelf->setShelfVisibility(Shelf::Back,0);
     m_shelf->setTexture("assets/test-textures/default_pine_wood.png");
 
-    m_hanger=std::make_shared<Hanger>();
+    m_hanger = std::make_shared<Hanger>();
     m_hanger->setParent(std::shared_ptr<Object>(this));
-    m_hanger->setPosition(glm::vec3(12.,3,9));
+    m_hanger->setPosition(glm::vec3(12., 3, 9));
 }
 
 void ClothingStore::update(float dt) {}
