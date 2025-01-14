@@ -21,7 +21,7 @@ void RenderRetail::render() {
     auto lightPos = m_cube->getLightPos();
     auto lightColor = m_cube->getLightColor();
     auto viewPos = m_camera->getPosition();
-    // m_cube->render(projection * m_camera->getViewMatrix());
+    m_cube->render(projection * m_camera->getViewMatrix());
     m_mall->render(m_VP,lightPos,lightColor,viewPos);
 }
 

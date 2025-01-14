@@ -17,12 +17,18 @@ ClothingStore::ClothingStore() {
     m_desk->setParent(std::shared_ptr<Object>(this));
     m_desk->setPosition(glm::vec3(5.,0.,7.));
     m_desk->setSize(glm::vec3(4.,2.,2.));
+
+    m_shelf = std::make_shared<Shelves>();
+    m_shelf->setParent(std::shared_ptr<Object>(this));
+    m_shelf->setPosition(glm::vec3(5.,5.,7.));
+    m_shelf->setSize(glm::vec3(0.88));
 }
 
 void ClothingStore::update(float dt) {}
 void ClothingStore::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos) {
-    // m_room->render(mvp, lightPos, lightColor, viewPos);
+    m_room->render(mvp, lightPos, lightColor, viewPos);
     m_desk->render(mvp, lightPos, lightColor, viewPos);
+    m_shelf->render(mvp, lightPos, lightColor, viewPos);
 }
 void ClothingStore::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {}
 void ClothingStore::onCursorPositionEvent(double x, double y) {}
