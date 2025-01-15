@@ -29,14 +29,18 @@ class Box : public Object {
         }
     };
 
+    struct FaceData {
+        std::shared_ptr<const Texture> texture;
+        glm::vec2 textureScale;
+        bool visibility;
+    };
     std::shared_ptr<VertexArray> vertexArray;
     std::shared_ptr<const ShaderProgram> shaderProgram;
-    std::vector<std::shared_ptr<const Texture>> textures;
-    std::vector<bool> faceVisibility;
+    std::vector<FaceData> faces;
 
    public:
     Box();
-    void setFaceTexture(Face face, const std::string& texturePath);
+    void setFaceTexture(Face face, const std::string& texturePath, glm::vec2 textureScale = glm::vec2(1.0f));
     void setTexture(const std::string& texturePath);
     void setFaceVisibility(Face face, bool visible);
     void update(float dt);

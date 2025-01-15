@@ -2,11 +2,10 @@
 
 #include "Objects/Box.h"
 #include "Objects/Object.h"
+#include "Render-Retail/ClothingStore.h"
 #include "core.h"
 
-#include "Render-Retail/ClothingStore.h"
-
-class Mall: public Object{
+class Mall : public Object {
    public:
     Mall();
     void update(float dt) override;
@@ -17,5 +16,4 @@ class Mall: public Object{
    private:
     std::shared_ptr<Box> m_box;
     std::shared_ptr<ClothingStore> m_clothingStore;
-
 };
