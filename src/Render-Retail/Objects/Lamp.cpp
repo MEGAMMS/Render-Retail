@@ -14,14 +14,14 @@ Lamp::Lamp() {
 
     m_cover = std::make_shared<Cone>(1, 0.04, 1.5, 100);
     m_cover->setParent(std::shared_ptr<Object>(this));
-    m_cover->setPosition(glm::vec3(0,-1.5,0));
+    m_cover->setPosition(glm::vec3(0, -1.5, 0));
     m_cover->setSize(glm::vec3(1));
     m_cover->setOrientation(glm::vec3(0., 1., 0.));
     m_cover->setColor(glm::vec3(0.69, 0.62, 0.30));
-    m_cover->setBaseVisibility(0,0);
+    m_cover->setBaseVisibility(0, 0);
 
-    m_bulb=std::make_shared<Sphere>(100);
-    m_bulb->setPosition(glm::vec3(0,-0.18,0));
+    m_bulb = std::make_shared<Sphere>(100);
+    m_bulb->setPosition(glm::vec3(0, -0.18, 0));
     m_bulb->setSize(glm::vec3(0.03));
     m_bulb->setColor(glm::vec3(1., 1., 0.));
 }
@@ -35,17 +35,8 @@ void Lamp::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm:
 void Lamp::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {}
 void Lamp::onCursorPositionEvent(double x, double y) {}
 
-void Lamp::setBulbColor(glm::vec3 color)
-{
-    m_bulb->setColor(color);
-}
+void Lamp::setBulbColor(glm::vec3 color) { m_bulb->setColor(color); }
 
-void Lamp::setCableColor(glm::vec3 color)
-{
-    m_cable->setColor(color);
-}
+void Lamp::setCableColor(glm::vec3 color) { m_cable->setColor(color); }
 
-void Lamp::setCoverColor(glm::vec3 color)
-{
-    m_cover->setColor(color);
-}
+void Lamp::setCoverColor(glm::vec3 color) { m_cover->setColor(color); }

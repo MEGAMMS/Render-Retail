@@ -9,7 +9,7 @@ Hanger::Hanger() {
     m_body->setParent(std::shared_ptr<Object>(this));
     m_body->setPosition(glm::vec3(0));
     m_body->setSize(glm::vec3(1));
-    m_body->setOrientation(glm::vec3(0., 1., 0.));
+    m_body->setOrientation(glm::vec3(0., 0., 1.));
     m_body->setColor(glm::vec3(0.5));
 }
 

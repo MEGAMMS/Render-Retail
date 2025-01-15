@@ -15,20 +15,20 @@ Shelves::Shelves() {
     }
 
     m_shelves[0]->setPosition(glm::vec3(0));
-    m_shelves[0]->setOrientation(glm::vec3(0));
+    m_shelves[0]->setOrientation(glm::vec3(0,0,1));
 
     m_shelves[1]->setPosition(glm::vec3(0));
     m_shelves[1]->setOrientation(glm::vec3(1., 0, 0));
     m_shelves[1]->setSize(glm::vec3(2.5, 0.5, 8.));
 
-    m_shelves[2]->setPosition(glm::vec3(7, 0, 0));
-    m_shelves[2]->setOrientation(glm::vec3(0));
+    m_shelves[2]->setPosition(glm::vec3(6, 0, 0));
+    m_shelves[2]->setOrientation(glm::vec3(0.,0,1));
 }
 
 void Shelves::update(float dt) {}
 void Shelves::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos) {
     for (int i = 0; i < 3; ++i) {
-        if (!shelfVisibility[i]) continue;
+        //if (!shelfVisibility[i]) continue;
         m_shelves[i]->render(mvp, lightPos, lightColor, viewPos);
     }
 }
