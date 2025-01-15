@@ -49,8 +49,8 @@ void ClothingStore::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightCo
     //m_desk->render(mvp, lightPos, lightColor, viewPos);
     //m_shelf->render(mvp, lightPos, lightColor, viewPos);
     // m_hanger->render(mvp, lightPos, lightColor, viewPos);
-    //m_shirt->render(mvp, lightPos, lightColor, viewPos);
-    m_wardrobe->render(mvp, lightPos, lightColor, viewPos);
+    m_shirt->render(mvp, lightPos, lightColor, viewPos);
+    // m_wardrobe->render(mvp, lightPos, lightColor, viewPos);
 }
 void ClothingStore::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {}
 void ClothingStore::onCursorPositionEvent(double x, double y) {}

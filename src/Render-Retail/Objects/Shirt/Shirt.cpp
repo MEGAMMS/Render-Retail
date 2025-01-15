@@ -10,11 +10,12 @@ Shirt::Shirt() {
     m_body->setPosition(glm::vec3(0));
     m_body->setSize(glm::vec3(0.5, 0.5, 0.1));
     m_body->setTexture("assets/test-textures/red_shirt.png");
+    m_body->setFaceVisibility(Face::Up,0);
 
     m_sleeves = std::make_shared<ShirtSleeves>();
     m_sleeves->setParent(std::shared_ptr<Object>(this));
     m_sleeves->setSize(glm::vec3(1));
-    m_sleeves->setPosition(glm::vec3(0.24,0.2,0));
+    m_sleeves->setPosition(glm::vec3(0.24,0.15,0.05));
 
 }
 

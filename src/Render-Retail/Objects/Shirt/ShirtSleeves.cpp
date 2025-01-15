@@ -17,10 +17,12 @@ ShirtSleeves::ShirtSleeves() {
     }
 
     m_sleeves[0]->setPosition(glm::vec3(-0.3, 0.1, 0));
-    m_sleeves[0]->setOrientation(glm::vec3(0., 0.0, 1.));
+    m_sleeves[0]->setOrientation(glm::vec3(0.5, 1.0, 0.));
+    m_sleeves[0]->setBaseVisibility(0,1);
 
     m_sleeves[1]->setPosition(glm::vec3(0.3, 0.1, 0));
-    m_sleeves[1]->setOrientation(glm::vec3(0., 0.0, 1.));
+    m_sleeves[1]->setOrientation(glm::vec3(-0.5, 1.0, 0.));
+    m_sleeves[1]->setBaseVisibility(0,1);
 }
 
 void ShirtSleeves::update(float dt) {}
