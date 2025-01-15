@@ -15,6 +15,8 @@ class Wardrobe : public Object {
     void onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) override;
     void onCursorPositionEvent(double x, double y) override;
 
+    void setTexture(const std::string& texturePath);
+
    private:
     std::shared_ptr<StoreWalls> m_body;
     std::vector<std::shared_ptr<Shelves>> m_shelves;

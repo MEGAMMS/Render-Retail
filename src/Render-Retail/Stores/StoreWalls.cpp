@@ -52,3 +52,10 @@ void StoreWalls::onCursorPositionEvent(double x, double y) {}
 void StoreWalls::setWallTexture(Wall wall, const std::string& texturePath) {
     walls[static_cast<int>(wall)]->setTexture(texturePath);
 }
+
+void StoreWalls::setTexture(const std::string& texturePath)
+{
+    for (const auto& wall : walls) {
+        wall->setTexture(texturePath);
+    }
+}

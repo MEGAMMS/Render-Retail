@@ -39,7 +39,8 @@ ClothingStore::ClothingStore() {
     m_wardrobe = std::make_shared<Wardrobe>(5);
     m_wardrobe->setParent(std::shared_ptr<Object>(this));
     m_wardrobe->setPosition(glm::vec3(0));
-    m_wardrobe->setSize(glm::vec3(5));
+    m_wardrobe->setSize(glm::vec3(3));
+    m_wardrobe->setTexture("assets/test-textures/Wood1.png");
 }
 
 void ClothingStore::update(float dt) {}

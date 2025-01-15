@@ -22,6 +22,7 @@ class StoreWalls : public Object
         void onCursorPositionEvent(double x, double y) override;
 
         void setWallTexture(Wall wall, const std::string& texturePath);
+        void setTexture(const std::string& texturePath);
     private:
         std::vector<std::shared_ptr<Box>>frontWall;
         std::vector<std::shared_ptr<Box>> walls;
