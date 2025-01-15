@@ -24,7 +24,6 @@ class ClothingStore : public Object {
     std::shared_ptr<StoreWalls> m_room;
     std::shared_ptr<Table> m_desk;
     std::shared_ptr<Shelves> m_shelf;
-    std::shared_ptr<Wardrobe> m_wardrobe;
     std::shared_ptr<Lamp> m_lamp;
-    std::shared_ptr<Clothes> m_clothes;
+    std::vector<std::shared_ptr<Clothes>> m_clothes;
 };

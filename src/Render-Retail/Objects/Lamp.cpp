@@ -21,8 +21,9 @@ Lamp::Lamp() {
     m_cover->setBaseVisibility(0, 0);
 
     m_bulb = std::make_shared<Sphere>(100);
-    m_bulb->setPosition(glm::vec3(0, -0.18, 0));
-    m_bulb->setSize(glm::vec3(0.03));
+    m_bulb->setParent(std::shared_ptr<Object>(this));
+    m_bulb->setPosition(glm::vec3(0, -1.8, 0));
+    m_bulb->setSize(glm::vec3(0.3));
     m_bulb->setColor(glm::vec3(1., 1., 0.));
 }
 
