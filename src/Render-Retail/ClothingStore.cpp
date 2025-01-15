@@ -13,6 +13,8 @@ ClothingStore::ClothingStore() {
     // m_room->setTexture("assets/brick.png");
     m_room->setWallTexture(Wall::Back, "assets/test-textures/default_stone_brick.png");
 
+    m_room->setWallTexture(Wall::Back, "assets/test-textures/default_stone_brick.png");
+
     m_desk = std::make_shared<Table>();
     m_desk->setParent(std::shared_ptr<Object>(this));
     m_desk->setPosition(glm::vec3(5., 0., 7.));

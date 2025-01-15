@@ -6,23 +6,18 @@
 
 class Object {
    private:
-    const glm::vec3 defaultOrientation =
-        glm::vec3(0.f, 0.f, 1.f);  // Assuming the plane initially faces the +Z direction
     void updateModelMatrix() {
         model = glm::mat4(1.f);
         model = glm::translate(model, position);
 
-        orientation = glm::normalize(orientation);
-        glm::vec3 axis = glm::cross(defaultOrientation, orientation);
-        float angle = glm::acos(glm::dot(defaultOrientation, orientation));
+        auto [angle, axis] = orientationToAngleAxis(orientation, defaultOrientation);
+        model = glm::rotate(model, angle, glm::normalize(axis));
 
-        if (glm::length(axis) > 0.0001f) {  // Avoid invalid axis when vectors are aligned
-            model = glm::rotate(model, angle, glm::normalize(axis));
-        }
         model = glm::scale(model, size);
     };
 
    public:
+    glm::vec3 defaultOrientation = glm::vec3(0.f, 0.f, 1.f);  // Assuming the plane initially faces the +Z direction
     glm::mat4 model;
     std::shared_ptr<Object> parent;
 
@@ -56,4 +51,32 @@ class Object {
         if (parent == nullptr) return model;
         return parent->getModel() * model;
     };
+
+   private:
+    std::pair<float, glm::vec3> orientationToAngleAxis(const glm::vec3& targetOrientation,
+                                                       const glm::vec3& baseOrientation = glm::vec3(0.0f, 0.0f, 1.0f)) {
+        // Ensure the orientations are normalized
+        glm::vec3 normTarget = glm::normalize(targetOrientation);
+        glm::vec3 normBase = glm::normalize(baseOrientation);
+
+        // Calculate the angle between the vectors
+        float dotProduct = glm::dot(normTarget, normBase);
+        dotProduct = glm::clamp(dotProduct, -1.0f, 1.0f);  // Clamp for numerical stability
+        float angle = glm::acos(dotProduct);
+
+        // Calculate the rotation axis (cross product)
+        glm::vec3 axis = glm::cross(normBase, normTarget);
+
+        // Handle the case where the axis length is very small (parallel vectors)
+        if (glm::length(axis) < 1e-6f) {
+            axis = glm::vec3(1.0f, 0.0f, 0.0f);  // Default axis
+            if (dotProduct < 0.0f) {             // Special case for 180-degree rotation
+                axis = glm::vec3(0.0f, 1.0f, 0.0f);
+            }
+        } else {
+            axis = glm::normalize(axis);  // Normalize the axis
+        }
+
+        return {angle, axis};
+    }
 };

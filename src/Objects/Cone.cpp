@@ -4,6 +4,7 @@
 #include "glm/detail/type_vec.hpp"
 
 Cone::Cone(float height, float topDiameter, float bottomDiameter, int resolution) {
+    this->defaultOrientation = glm::vec3(0.0, 1.0, 0.0);
     generateGeometry(height, topDiameter, bottomDiameter, resolution);
     vertexArray->addVertexAttributes(Cone::Vertex::vertexAttributes(), sizeof(Cone::Vertex));
     shaderProgram = AssetManager::instance().loadShaderProgram("Cone");
