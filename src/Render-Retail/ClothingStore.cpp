@@ -24,15 +24,6 @@ ClothingStore::ClothingStore() {
     m_shelf->setSize(glm::vec3(1.3,0.88,0.88));
     m_shelf->setTexture("assets/test-textures/default_pine_wood.png");
 
-    m_hanger = std::make_shared<Hanger>();
-    m_hanger->setParent(std::shared_ptr<Object>(this));
-    m_hanger->setPosition(glm::vec3(8.3,-1, 5));
-
-    m_shirt = std::make_shared<Shirt>();
-    m_shirt->setParent(std::shared_ptr<Object>(this));
-    m_shirt->setPosition(glm::vec3(7.3,-3,5));
-    m_shirt->setSize(glm::vec3(3));
-
     m_wardrobe = std::make_shared<Wardrobe>(5);
     m_wardrobe->setParent(std::shared_ptr<Object>(this));
     m_wardrobe->setPosition(glm::vec3(0));
@@ -43,6 +34,12 @@ ClothingStore::ClothingStore() {
     m_lamp->setParent(std::shared_ptr<Object>(this));
     m_lamp->setPosition(glm::vec3(6,3,5));
     m_lamp->setCoverColor(glm::vec3(0.1,01.,0.6));
+
+    m_clothes= std::make_shared<Clothes>(8);
+    m_clothes->setParent(std::shared_ptr<Object>(this));
+    m_clothes->setPosition(glm::vec3(8.3,-1, 5));
+    m_clothes->setSize(glm::vec3(3.5));
+    
 }
 
 void ClothingStore::update(float dt) {}
@@ -50,10 +47,11 @@ void ClothingStore::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightCo
     m_room->render(mvp, lightPos, lightColor, viewPos);
     m_desk->render(mvp, lightPos, lightColor, viewPos);
     m_shelf->render(mvp, lightPos, lightColor, viewPos);
-    m_hanger->render(mvp, lightPos, lightColor, viewPos);
-    m_shirt->render(mvp, lightPos, lightColor, viewPos);
-    m_lamp->render(mvp, lightPos, lightColor, viewPos);
+    // m_hanger->render(mvp, lightPos, lightColor, viewPos);
+    // m_shirt->render(mvp, lightPos, lightColor, viewPos);
+    // m_lamp->render(mvp, lightPos, lightColor, viewPos);
     // m_wardrobe->render(mvp, lightPos, lightColor, viewPos);
+    m_clothes->render(mvp, lightPos, lightColor, viewPos);
 }
 void ClothingStore::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {}
 void ClothingStore::onCursorPositionEvent(double x, double y) {}
