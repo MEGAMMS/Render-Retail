@@ -3,6 +3,7 @@
 #include "Objects/Box.h"
 #include "Objects/Object.h"
 #include "Render-Retail/Objects/Hanger.h"
+#include "Render-Retail/Objects/Lamp.h"
 #include "Render-Retail/Objects/Shelves.h"
 #include "Render-Retail/Objects/Shirt/Shirt.h"
 #include "Render-Retail/Objects/Table.h"
@@ -25,4 +26,5 @@ class ClothingStore : public Object {
     std::shared_ptr<Hanger> m_hanger;
     std::shared_ptr<Shirt> m_shirt;
     std::shared_ptr<Wardrobe> m_wardrobe;
+    std::shared_ptr<Lamp> m_lamp;
 };

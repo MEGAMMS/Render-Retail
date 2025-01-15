@@ -41,6 +41,11 @@ ClothingStore::ClothingStore() {
     m_wardrobe->setPosition(glm::vec3(0));
     m_wardrobe->setSize(glm::vec3(3));
     m_wardrobe->setTexture("assets/test-textures/Wood1.png");
+
+    m_lamp = std::make_shared<Lamp>();
+    m_lamp->setParent(std::shared_ptr<Object>(this));
+    m_lamp->setPosition(glm::vec3(0));
+    m_lamp->setCoverColor(glm::vec3(0.1,01.,0.6));
 }
 
 void ClothingStore::update(float dt) {}
@@ -49,7 +54,8 @@ void ClothingStore::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightCo
     //m_desk->render(mvp, lightPos, lightColor, viewPos);
     //m_shelf->render(mvp, lightPos, lightColor, viewPos);
     // m_hanger->render(mvp, lightPos, lightColor, viewPos);
-    m_shirt->render(mvp, lightPos, lightColor, viewPos);
+    // m_shirt->render(mvp, lightPos, lightColor, viewPos);
+    m_lamp->render(mvp, lightPos, lightColor, viewPos);
     // m_wardrobe->render(mvp, lightPos, lightColor, viewPos);
 }
 void ClothingStore::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {}
