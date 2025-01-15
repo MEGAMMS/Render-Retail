@@ -4,3 +4,4 @@ assets/test-textures
 .exrc
 .cache
 compile_commands.json
+lib/assimp

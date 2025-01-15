@@ -7,6 +7,9 @@
 #include <glm/gtc/matrix_transform.hpp> // IWYU pragma: export
 #include <glm/gtc/type_ptr.hpp> // IWYU pragma: export
 #include <lodepng.h> // IWYU pragma: export
+#include <assimp/Importer.hpp> // IWYU pragma: export
+#include <assimp/scene.h> // IWYU pragma: export
+#include <assimp/postprocess.h> // IWYU pragma: export
 
 // Standard library stuff
 #include <iostream> // IWYU pragma: export
