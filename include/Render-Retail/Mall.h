@@ -3,6 +3,7 @@
 #include "Objects/Box.h"
 #include "Objects/Object.h"
 #include "Render-Retail/ClothingStore.h"
+#include "Render-Retail/BookStore.h"
 #include "core.h"
 
 class Mall : public Object {
@@ -16,4 +17,5 @@ class Mall : public Object {
    private:
     std::shared_ptr<Box> m_box;
     std::shared_ptr<ClothingStore> m_clothingStore;
+    std::shared_ptr<BookStore> m_bookStore;
 };
