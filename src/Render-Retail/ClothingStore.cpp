@@ -20,6 +20,7 @@ ClothingStore::ClothingStore() {
     m_desk->setParent(std::shared_ptr<Object>(this));
     m_desk->setPosition(glm::vec3(4.8, -4., 3.));
     m_desk->setSize(glm::vec3(4., 2., 2.));
+    m_desk->setTexture("assets/test-textures/default_pine_wood.png");
 
     m_shelf = std::make_shared<Shelves>();
     m_shelf->setParent(std::shared_ptr<Object>(this));

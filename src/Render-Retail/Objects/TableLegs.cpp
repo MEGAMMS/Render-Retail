@@ -34,3 +34,10 @@ void TableLegs::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor,
 }
 void TableLegs::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {}
 void TableLegs::onCursorPositionEvent(double x, double y) {}
+
+void TableLegs::setTexture(const std::string& texturePath)
+{
+   for (const auto& leg : m_legs) {
+        leg->setTexture(texturePath);
+    }
+}
