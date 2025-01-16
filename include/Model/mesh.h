@@ -1,4 +1,4 @@
-#pragma once
+ #pragma once
 
 #include "Render/ShaderProgram.h"
 #include "core.h"
@@ -45,6 +45,7 @@ class Mesh {
 
         // now that we have all the required data, set the vertex buffers and its attribute pointers.
         setupMesh();
+        
     }
 
     // render the mesh
@@ -70,6 +71,7 @@ class Mesh {
 
             // now set the sampler to the correct texture unit
             shader->setInt((name + number), i);
+            std::cerr << name << std::endl; 
             // and finally bind the texture
             glBindTexture(GL_TEXTURE_2D, textures[i].id);
         }

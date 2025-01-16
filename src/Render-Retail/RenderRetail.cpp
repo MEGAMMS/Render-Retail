@@ -9,7 +9,9 @@
 RenderRetail::RenderRetail() {
     m_camera = std::make_shared<Camera>();
     m_camera->setPosition(glm::vec3(0.));
+
     m_cube = std::make_shared<LightCube>(glm::vec3(2.), glm::vec3(1.));
+
     m_mall = std::make_shared<Mall>();
 
     m_cone = std::make_shared<Cone>(1, 1, 1, 100);
@@ -20,7 +22,7 @@ RenderRetail::RenderRetail() {
     m_sphere = std::make_shared<Sphere>(100);
     m_sphere->setTexture("assets/test-textures/pavement_1.png");
 
-    m_backpack = std::make_shared<Backpack>();
+    m_backpack = std::make_shared<Model>();
 }
 void RenderRetail::update(float dt) {
     m_cube->update(dt);
@@ -36,14 +38,16 @@ void RenderRetail::render() {
     auto lightColor = m_cube->getLightColor();
     auto viewPos = m_camera->getPosition();
     m_cube->render(projection * m_camera->getViewMatrix());
+
     m_mall->render(m_VP, lightPos, lightColor, viewPos);
-    // m_cone->render(m_VP, lightPos, lightColor, viewPos);
-    //m_sphere->render(m_VP, lightPos, lightColor, viewPos);
+    m_backpack->render(m_VP, lightPos, lightColor, viewPos);
+    m_cone->render(m_VP, lightPos, lightColor, viewPos);
+    m_sphere->render(m_VP, lightPos, lightColor, viewPos);
 }
 
 void RenderRetail::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
     m_camera->onKeyEvent(key, scancode, action, mode);
-    m_mall->onKeyEvent(key, scancode, action, mode);
+    // m_mall->onKeyEvent(key, scancode, action, mode);
     bool pressed = action == GLFW_PRESS;
 }
 void RenderRetail::onCursorPositionEvent(double x, double y) { m_camera->onCursorPositionEvent(x, y); }
