@@ -1,7 +1,5 @@
 #include "Render-Retail/Objects/Hanger.h"
 
-#include <memory>
-
 #include "Objects/Object.h"
 
 Hanger::Hanger() {

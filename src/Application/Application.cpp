@@ -29,6 +29,9 @@ Application::Application() {
   scenes.push_back(std::make_shared<RenderRetail>());
 }
 void Application::run() {
+  // Blending
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   // render loop
   // -----------
