@@ -22,7 +22,7 @@ RenderRetail::RenderRetail() {
     m_sphere = std::make_shared<Sphere>(100);
     m_sphere->setTexture("assets/test-textures/pavement_1.png");
 
-    m_backpack = std::make_shared<Model>();
+    m_rock = std::make_shared<Model>("assets/objects/rock/rock.obj");
 }
 void RenderRetail::update(float dt) {
     m_cube->update(dt);
@@ -39,10 +39,10 @@ void RenderRetail::render() {
     auto viewPos = m_camera->getPosition();
     m_cube->render(projection * m_camera->getViewMatrix());
 
-    m_mall->render(m_VP, lightPos, lightColor, viewPos);
-    m_backpack->render(m_VP, lightPos, lightColor, viewPos);
-    m_cone->render(m_VP, lightPos, lightColor, viewPos);
-    m_sphere->render(m_VP, lightPos, lightColor, viewPos);
+    // m_mall->render(m_VP, lightPos, lightColor, viewPos);
+    m_rock->render(m_VP, lightPos, lightColor, viewPos);
+    // m_cone->render(m_VP, lightPos, lightColor, viewPos);
+    // m_sphere->render(m_VP, lightPos, lightColor, viewPos);
 }
 
 void RenderRetail::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {

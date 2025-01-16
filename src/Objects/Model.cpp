@@ -1,12 +1,10 @@
 #include "Objects/Model.h"
 
-#include <memory>
-
 #include "Model/model.h"
 #include "Render/ShaderProgram.h"
 
-Model::Model() {
-    m_model = std::make_shared<aiModel>("assets/objects/rock/rock.obj");
+Model::Model(const std::string& modelPath) {
+    m_model = std::make_shared<aiModel>(modelPath);
     m_shader = std::make_shared<const ShaderProgram>("Model");
 }
 

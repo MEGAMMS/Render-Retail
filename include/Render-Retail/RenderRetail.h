@@ -23,7 +23,7 @@ private:
     std::shared_ptr<Mall> m_mall;
     std::shared_ptr<Cone> m_cone;
     std::shared_ptr<Sphere> m_sphere;
-    std::shared_ptr<Model> m_backpack;
+    std::shared_ptr<Model> m_rock;
 
     glm::mat4 m_VP = glm::mat4(1.);
 };
