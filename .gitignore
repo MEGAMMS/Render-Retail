@@ -6,3 +6,4 @@ assets/textures
 .cache
 compile_commands.json
 lib/assimp
+assets/objects

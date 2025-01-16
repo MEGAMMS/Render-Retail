@@ -19,6 +19,8 @@ RenderRetail::RenderRetail() {
 
     m_sphere = std::make_shared<Sphere>(100);
     m_sphere->setTexture("assets/test-textures/pavement_1.png");
+
+    m_backpack = std::make_shared<Backpack>();
 }
 void RenderRetail::update(float dt) {
     m_cube->update(dt);
