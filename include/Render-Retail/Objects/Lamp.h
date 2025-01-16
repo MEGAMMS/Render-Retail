@@ -4,27 +4,25 @@
 #include "Objects/Object.h"
 #include "core.h"
 
-enum class Wall {
-    Down,
-    Up,
-    Back,
-    Left,
-    Right,
-};
+#include "Objects/Cone.h"
+#include "Objects/Sphere.h"
 
-class StoreWalls : public Object
+class Lamp : public Object
 {
     public:
-        StoreWalls();
+        Lamp();
+
         void update(float dt) override;
         void render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos);
         void onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) override;
         void onCursorPositionEvent(double x, double y) override;
 
-        void setWallTexture(Wall wall, const std::string& texturePath);
-        void setTexture(const std::string& texturePath);
+        void setCableColor(glm::vec3 color);
+        void setCoverColor(glm::vec3 color);
+        void setBulbColor(glm::vec3 color);
     private:
-        std::vector<std::shared_ptr<Box>>frontWall;
-        std::vector<std::shared_ptr<Box>> walls;
+        std::shared_ptr<Cone>m_cable;
+        std::shared_ptr<Cone>m_cover;
+        std::shared_ptr<Sphere>m_bulb;
 
 };

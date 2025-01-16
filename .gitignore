@@ -1,6 +1,7 @@
 build
 .vscode
 assets/test-textures
+assets/textures
 .exrc
 .cache
 compile_commands.json

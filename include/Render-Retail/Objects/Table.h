@@ -4,6 +4,8 @@
 #include "Objects/Object.h"
 #include "core.h"
 
+#include "Render-Retail/Objects/TableLegs.h"
+
 class Table : public Object
 {
     public:
@@ -15,6 +17,6 @@ class Table : public Object
         void onCursorPositionEvent(double x, double y) override;
     private:
         std::shared_ptr<Box>m_body;
-        std::vector<std::shared_ptr<Box>>m_legs;
+        std::shared_ptr<TableLegs>m_legs;
 
 };

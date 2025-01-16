@@ -2,7 +2,13 @@
 
 #include "Objects/Box.h"
 #include "Objects/Object.h"
+#include "Render-Retail/Objects/Clothes.h"
+#include "Render-Retail/Objects/Hanger.h"
+#include "Render-Retail/Objects/Lamp.h"
+#include "Render-Retail/Objects/Shelves.h"
+#include "Render-Retail/Objects/Shirt/Shirt.h"
 #include "Render-Retail/Objects/Table.h"
+#include "Render-Retail/Objects/Wardrobe.h"
 #include "Render-Retail/Stores/StoreWalls.h"
 #include "core.h"
 
@@ -17,4 +23,7 @@ class ClothingStore : public Object {
    private:
     std::shared_ptr<StoreWalls> m_room;
     std::shared_ptr<Table> m_desk;
+    std::shared_ptr<Shelves> m_shelf;
+    std::shared_ptr<Lamp> m_lamp;
+    std::vector<std::shared_ptr<Clothes>> m_clothes;
 };

@@ -18,7 +18,7 @@ Cone::Cone(float height, float topDiameter, float bottomDiameter, int resolution
 void Cone::generateGeometry(float height, float topDiameter, float bottomDiameter, int resolution) {
     std::vector<Vertex> vertices;
     std::vector<GLuint> indices;
-
+ 
     float topRadius = topDiameter / 2.0f;
     float bottomRadius = bottomDiameter / 2.0f;
     glm::vec3 topCenter(0.0f, height / 2.0f, 0.0f);
@@ -43,27 +43,27 @@ void Cone::generateGeometry(float height, float topDiameter, float bottomDiamete
 
     // Add indices for side faces
     for (int i = 0; i < std::max(resolution, resolution); ++i) {
-        uint topIdx = i % resolution;
-        uint bottomIdx = (i % resolution) + resolution;
-        uint nextTopIdx = (i + 1) % resolution;
-        uint nextBottomIdx = ((i + 1) % resolution) + resolution;
+        uint32_t topIdx = i % resolution;
+        uint32_t bottomIdx = (i % resolution) + resolution;
+        uint32_t nextTopIdx = (i + 1) % resolution;
+        uint32_t nextBottomIdx = ((i + 1) % resolution) + resolution;
 
         indices.insert(indices.end(), {topIdx, bottomIdx, nextTopIdx, nextTopIdx, bottomIdx, nextBottomIdx});
     }
 
     // Add indices for top base
-    uint centerIdx = vertices.size();
+    uint32_t centerIdx = vertices.size();
     vertices.push_back({topCenter, {0.5f, 0.5f}, {0.0f, 1.0f, 0.0f}});
-    for (uint i = 0; i < resolution; ++i) {
-        uint nextIdx = (i + 1) % resolution;
+    for (uint32_t i = 0; i < resolution; ++i) {
+        uint32_t nextIdx = (i + 1) % resolution;
         indices.insert(indices.end(), {centerIdx, i, nextIdx});
     }
 
     // Add indices for bottom base
     centerIdx = vertices.size();
     vertices.push_back({bottomCenter, {0.5f, 0.5f}, {0.0f, -1.0f, 0.0f}});
-    for (uint i = 0; i < resolution; ++i) {
-        uint nextIdx = (i + 1) % resolution + resolution;
+    for (uint32_t i = 0; i < resolution; ++i) {
+        uint32_t nextIdx = (i + 1) % resolution + resolution;
         indices.insert(indices.end(), {centerIdx, nextIdx, i + resolution});
     }
 
@@ -83,7 +83,7 @@ void Cone::setTexture(const std::string& topTexturePath, const std::string& bott
         bottomTexture = AssetManager::instance().loadTexture(bottomTexturePath);
 }
 
-void Cone::setColor(glm::vec3 color) { color = color; }
+void Cone::setColor(glm::vec3 in_Color) { color = in_Color; }
 
 void Cone::setBaseVisibility(bool topVisible, bool bottomVisible) {
     topBaseVisible = topVisible;
