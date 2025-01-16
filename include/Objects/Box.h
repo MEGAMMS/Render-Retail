@@ -41,7 +41,7 @@ class Box : public Object {
    public:
     Box();
     void setFaceTexture(Face face, const std::string& texturePath, glm::vec2 textureScale = glm::vec2(1.0f));
-    void setTexture(const std::string& texturePath);
+    void setTexture(const std::string& texturePath,glm::vec2 textureScale = glm::vec2(1.f));
     void setFaceVisibility(Face face, bool visible);
     void update(float dt);
     void render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos);

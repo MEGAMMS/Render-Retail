@@ -10,12 +10,11 @@ ClothingStore::ClothingStore() {
     m_room->setPosition(glm::vec3(0));
     m_room->setSize(glm::vec3(1.3, 1, 1));
     // m_room->setOrientation(glm::vec3(-1.));
-    m_room->setTexture("assets/brick.png");
-    m_room->setWallTexture(Wall::Down, "assets/test-textures/WoodFloor1.png");
-    m_room->setWallTexture(Wall::Back, "assets/textures/pbr/wall/albedo.png");
-    m_room->setWallTexture(Wall::Right, "assets/textures/pbr/wall/albedo.png");
-    m_room->setWallTexture(Wall::Left, "assets/textures/pbr/wall/albedo.png");
-    m_room->setWallTexture(Wall::Up, "assets/textures/pbr/wall/albedo.png");
+    m_room->setWallTexture(Wall::Down, "assets/test-textures/WoodFloor1.png",glm::vec2(2.6,1)*glm::vec2(2.));
+    m_room->setWallTexture(Wall::Back, "assets/textures/pbr/wall/albedo.png",glm::vec2(2.6,1)*glm::vec2(2.));
+    m_room->setWallTexture(Wall::Right, "assets/textures/pbr/wall/albedo.png",glm::vec2(2.6,1)*glm::vec2(2.));
+    m_room->setWallTexture(Wall::Left, "assets/textures/pbr/wall/albedo.png",glm::vec2(2.6,1)*glm::vec2(2.));
+    m_room->setWallTexture(Wall::Up, "assets/textures/pbr/wall/albedo.png",glm::vec2(2.6,1)*glm::vec2(2.));
 
     m_desk = std::make_shared<Table>();
     m_desk->setParent(std::shared_ptr<Object>(this));

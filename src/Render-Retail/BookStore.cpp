@@ -11,11 +11,11 @@ BookStore::BookStore() {
     m_room->setSize(glm::vec3(2.6, 1, 1.3));
     // m_room->setOrientation(glm::vec3(-1.));
     m_room->setTexture("assets/test-textures/Bricks092.png");
-    m_room->setWallTexture(Wall::Down, "assets/test-textures/WoodFloor1.png");
-    // m_room->setWallTexture(Wall::Back, "assets/textures/pbr/wall/albedo.png");
-    // m_room->setWallTexture(Wall::Right, "assets/textures/pbr/wall/albedo.png");
-    // m_room->setWallTexture(Wall::Left, "assets/textures/pbr/wall/albedo.png");
-    // m_room->setWallTexture(Wall::Up, "assets/textures/pbr/wall/albedo.png");
+    m_room->setWallTexture(Wall::Down, "assets/test-textures/WoodFloor1.png",glm::vec2(2.6,1)*glm::vec2(2.));
+    m_room->setWallTexture(Wall::Up, "assets/test-textures/WoodFloor1.png",glm::vec2(2.6,1)*glm::vec2(2.));
+    m_room->setWallTexture(Wall::Back, "assets/test-textures/Bricks092.png",glm::vec2(2.6,1)*glm::vec2(2.));
+    m_room->setWallTexture(Wall::Right, "assets/test-textures/Bricks092.png",glm::vec2(2.6,1)*glm::vec2(2.));
+    m_room->setWallTexture(Wall::Left, "assets/test-textures/Bricks092.png",glm::vec2(2.6,1)*glm::vec2(2.));
 
     m_desk = std::make_shared<Table>();
     m_desk->setParent(std::shared_ptr<Object>(this));
@@ -25,7 +25,7 @@ BookStore::BookStore() {
     for (int i = 0; i < 2; i++) {
         auto m_shelf = std::make_shared<Shelves>();
         m_shelf->setParent(std::shared_ptr<Object>(this));
-        m_shelf->setPosition(glm::vec3(3.3+(i*10), 1.5, 3.));
+        m_shelf->setPosition(glm::vec3(3.3 + (i * 10), 1.5, 3.));
         m_shelf->setShelfVisibility(Shelf::Right, 0);
         m_shelf->setShelfVisibility(Shelf::Left, 0);
         m_shelf->setSize(glm::vec3(1., 0.88, 0.88));

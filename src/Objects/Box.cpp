@@ -25,8 +25,8 @@ Box::Box() {
     faces.assign(6, {AssetManager::instance().loadTexture(), glm::vec2(1), true});
 }
 
-void Box::setTexture(const std::string& texturePath) {
-    for (int i = 0; i < 6; i++) setFaceTexture((Face)i, texturePath);
+void Box::setTexture(const std::string& texturePath, glm::vec2 textureScale) {
+    for (int i = 0; i < 6; i++) setFaceTexture((Face)i, texturePath,textureScale);
 }
 
 void Box::setFaceTexture(Face face, const std::string& texturePath, glm::vec2 textureScale) {
