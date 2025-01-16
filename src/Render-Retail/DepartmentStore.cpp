@@ -11,19 +11,19 @@ DepartmentStore::DepartmentStore() {
     m_room->setSize(glm::vec3(5, 1, 3));
     m_room->setTexture("assets/brick.png");
     m_room->setWallTexture(Wall::Down, "assets/test-textures/Wood1.png");
-    m_room->setWallTexture(Wall::Back, "assets/test-textures/default_brick.png");
-    m_room->setWallTexture(Wall::Right, "assets/test-textures/default_brick.png");
-    m_room->setWallTexture(Wall::Left, "assets/test-textures/default_brick.png");
-    m_room->setWallTexture(Wall::Up, "assets/test-textures/default_brick.png");
+    m_room->setWallTexture(Wall::Back, "assets/test-textures/default_brick.png", glm::vec2(4) * glm::vec2(5, 1));
+    m_room->setWallTexture(Wall::Right, "assets/test-textures/default_brick.png", glm::vec2(4) * glm::vec2(5, 1));
+    m_room->setWallTexture(Wall::Left, "assets/test-textures/default_brick.png", glm::vec2(4) * glm::vec2(5, 1));
+    m_room->setWallTexture(Wall::Up, "assets/test-textures/default_brick.png", glm::vec2(4) * glm::vec2(5, 1));
 
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 3; j++) {
-            auto wardrobe = std::make_shared<Wardrobe>(5);
+            auto wardrobe = std::make_shared<Wardrobe>(3);
             wardrobe->setParent(std::shared_ptr<Object>(this));
             wardrobe->setSize(glm::vec3(0.5));
             wardrobe->setTexture("assets/textures/concreteTexture.png");
             wardrobe->setOrientation(glm::vec3((i % 2) ? -1 : 1, 0, 0));
-            wardrobe->setPosition(glm::vec3(35 - (5 * j), -1.5, (i % 2) ? 26.5 - (2.5 * i) : 28 - (2.5 * i - 1)));
+            wardrobe->setPosition(glm::vec3(35 - (8 * j), -1.5, (i % 2) ? 26.5 - (2.5 * i) : 28 - (2.5 * i - 1)));
             m_wardrobes.push_back(wardrobe);
         }
     }
