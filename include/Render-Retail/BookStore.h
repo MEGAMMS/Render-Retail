@@ -21,5 +21,5 @@ class BookStore : public Object {
     std::shared_ptr<StoreWalls> m_room;
     std::shared_ptr<Table> m_desk;
     std::shared_ptr<Lamp> m_lamp;
-    std::shared_ptr<Wardrobe> m_wardrobes;
+    std::vector<std::shared_ptr<Wardrobe>> m_wardrobes;
 };
