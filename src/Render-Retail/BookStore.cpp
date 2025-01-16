@@ -11,11 +11,11 @@ BookStore::BookStore() {
     m_room->setSize(glm::vec3(2.6, 1, 1.3));
     // m_room->setOrientation(glm::vec3(-1.));
     m_room->setTexture("assets/test-textures/Bricks092.png");
-    m_room->setWallTexture(Wall::Down, "assets/test-textures/WoodFloor1.png",glm::vec2(2.6,1)*glm::vec2(2.));
-    m_room->setWallTexture(Wall::Up, "assets/test-textures/WoodFloor1.png",glm::vec2(2.6,1)*glm::vec2(2.));
-    m_room->setWallTexture(Wall::Back, "assets/test-textures/Bricks092.png",glm::vec2(2.6,1)*glm::vec2(2.));
-    m_room->setWallTexture(Wall::Right, "assets/test-textures/Bricks092.png",glm::vec2(2.6,1)*glm::vec2(2.));
-    m_room->setWallTexture(Wall::Left, "assets/test-textures/Bricks092.png",glm::vec2(2.6,1)*glm::vec2(2.));
+    m_room->setWallTexture(Wall::Down, "assets/test-textures/WoodFloor1.png", glm::vec2(2.6, 1) * glm::vec2(2.));
+    m_room->setWallTexture(Wall::Up, "assets/test-textures/WoodFloor1.png", glm::vec2(2.6, 1) * glm::vec2(2.));
+    m_room->setWallTexture(Wall::Back, "assets/test-textures/Bricks092.png", glm::vec2(2.6, 1) * glm::vec2(2.));
+    m_room->setWallTexture(Wall::Right, "assets/test-textures/Bricks092.png", glm::vec2(2.6, 1) * glm::vec2(2.));
+    m_room->setWallTexture(Wall::Left, "assets/test-textures/Bricks092.png", glm::vec2(2.6, 1) * glm::vec2(2.));
 
     m_desk = std::make_shared<Table>();
     m_desk->setParent(std::shared_ptr<Object>(this));
@@ -31,6 +31,12 @@ BookStore::BookStore() {
         m_shelf->setSize(glm::vec3(1., 0.88, 0.88));
         m_shelf->setTexture("assets/test-textures/Wood1.png");
         m_shelves.push_back(m_shelf);
+
+        auto books = std::make_shared<Books>(6 + i);
+        books->setParent(std::shared_ptr<Object>(this));
+        books->setPosition(glm::vec3(3.6 + (i * 10), 2., 2.));
+        books->setSize(glm::vec3(1));
+        m_books.push_back(books);
     }
     for (int i = 0; i < 3; i++) {
         auto m_lamp = std::make_shared<Lamp>();
@@ -48,24 +54,40 @@ BookStore::BookStore() {
         wardrobe->setOrientation(glm::vec3(-1, 0, 0));
         wardrobe->setPosition(glm::vec3(23.3 - (3.5 * i), -1.5, 6));
         m_wardrobes.push_back(wardrobe);
+
+        for (int j = 0; j < 5; j++) {
+            auto books = std::make_shared<Books>(7);
+            books->setParent(std::shared_ptr<Object>(this));
+            books->setPosition(glm::vec3(22.35 - (3.5 * i), (0.4)-(j*0.8), 7.));
+            books->setSize(glm::vec3(0.5));
+            books->setOrientation(glm::vec3(-1, 0, 0));
+            m_books.push_back(books);
+        }
     }
     m_wardrobes[4]->setPosition(glm::vec3(3., -1.5, 11));
     m_wardrobes[4]->setOrientation(glm::vec3(1., 0, 0));
+
+    for (int j = 0; j < 5; j++) {
+            m_books[26-j]->setPosition(glm::vec3(4, (0.4)-(j*0.8), 7.));
+        }
 }
 
 void BookStore::update(float dt) {}
 void BookStore::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos) {
     m_room->render(mvp, lightPos, lightColor, viewPos);
     m_desk->render(mvp, lightPos, lightColor, viewPos);
-    for (int i = 0; i < 3; i++) {
-        m_lamps[i]->render(mvp, lightPos, lightColor, viewPos);
+    for (const auto& lamp : m_lamps) {
+        lamp->render(mvp, lightPos, lightColor, viewPos);
     }
-    for (int i = 0; i < 2; i++) {
-        m_shelves[i]->render(mvp, lightPos, lightColor, viewPos);
+    for (const auto& shelf : m_shelves) {
+        shelf->render(mvp, lightPos, lightColor, viewPos);
     }
 
-    for (int i = 0; i < 5; i++) {
-        m_wardrobes[i]->render(mvp, lightPos, lightColor, viewPos);
+    for (const auto& wardrobe : m_wardrobes) {
+        wardrobe->render(mvp, lightPos, lightColor, viewPos);
+    }
+    for (const auto& books : m_books) {
+        books->render(mvp, lightPos, lightColor, viewPos);
     }
 }
 void BookStore::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {}
