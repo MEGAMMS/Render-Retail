@@ -23,7 +23,7 @@ vec3 calcLight(vec3 Normal, vec3 FragPos, vec3 lightColor, vec3 lightPos, vec3 v
     }
 
     // Ambient lighting
-    float ambientStrength = 0.6;
+    float ambientStrength = 0.2;
     vec3 ambient = ambientStrength * lightColor;
 
     // Diffuse lighting
