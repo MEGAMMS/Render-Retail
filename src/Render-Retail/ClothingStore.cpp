@@ -14,7 +14,7 @@ ClothingStore::ClothingStore() {
     m_room->setWallTexture(Wall::Back, "assets/textures/pbr/wall/albedo.png",glm::vec2(2.6,1)*glm::vec2(2.));
     m_room->setWallTexture(Wall::Right, "assets/textures/pbr/wall/albedo.png",glm::vec2(2.6,1)*glm::vec2(2.));
     m_room->setWallTexture(Wall::Left, "assets/textures/pbr/wall/albedo.png",glm::vec2(2.6,1)*glm::vec2(2.));
-    m_room->setWallTexture(Wall::Up, "assets/textures/pbr/wall/albedo.png",glm::vec2(2.6,1)*glm::vec2(2.));
+    m_room->setWallTexture(Wall::Up, "assets/test-textures/WoodFloor1.png",glm::vec2(2.6,1)*glm::vec2(2.));
 
     m_desk = std::make_shared<Table>();
     m_desk->setParent(std::shared_ptr<Object>(this));

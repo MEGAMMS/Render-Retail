@@ -15,7 +15,7 @@ class Mall : public Object {
     void onCursorPositionEvent(double x, double y) override;
 
    private:
-    std::shared_ptr<Box> m_box;
+    std::shared_ptr<Box> m_body;
     std::shared_ptr<ClothingStore> m_clothingStore;
     std::shared_ptr<BookStore> m_bookStore;
 };
