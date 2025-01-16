@@ -4,10 +4,10 @@
 #include "Render/Image.h"
 
 class Texture {
-  uint32_t id = 0;
   uint32_t type;
 
 public:
+  uint32_t id = 0;
   Texture(const Texture&) = delete;
   Texture(Texture&) = delete;
   Texture(Texture&&) = delete;

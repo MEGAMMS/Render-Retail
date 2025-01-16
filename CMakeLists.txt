@@ -18,6 +18,7 @@ add_subdirectory(lib/glm EXCLUDE_FROM_ALL)
 add_subdirectory(lib/glad EXCLUDE_FROM_ALL)
 add_subdirectory(lib/lodepng EXCLUDE_FROM_ALL)
 add_subdirectory(lib/assimp EXCLUDE_FROM_ALL)
+add_subdirectory(lib/stb_image EXCLUDE_FROM_ALL)
 
 target_link_libraries(main
     glfw
@@ -25,6 +26,7 @@ target_link_libraries(main
     glm
     lodepng
     assimp
+    stb_image
 )
 
 

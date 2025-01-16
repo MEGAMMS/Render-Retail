@@ -10,6 +10,7 @@
 #include <assimp/Importer.hpp> // IWYU pragma: export
 #include <assimp/scene.h> // IWYU pragma: export
 #include <assimp/postprocess.h> // IWYU pragma: export
+#include <stb_image.h> // IWYU pragma: export
 
 // Standard library stuff
 #include <iostream> // IWYU pragma: export
