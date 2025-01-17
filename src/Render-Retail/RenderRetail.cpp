@@ -39,8 +39,8 @@ void RenderRetail::render() {
     auto viewPos = m_camera->getPosition();
     m_cube->render(projection * m_camera->getViewMatrix());
 
-    // m_mall->render(m_VP, lightPos, lightColor, viewPos);
-    m_rock->render(m_VP, lightPos, lightColor, viewPos);
+    m_mall->render(m_VP, lightPos, lightColor, viewPos);
+    // m_rock->render(m_VP, lightPos, lightColor, viewPos);
     // m_cone->render(m_VP, lightPos, lightColor, viewPos);
     // m_sphere->render(m_VP, lightPos, lightColor, viewPos);
 }

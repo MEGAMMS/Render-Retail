@@ -21,10 +21,19 @@ DepartmentStore::DepartmentStore() {
             auto wardrobe = std::make_shared<Wardrobe>(3);
             wardrobe->setParent(std::shared_ptr<Object>(this));
             wardrobe->setSize(glm::vec3(0.5));
-            wardrobe->setTexture("assets/textures/concreteTexture.png");
+            wardrobe->setTexture("assets/test-textures/default_pine_wood.png");
             wardrobe->setOrientation(glm::vec3((i % 2) ? -1 : 1, 0, 0));
             wardrobe->setPosition(glm::vec3(35 - (8 * j), -1.5, (i % 2) ? 26.5 - (2.5 * i) : 28 - (2.5 * i - 1)));
+
             m_wardrobes.push_back(wardrobe);
+
+            // // games
+            // auto game = std::make_shared<Model>("assets/objects/vampire/dancing_vampire.dae");
+
+            // game->setSize(glm::vec3(0.001));
+            // game->setOrientation(glm::vec3((i % 2) ? -1 : 1, 0, 0));
+            // game->setPosition(glm::vec3(3.5 - (0.8 * j), 0.09, (i % 2) ? 2.5 - (0.2 * i) : 4 - (0.2 * i - 1)));
+            // m_games.push_back(game);
         }
     }
 
@@ -44,7 +53,9 @@ DepartmentStore::DepartmentStore() {
     m_lamp = std::make_shared<Lamp>();
     m_lamp->setParent(std::shared_ptr<Object>(this));
     m_lamp->setPosition(glm::vec3(12, 4, 5));
-    m_lamp->setCoverColor(glm::vec3(0.1, 01., 0.6));
+    m_lamp->setCoverColor(glm::vec3(0.14, 0.15, 0.18));
+    m_lamp->setCableColor(glm::vec3(0.8, 0.8, 0.8));
+    m_lamp->setBulbColor(glm::vec3(0.9, 0.9, 0.7));
 }
 
 void DepartmentStore::update(float dt) {}
@@ -56,6 +67,9 @@ void DepartmentStore::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 light
     for (auto wardrobe : m_wardrobes) {
         wardrobe->render(mvp, lightPos, lightColor, viewPos);
     }
+    // for (auto game : m_games) {
+    //     game->render(mvp, lightPos, lightColor, viewPos);
+    // }
 }
 void DepartmentStore::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {}
 void DepartmentStore::onCursorPositionEvent(double x, double y) {}

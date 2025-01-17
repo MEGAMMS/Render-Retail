@@ -10,6 +10,7 @@
 #include "Render-Retail/Objects/Table.h"
 #include "Render-Retail/Objects/Wardrobe.h"
 #include "Render-Retail/Stores/StoreWalls.h"
+#include "Objects/Model.h"
 #include "core.h"
 
 class DepartmentStore : public Object {
@@ -23,6 +24,7 @@ class DepartmentStore : public Object {
    private:
     std::shared_ptr<StoreWalls> m_room;
     std::vector<std::shared_ptr<Wardrobe>> m_wardrobes;
+    std::vector<std::shared_ptr<Model>> m_games;
     std::shared_ptr<Table> m_desk;
     std::shared_ptr<Shelves> m_shelf;
     std::shared_ptr<Lamp> m_lamp;
