@@ -9,7 +9,7 @@ Elevator::Elevator(float highet) {
 
 void Elevator::update(float dt) {
     status.update(dt);
-    this->setPosition(glm::vec3(0, status.currentHighet, 0));
+    m_body->setPosition(glm::vec3(0, status.currentHighet, 0));
 }
 void Elevator::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos) {
     m_body->render(mvp, lightPos, lightColor, viewPos);
