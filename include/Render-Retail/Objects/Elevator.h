@@ -6,10 +6,10 @@
 
 class Elevator : public Object {
    public:
-    Elevator();
+    Elevator(float highet = 4.f);
     struct status {
-        const float highet = 4.f;
-        const int speed = 2.f;
+        float highet;
+        int speed = 2.f;
         bool up = false;
         bool comingUp = false;
         bool comingDown = false;

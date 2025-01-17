@@ -1,8 +1,8 @@
 #include "Render-Retail/Objects/Elevator.h"
 
-#include "GLFW/glfw3.h"
-
-Elevator::Elevator() {
+Elevator::Elevator(float highet) {
+    status.highet = highet;
+    status.speed = highet / 2;
     m_body = std::make_shared<Box>();
     m_body->setParent(std::shared_ptr<Object>(this));
 }
