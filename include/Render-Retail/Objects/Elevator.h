@@ -2,6 +2,7 @@
 
 #include "Objects/Box.h"
 #include "Objects/Object.h"
+#include "Render-Retail/Objects/Door.h"
 #include "core.h"
 
 class Elevator : public Object {
@@ -34,5 +35,7 @@ class Elevator : public Object {
     void onCursorPositionEvent(double x, double y) override;
 
    private:
+    std::shared_ptr<Object> m_root;
     std::shared_ptr<Box> m_body;
+    std::shared_ptr<Door> m_door;
 };

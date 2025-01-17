@@ -4,6 +4,7 @@
 
 #include "Objects/Cone.h"
 #include "Render-Retail/Mall.h"
+#include "Render-Retail/Objects/Door.h"
 #include "glm/detail/type_vec.hpp"
 
 RenderRetail::RenderRetail() {
@@ -36,7 +37,7 @@ RenderRetail::RenderRetail() {
     m_street->setTexture("assets/test-textures/Road007.png");
 
     m_elevator = std::make_shared<Elevator>();
-    m_elevator->setPosition(glm::vec3(170,0,1));
+    m_door = std::make_shared<Door>();
 }
 void RenderRetail::update(float dt) {
     m_cube->update(dt);
@@ -45,6 +46,7 @@ void RenderRetail::update(float dt) {
               << std::endl;
     m_VP = projection * m_camera->getViewMatrix();
     m_elevator->update(dt);
+    m_door->update(dt);
 }
 
 void RenderRetail::render() {
@@ -61,12 +63,14 @@ void RenderRetail::render() {
     // m_cone->render(m_VP, lightPos, lightColor, viewPos);
     // m_sphere->render(m_VP, lightPos, lightColor, viewPos);
     m_elevator->render(m_VP, lightPos, lightColor, viewPos);
+    // m_door->render(m_VP, lightPos, lightColor, viewPos);
 }
 
 void RenderRetail::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
     m_camera->onKeyEvent(key, scancode, action, mode);
     m_mall->onKeyEvent(key, scancode, action, mode);
     m_elevator->onKeyEvent(key, scancode, action, mode);
+    m_door->onKeyEvent(key, scancode, action, mode);
     bool pressed = action == GLFW_PRESS;
 }
 void RenderRetail::onCursorPositionEvent(double x, double y) { m_camera->onCursorPositionEvent(x, y); }
