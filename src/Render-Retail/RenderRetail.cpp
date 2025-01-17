@@ -33,6 +33,8 @@ RenderRetail::RenderRetail() {
     m_street->setSize(glm::vec3(3,0.2,24));
     m_street->setOrientation(glm::vec3(1,0,0));
     m_street->setPosition(glm::vec3(-1.9123,-.184925,17.4586));
+
+    m_elevator = std::make_shared<Elevator>();
 }
 void RenderRetail::update(float dt) {
     m_cube->update(dt);
@@ -57,6 +59,7 @@ void RenderRetail::render() {
     // m_rock->render(m_VP, lightPos, lightColor, viewPos);
     // m_cone->render(m_VP, lightPos, lightColor, viewPos);
     // m_sphere->render(m_VP, lightPos, lightColor, viewPos);
+    m_elevator->render(m_VP, lightPos, lightColor, viewPos);
 }
 
 void RenderRetail::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {

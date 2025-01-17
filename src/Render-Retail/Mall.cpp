@@ -2,7 +2,6 @@
 
 #include <memory>
 
-#include "GLFW/glfw3.h"
 #include "Objects/Object.h"
 #include "glm/detail/type_vec.hpp"
 
@@ -42,6 +41,5 @@ void Mall::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm:
     m_bookStore->render(mvp, lightPos, lightColor, viewPos);
     m_columns->render(mvp, lightPos, lightColor, viewPos);
 }
-void Mall::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
-}
+void Mall::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {}
 void Mall::onCursorPositionEvent(double x, double y) {}

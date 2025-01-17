@@ -6,6 +6,7 @@
 #include "Objects/Sphere.h"
 #include "Objects/Model.h"
 #include "Render-Retail/Mall.h"
+#include "Render-Retail/Objects/Elevator.h"
 #include "core.h"
 #include "core/Camera.h"
 
@@ -27,6 +28,7 @@ private:
     std::shared_ptr<Model> m_plane;
     std::shared_ptr<Box> m_street;
     std::shared_ptr<Box> m_grass;
+    std::shared_ptr<Elevator> m_elevator;
 
     glm::mat4 m_VP = glm::mat4(1.);
 };
