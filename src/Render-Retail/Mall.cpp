@@ -47,6 +47,9 @@ Mall::Mall() {
     m_departmentStore->setSize(glm::vec3(0.6,2,0.8));
     m_departmentStore->setOrientation(glm::vec3(-1,0,0));
 
+    m_fruitStore = std::make_shared<FruitStore>();
+    m_fruitStore->setParent(std::shared_ptr<Object>(this));
+
 }
 
 void Mall::update(float dt) {}
@@ -57,6 +60,7 @@ void Mall::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm:
     m_bookStore->render(mvp, lightPos, lightColor, viewPos);
     m_columns->render(mvp, lightPos, lightColor, viewPos);
     m_departmentStore->render(mvp, lightPos, lightColor, viewPos);
+    m_fruitStore->render(mvp, lightPos, lightColor, viewPos);
 }
 void Mall::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {}
 void Mall::onCursorPositionEvent(double x, double y) {}
