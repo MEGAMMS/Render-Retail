@@ -34,7 +34,7 @@ Mall::Mall() {
 
     m_departmentStore = std::make_shared<DepartmentStore>();
     m_departmentStore->setParent(std::shared_ptr<Object>(this));
-    m_departmentStore->setPosition(glm::vec3(109.9345,7.5,0.1));
+    m_departmentStore->setPosition(glm::vec3(109.9345,8,0.1));
     m_departmentStore->setSize(glm::vec3(0.6,2,0.8));
     m_departmentStore->setOrientation(glm::vec3(-1,0,0));
 

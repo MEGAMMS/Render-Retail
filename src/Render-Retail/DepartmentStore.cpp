@@ -10,7 +10,7 @@ DepartmentStore::DepartmentStore() {
     m_room->setPosition(glm::vec3(0));
     m_room->setSize(glm::vec3(5, 1, 3));
     m_room->setTexture("assets/brick.png");
-    m_room->setWallTexture(Wall::Down, "assets/test-textures/Wood1.png");
+    m_room->setWallTexture(Wall::Down, "assets/test-textures/WoodFloor1.png");
     m_room->setWallTexture(Wall::Back, "assets/test-textures/default_brick.png", glm::vec2(4) * glm::vec2(5, 1));
     m_room->setWallTexture(Wall::Right, "assets/test-textures/default_brick.png", glm::vec2(4) * glm::vec2(5, 1));
     m_room->setWallTexture(Wall::Left, "assets/test-textures/default_brick.png", glm::vec2(4) * glm::vec2(5, 1));

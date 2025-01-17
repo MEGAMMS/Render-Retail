@@ -23,14 +23,14 @@ RenderRetail::RenderRetail() {
     m_plane->setPosition(glm::vec3(7, -1.2, 0.1));
 
     m_grass = std::make_shared<Box>();
-    m_grass->setSize(glm::vec3(40,0.2,24));
+    m_grass->setSize(glm::vec3(40,0.2,28));
     m_grass->setOrientation(glm::vec3(1,0,0));
     m_grass->setPosition(glm::vec3(-1.9123,-0.211544,21.7459));
     m_grass->setTexture("assets/test-textures/Grass001.png");
     
 
     m_street = std::make_shared<Box>();
-    m_street->setSize(glm::vec3(3,0.2,24));
+    m_street->setSize(glm::vec3(3,0.2,28));
     m_street->setOrientation(glm::vec3(1,0,0));
     m_street->setPosition(glm::vec3(-1.9123,-.184925,17.4586));
     m_street->setTexture("assets/test-textures/Road007.png");
