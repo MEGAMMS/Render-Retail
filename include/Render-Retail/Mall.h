@@ -5,6 +5,7 @@
 #include "Render-Retail/ClothingStore.h"
 #include "Render-Retail/BookStore.h"
 #include "Render-Retail/DepartmentStore.h"
+#include "Render-Retail/FruitStore.h"
 #include "core.h"
 
 class Mall : public Object {
@@ -21,4 +22,5 @@ class Mall : public Object {
     std::shared_ptr<BookStore> m_bookStore;
     // std::shared_ptr<ClothingStore> m_clothingStore;
     std::shared_ptr<DepartmentStore> m_departmentStore;
+    std::shared_ptr<FruitStore> m_fruitStore;
 };
