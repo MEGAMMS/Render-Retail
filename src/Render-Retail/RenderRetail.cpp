@@ -8,9 +8,9 @@
 
 RenderRetail::RenderRetail() {
     m_camera = std::make_shared<Camera>();
-    m_camera->setPosition(glm::vec3(0.));
+    m_camera->setPosition(glm::vec3(12.3597,2.82287,35.3499));
 
-    m_cube = std::make_shared<LightCube>(glm::vec3(2.), glm::vec3(1.));
+    m_cube = std::make_shared<LightCube>(glm::vec3(9.04054,8.12076,6.62954), glm::vec3(1.));
 
     m_mall = std::make_shared<Mall>();
     m_mall->setSize(glm::vec3(0.2));
@@ -24,10 +24,16 @@ RenderRetail::RenderRetail() {
     m_sphere->setTexture("assets/test-textures/pavement_1.png");
 
     m_rock = std::make_shared<Model>("assets/objects/rock/rock.obj");
+
+    m_plane = std::make_shared<Model>("assets/objects/Grass/10450_Rectangular_Grass_Patch_v1_iterations-2.obj");
+    m_plane->setSize(glm::vec3(0.13));
+    m_plane->setOrientation(glm::vec3(0,1,0));
+    m_plane->setPosition(glm::vec3(7,-1.1,0.1));
 }
 void RenderRetail::update(float dt) {
     m_cube->update(dt);
     m_camera->update(dt);
+    std::cout<<m_camera->getPosition().x<<","<<m_camera->getPosition().y<<","<<m_camera->getPosition().z<<std::endl;
     m_VP = projection * m_camera->getViewMatrix();
 
     m_mall->update(dt);
@@ -40,6 +46,7 @@ void RenderRetail::render() {
     m_cube->render(projection * m_camera->getViewMatrix());
 
     m_mall->render(m_VP, lightPos, lightColor, viewPos);
+    m_plane->render(m_VP, lightPos, lightColor, viewPos);
     // m_rock->render(m_VP, lightPos, lightColor, viewPos);
     // m_cone->render(m_VP, lightPos, lightColor, viewPos);
     // m_sphere->render(m_VP, lightPos, lightColor, viewPos);
