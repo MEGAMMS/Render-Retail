@@ -11,7 +11,7 @@ FrontWall::FrontWall() {
 
     m_door = std::make_shared<Door>();
     m_door->setParent(std::shared_ptr<Object>(this));
-    m_door->setPosition(glm::vec3(2.6f, -10 / 2, 0.0f));
+    m_door->setPosition(glm::vec3(2.5f, -10 / 2, 0.0f));
     m_door->setSize(glm::vec3(5.f, 5.1, 1.f));
     m_door->setOrientation(glm::vec3(0.,0,1));
 

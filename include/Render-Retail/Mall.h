@@ -2,11 +2,12 @@
 
 #include "Objects/Box.h"
 #include "Objects/Object.h"
-#include "Render-Retail/ClothingStore.h"
 #include "Render-Retail/BookStore.h"
-#include "Render-Retail/Objects/Columns.h"
+#include "Render-Retail/ClothingStore.h"
 #include "Render-Retail/DepartmentStore.h"
 #include "Render-Retail/FruitStore.h"
+#include "Render-Retail/Objects/Columns.h"
+#include "Render-Retail/Stores/StoreWalls.h"
 #include "core.h"
 
 class Mall : public Object {
@@ -25,4 +26,5 @@ class Mall : public Object {
     std::shared_ptr<Columns> m_columns;
     std::shared_ptr<DepartmentStore> m_departmentStore;
     std::shared_ptr<FruitStore> m_fruitStore;
+    std::shared_ptr<FrontWall> m_frontWall;
 };
