@@ -15,6 +15,15 @@ Mall::Mall() {
     m_body->setFaceTexture(Face::Down,"assets/test-textures/WoodFloor1.png",glm::vec2(2.6, 1) * glm::vec2(2.));
     m_body->setFaceTexture(Face::Up,"assets/test-textures/WoodFloor1.png",glm::vec2(2.6, 1) * glm::vec2(2.));
 
+    m_storey2= std::make_shared<Box>();
+    m_storey2->setParent(std::shared_ptr<Object>(this));
+    m_storey2->setPosition(glm::vec3(0,20.1,0));
+    m_storey2->setSize(glm::vec3(110.,20,60));
+    // m_storey2->setOrientation(glm::vec3(0)); 
+    m_storey2->setTexture("assets/brick.png");
+    m_storey2->setFaceTexture(Face::Down,"assets/test-textures/WoodFloor1.png",glm::vec2(2.6, 1) * glm::vec2(2.));
+    m_storey2->setFaceTexture(Face::Up,"assets/test-textures/WoodFloor1.png",glm::vec2(2.6, 1) * glm::vec2(2.));
+
     m_clothingStore = std::make_shared<ClothingStore>();
     m_clothingStore->setParent(std::shared_ptr<Object>(this));
     m_clothingStore->setPosition(glm::vec3(0.1,9,21));
@@ -43,6 +52,7 @@ Mall::Mall() {
 void Mall::update(float dt) {}
 void Mall::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos) {
     m_body->render(mvp, lightPos, lightColor, viewPos);
+    m_storey2->render(mvp, lightPos, lightColor, viewPos);
     m_clothingStore->render(mvp, lightPos, lightColor, viewPos);
     m_bookStore->render(mvp, lightPos, lightColor, viewPos);
     m_columns->render(mvp, lightPos, lightColor, viewPos);

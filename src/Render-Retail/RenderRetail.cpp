@@ -36,6 +36,7 @@ RenderRetail::RenderRetail() {
     m_street->setTexture("assets/test-textures/Road007.png");
 
     m_elevator = std::make_shared<Elevator>();
+    m_elevator->setPosition(glm::vec3(170,0,1));
 }
 void RenderRetail::update(float dt) {
     m_cube->update(dt);
@@ -43,9 +44,6 @@ void RenderRetail::update(float dt) {
     std::cout << m_camera->getPosition().x << "," << m_camera->getPosition().y << "," << m_camera->getPosition().z
               << std::endl;
     m_VP = projection * m_camera->getViewMatrix();
-
-    m_mall->update(dt);
-    m_mall->setSize(glm::vec3(0.1));
     m_elevator->update(dt);
 }
 
@@ -62,7 +60,7 @@ void RenderRetail::render() {
     // m_rock->render(m_VP, lightPos, lightColor, viewPos);
     // m_cone->render(m_VP, lightPos, lightColor, viewPos);
     // m_sphere->render(m_VP, lightPos, lightColor, viewPos);
-    // m_elevator->render(m_VP, lightPos, lightColor, viewPos);
+    m_elevator->render(m_VP, lightPos, lightColor, viewPos);
 }
 
 void RenderRetail::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
