@@ -33,6 +33,7 @@ RenderRetail::RenderRetail() {
     m_street->setSize(glm::vec3(3,0.2,24));
     m_street->setOrientation(glm::vec3(1,0,0));
     m_street->setPosition(glm::vec3(-1.9123,-.184925,17.4586));
+    m_street->setTexture("assets/test-textures/Road007.png");
 
     m_elevator = std::make_shared<Elevator>();
 }
