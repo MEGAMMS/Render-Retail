@@ -23,7 +23,7 @@ class Camera {
     float lastX, lastY;
 
 
-    float walkingSpeed = 2.317;
+    float walkingSpeed = 10.317;
     float runningSpeed = 10.321;
     glm::vec2 mouseSensitivity = glm::vec2(0.2);
 

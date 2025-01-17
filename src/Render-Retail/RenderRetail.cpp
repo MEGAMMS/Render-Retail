@@ -17,10 +17,10 @@ RenderRetail::RenderRetail() {
 
     m_rock = std::make_shared<Model>("assets/objects/rock/rock.obj");
 
-    m_plane = std::make_shared<Model>("assets/objects/Grass/10450_Rectangular_Grass_Patch_v1_iterations-2.obj");
+    m_plane = std::make_shared<Model>("assets/objects/chêne/tree 1.obj");
     m_plane->setSize(glm::vec3(0.13));
     m_plane->setOrientation(glm::vec3(0, 1, 0));
-    m_plane->setPosition(glm::vec3(7, -1.2, 0.1));
+    m_plane->setPosition(glm::vec3(0));
 
     m_grass = std::make_shared<Box>();
     m_grass->setSize(glm::vec3(40,0.2,28));

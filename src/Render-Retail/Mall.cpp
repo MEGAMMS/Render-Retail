@@ -49,6 +49,9 @@ Mall::Mall() {
 
     m_fruitStore = std::make_shared<FruitStore>();
     m_fruitStore->setParent(std::shared_ptr<Object>(this));
+    m_fruitStore->setPosition(glm::vec3(109.9345,8,29.9));
+    m_fruitStore->setSize(glm::vec3(1,2,1.2));
+    m_fruitStore->setOrientation(glm::vec3(-1,0,0));
 
 }
 
