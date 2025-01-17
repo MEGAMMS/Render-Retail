@@ -13,6 +13,7 @@ RenderRetail::RenderRetail() {
     m_cube = std::make_shared<LightCube>(glm::vec3(2.), glm::vec3(1.));
 
     m_mall = std::make_shared<Mall>();
+    m_mall->setSize(glm::vec3(0.2));
 
     m_cone = std::make_shared<Cone>(1, 1, 1, 100);
     m_cone->setTexture("assets/test-textures/Wood1.png", "");
@@ -30,7 +31,6 @@ void RenderRetail::update(float dt) {
     m_VP = projection * m_camera->getViewMatrix();
 
     m_mall->update(dt);
-    m_mall->setSize(glm::vec3(0.1));
 }
 
 void RenderRetail::render() {
@@ -39,8 +39,8 @@ void RenderRetail::render() {
     auto viewPos = m_camera->getPosition();
     m_cube->render(projection * m_camera->getViewMatrix());
 
-    // m_mall->render(m_VP, lightPos, lightColor, viewPos);
-    m_rock->render(m_VP, lightPos, lightColor, viewPos);
+    m_mall->render(m_VP, lightPos, lightColor, viewPos);
+    // m_rock->render(m_VP, lightPos, lightColor, viewPos);
     // m_cone->render(m_VP, lightPos, lightColor, viewPos);
     // m_sphere->render(m_VP, lightPos, lightColor, viewPos);
 }
