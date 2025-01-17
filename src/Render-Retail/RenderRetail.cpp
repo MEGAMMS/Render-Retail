@@ -32,6 +32,7 @@ void RenderRetail::update(float dt) {
 
     m_mall->update(dt);
     m_mall->setSize(glm::vec3(0.1));
+    m_elevator->update(dt);
 }
 
 void RenderRetail::render() {
@@ -49,7 +50,8 @@ void RenderRetail::render() {
 
 void RenderRetail::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
     m_camera->onKeyEvent(key, scancode, action, mode);
-    // m_mall->onKeyEvent(key, scancode, action, mode);
+    m_mall->onKeyEvent(key, scancode, action, mode);
+    m_elevator->onKeyEvent(key, scancode, action, mode);
     bool pressed = action == GLFW_PRESS;
 }
 void RenderRetail::onCursorPositionEvent(double x, double y) { m_camera->onCursorPositionEvent(x, y); }
