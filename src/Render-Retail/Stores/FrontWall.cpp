@@ -9,19 +9,19 @@ FrontWall::FrontWall() {
         frontWall.push_back(std::make_shared<Box>());
     }
 
-    m_door = std::make_shared<Door>(1);
+    m_door = std::make_shared<Door>();
     m_door->setParent(std::shared_ptr<Object>(this));
     m_door->setPosition(glm::vec3(2.6f, -10 / 2, 0.0f));
-    m_door->setSize(glm::vec3(5.f, 11.1, 1.f));
+    m_door->setSize(glm::vec3(5.f, 5.1, 1.f));
     m_door->setOrientation(glm::vec3(0.,0,1));
 
     frontWall[0]->setPosition(glm::vec3(0.0f, -10 / 2, 0.0f));
-    frontWall[0]->setSize(glm::vec3(2.5f, 11.1, 1.f));
+    frontWall[0]->setSize(glm::vec3(2.5f, 11., 1.f));
 
     frontWall[1]->setPosition(glm::vec3(7.3f, -10 / 2, 0.0f));
-    frontWall[1]->setSize(glm::vec3(2.5f, 11.1, 1.f));
+    frontWall[1]->setSize(glm::vec3(2.5f, 11., 1.f));
 
-    frontWall[2]->setPosition(glm::vec3(2.50f, 3.6, 0.0f));
+    frontWall[2]->setPosition(glm::vec3(2.50f, 3.5, 0.0f));
     frontWall[2]->setSize(glm::vec3(4.8,2.5, 1.f));
 
     for (int i = 0; i < 3; ++i) {
@@ -41,6 +41,7 @@ void FrontWall::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor,
 }
 void FrontWall::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
     m_door->onKeyEvent(key,scancode,action,mode);
+    bool pressed = action == GLFW_PRESS;
 }
 void FrontWall::onCursorPositionEvent(double x, double y) {}
 

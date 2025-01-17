@@ -18,7 +18,7 @@ DepartmentStore::DepartmentStore() {
 
     m_frontWall = std::make_shared<FrontWall>();
     m_frontWall->setParent(std::shared_ptr<Object>(this));
-    m_frontWall->setPosition(glm::vec3(0,0,30));
+    m_frontWall->setPosition(glm::vec3(0, 0, 30));
     m_frontWall->setSize(glm::vec3(5, 1, 3));
     m_frontWall->setOrientation(glm::vec3(0, 0, 1));
     m_frontWall->setTexture("assets/test-textures/default_brick.png");
@@ -65,7 +65,7 @@ DepartmentStore::DepartmentStore() {
     m_lamp->setBulbColor(glm::vec3(0.9, 0.9, 0.7));
 }
 
-void DepartmentStore::update(float dt) {}
+void DepartmentStore::update(float dt) { m_frontWall->update(dt); }
 void DepartmentStore::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos) {
     m_room->render(mvp, lightPos, lightColor, viewPos);
     m_desk->render(mvp, lightPos, lightColor, viewPos);
@@ -74,10 +74,12 @@ void DepartmentStore::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 light
     for (auto wardrobe : m_wardrobes) {
         wardrobe->render(mvp, lightPos, lightColor, viewPos);
     }
-     m_frontWall->render(mvp, lightPos, lightColor, viewPos);
+    m_frontWall->render(mvp, lightPos, lightColor, viewPos);
     // for (auto game : m_games) {
     //     game->render(mvp, lightPos, lightColor, viewPos);
     // }
 }
-void DepartmentStore::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {}
+void DepartmentStore::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
+    m_frontWall->onKeyEvent(key, scancode, action, mode);
+}
 void DepartmentStore::onCursorPositionEvent(double x, double y) {}

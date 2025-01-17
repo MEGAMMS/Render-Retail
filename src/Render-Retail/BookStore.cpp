@@ -79,7 +79,7 @@ BookStore::BookStore() {
         }
 }
 
-void BookStore::update(float dt) {}
+void BookStore::update(float dt) {m_frontWall->update(dt);}
 void BookStore::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos) {
     m_room->render(mvp, lightPos, lightColor, viewPos);
      m_frontWall->render(mvp, lightPos, lightColor, viewPos);
@@ -98,5 +98,5 @@ void BookStore::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor,
         books->render(mvp, lightPos, lightColor, viewPos);
     }
 }
-void BookStore::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {}
+void BookStore::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {m_frontWall->onKeyEvent(key, scancode, action, mode);}
 void BookStore::onCursorPositionEvent(double x, double y) {}

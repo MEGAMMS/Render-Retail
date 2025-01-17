@@ -47,6 +47,7 @@ void RenderRetail::update(float dt) {
     m_VP = projection * m_camera->getViewMatrix();
     m_elevator->update(dt);
     m_door->update(dt);
+    m_mall->update(dt);
 }
 
 void RenderRetail::render() {
