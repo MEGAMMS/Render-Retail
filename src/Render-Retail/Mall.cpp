@@ -9,7 +9,7 @@ Mall::Mall() {
     m_body = std::make_shared<Box>();
     m_body->setParent(std::shared_ptr<Object>(this));
     m_body->setPosition(glm::vec3(0));
-    m_body->setSize(glm::vec3(100.,20,60));
+    m_body->setSize(glm::vec3(110.,20,60));
     // m_body->setOrientation(glm::vec3(0)); 
     m_body->setTexture("assets/brick.png");
     m_body->setFaceTexture(Face::Down,"assets/test-textures/WoodFloor1.png",glm::vec2(2.6, 1) * glm::vec2(2.));
@@ -34,6 +34,9 @@ Mall::Mall() {
 
     m_departmentStore = std::make_shared<DepartmentStore>();
     m_departmentStore->setParent(std::shared_ptr<Object>(this));
+    m_departmentStore->setPosition(glm::vec3(109.9345,7.5,0.1));
+    m_departmentStore->setSize(glm::vec3(0.6,2,0.8));
+    m_departmentStore->setOrientation(glm::vec3(-1,0,0));
 
 }
 
@@ -43,7 +46,7 @@ void Mall::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm:
     m_clothingStore->render(mvp, lightPos, lightColor, viewPos);
     m_bookStore->render(mvp, lightPos, lightColor, viewPos);
     m_columns->render(mvp, lightPos, lightColor, viewPos);
+    m_departmentStore->render(mvp, lightPos, lightColor, viewPos);
 }
-void Mall::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {}
 void Mall::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {}
 void Mall::onCursorPositionEvent(double x, double y) {}

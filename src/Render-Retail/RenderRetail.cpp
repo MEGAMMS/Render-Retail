@@ -60,7 +60,7 @@ void RenderRetail::render() {
     // m_rock->render(m_VP, lightPos, lightColor, viewPos);
     // m_cone->render(m_VP, lightPos, lightColor, viewPos);
     // m_sphere->render(m_VP, lightPos, lightColor, viewPos);
-    m_elevator->render(m_VP, lightPos, lightColor, viewPos);
+    // m_elevator->render(m_VP, lightPos, lightColor, viewPos);
 }
 
 void RenderRetail::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
