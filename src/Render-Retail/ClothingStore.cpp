@@ -16,6 +16,13 @@ ClothingStore::ClothingStore() {
     m_room->setWallTexture(Wall::Left, "assets/textures/pbr/wall/albedo.png",glm::vec2(2.6,1)*glm::vec2(2.));
     m_room->setWallTexture(Wall::Up, "assets/test-textures/WoodFloor1.png",glm::vec2(2.6,1)*glm::vec2(2.));
 
+    m_frontWall = std::make_shared<FrontWall>();
+    m_frontWall->setParent(std::shared_ptr<Object>(this));
+    m_frontWall->setPosition(glm::vec3(0,0,10));
+    m_frontWall->setSize(glm::vec3(1.3, 1, 1));
+    m_frontWall->setOrientation(glm::vec3(0, 0, 1));
+    m_frontWall->setTexture("assets/textures/pbr/wall/albedo.png");
+
     m_desk = std::make_shared<Table>();
     m_desk->setParent(std::shared_ptr<Object>(this));
     m_desk->setPosition(glm::vec3(4.8, -4., 3.));
@@ -51,6 +58,7 @@ void ClothingStore::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightCo
     m_desk->render(mvp, lightPos, lightColor, viewPos);
     m_shelf->render(mvp, lightPos, lightColor, viewPos);
     m_lamp->render(mvp, lightPos, lightColor, viewPos);
+    m_frontWall->render(mvp, lightPos, lightColor, viewPos);
     for (const auto& cloth : m_clothes) {
         cloth->render(mvp, lightPos, lightColor, viewPos);
     }
