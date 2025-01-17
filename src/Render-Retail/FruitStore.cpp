@@ -16,6 +16,13 @@ FruitStore::FruitStore() {
     m_room->setWallTexture(Wall::Left, "assets/test-textures/Bricks075.png", glm::vec2(4) * glm::vec2(5, 1));
     m_room->setWallTexture(Wall::Up, "assets/test-textures/WoodFloor1.png", glm::vec2(4) * glm::vec2(5, 1));
 
+    m_frontWall = std::make_shared<FrontWall>();
+    m_frontWall->setParent(std::shared_ptr<Object>(this));
+    m_frontWall->setPosition(glm::vec3(0,0,20));
+    m_frontWall->setSize(glm::vec3(3, 1, 2));
+    m_frontWall->setOrientation(glm::vec3(0, 0, 1));
+    m_frontWall->setTexture("assets/test-textures/Bricks075.png");
+
     for (int i = 0; i < 9; i++) {
         auto box = std::make_shared<StoreWalls>();
         box->setParent(std::shared_ptr<Object>(this));
@@ -71,6 +78,7 @@ void FruitStore::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor
     m_desk->render(mvp, lightPos, lightColor, viewPos);
     m_shelf->render(mvp, lightPos, lightColor, viewPos);
     m_lamp->render(mvp, lightPos, lightColor, viewPos);
+     m_frontWall->render(mvp, lightPos, lightColor, viewPos);
     for (auto box : m_boxes) {
         box->render(mvp, lightPos, lightColor, viewPos);
     }

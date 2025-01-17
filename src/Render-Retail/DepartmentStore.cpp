@@ -16,6 +16,13 @@ DepartmentStore::DepartmentStore() {
     m_room->setWallTexture(Wall::Left, "assets/test-textures/default_brick.png", glm::vec2(4) * glm::vec2(5, 1));
     m_room->setWallTexture(Wall::Up, "assets/test-textures/default_brick.png", glm::vec2(4) * glm::vec2(5, 1));
 
+    m_frontWall = std::make_shared<FrontWall>();
+    m_frontWall->setParent(std::shared_ptr<Object>(this));
+    m_frontWall->setPosition(glm::vec3(0,0,30));
+    m_frontWall->setSize(glm::vec3(5, 1, 3));
+    m_frontWall->setOrientation(glm::vec3(0, 0, 1));
+    m_frontWall->setTexture("assets/test-textures/default_brick.png");
+
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 3; j++) {
             auto wardrobe = std::make_shared<Wardrobe>(3);
@@ -67,6 +74,7 @@ void DepartmentStore::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 light
     for (auto wardrobe : m_wardrobes) {
         wardrobe->render(mvp, lightPos, lightColor, viewPos);
     }
+     m_frontWall->render(mvp, lightPos, lightColor, viewPos);
     // for (auto game : m_games) {
     //     game->render(mvp, lightPos, lightColor, viewPos);
     // }

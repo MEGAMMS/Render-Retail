@@ -8,6 +8,7 @@
 #include "Render-Retail/Objects/Table.h"
 #include "Render-Retail/Objects/Wardrobe.h"
 #include "Render-Retail/Stores/StoreWalls.h"
+#include "Render-Retail/Stores/FrontWall.h"
 #include "core.h"
 
 class BookStore : public Object {
@@ -25,4 +26,5 @@ class BookStore : public Object {
     std::vector<std::shared_ptr<Lamp>> m_lamps;
     std::vector<std::shared_ptr<Wardrobe>> m_wardrobes;
     std::vector<std::shared_ptr<Books>> m_books;
+    std::shared_ptr<FrontWall> m_frontWall;
 };

@@ -17,6 +17,13 @@ BookStore::BookStore() {
     m_room->setWallTexture(Wall::Right, "assets/test-textures/Bricks092.png", glm::vec2(2.6, 1) * glm::vec2(2.));
     m_room->setWallTexture(Wall::Left, "assets/test-textures/Bricks092.png", glm::vec2(2.6, 1) * glm::vec2(2.));
 
+    m_frontWall = std::make_shared<FrontWall>();
+    m_frontWall->setParent(std::shared_ptr<Object>(this));
+    m_frontWall->setPosition(glm::vec3(0,0,13));
+    m_frontWall->setSize(glm::vec3(2.6, 1, 1.3));
+    m_frontWall->setOrientation(glm::vec3(0, 0, 1));
+    m_frontWall->setTexture("assets/test-textures/Bricks092.png");
+
     m_desk = std::make_shared<Table>();
     m_desk->setParent(std::shared_ptr<Object>(this));
     m_desk->setPosition(glm::vec3(5.5, -4., 4.));
@@ -75,6 +82,7 @@ BookStore::BookStore() {
 void BookStore::update(float dt) {}
 void BookStore::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos) {
     m_room->render(mvp, lightPos, lightColor, viewPos);
+     m_frontWall->render(mvp, lightPos, lightColor, viewPos);
     m_desk->render(mvp, lightPos, lightColor, viewPos);
     for (const auto& lamp : m_lamps) {
         lamp->render(mvp, lightPos, lightColor, viewPos);
