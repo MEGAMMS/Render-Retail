@@ -21,6 +21,7 @@ class Mall : public Object {
    private:
     std::shared_ptr<Box> m_body;
     std::shared_ptr<Box> m_storey2;
+    std::vector<std::shared_ptr<Box>> m_walls;
     std::shared_ptr<ClothingStore> m_clothingStore;
     std::shared_ptr<BookStore> m_bookStore;
     std::shared_ptr<Columns> m_columns;

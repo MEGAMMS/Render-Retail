@@ -19,10 +19,10 @@ FrontWall::FrontWall() {
     frontWall[0]->setSize(glm::vec3(2.5f, 11., 1.f));
 
     frontWall[1]->setPosition(glm::vec3(7.3f, -10 / 2, 0.0f));
-    frontWall[1]->setSize(glm::vec3(2.5f, 11., 1.f));
+    frontWall[1]->setSize(glm::vec3(2.7f, 11., 1.f));
 
     frontWall[2]->setPosition(glm::vec3(2.50f, 3.5, 0.0f));
-    frontWall[2]->setSize(glm::vec3(4.8,2.5, 1.f));
+    frontWall[2]->setSize(glm::vec3(4.9,2.5, 1.f));
 
     for (int i = 0; i < 3; ++i) {
         frontWall[i]->setTexture("assets/brick.png");

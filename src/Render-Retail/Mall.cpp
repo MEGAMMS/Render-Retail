@@ -32,11 +32,22 @@ Mall::Mall() {
     m_storey2->setFaceTexture(Face::Down, "assets/test-textures/WoodFloor1.png", glm::vec2(2.6, 1) * glm::vec2(2.));
     m_storey2->setFaceTexture(Face::Up, "assets/test-textures/WoodFloor1.png", glm::vec2(2.6, 1) * glm::vec2(2.));
 
+    for (int i = 0; i <2; i++) {
+        auto m_wall = std::make_shared<Box>();
+        m_wall->setParent(std::shared_ptr<Object>(this));
+        m_wall->setSize(glm::vec3(5, 20, 5));
+        m_wall->setTexture("assets/test-textures/WoodFloor1.png");
+        m_walls.push_back(m_wall);
+    }
+
     m_clothingStore = std::make_shared<ClothingStore>();
     m_clothingStore->setParent(std::shared_ptr<Object>(this));
     m_clothingStore->setPosition(glm::vec3(0.1, 9, 29));
     m_clothingStore->setSize(glm::vec3(2.2, 1.8, 1.5));
     m_clothingStore->setOrientation(glm::vec3(1, 0, 0));
+
+    m_walls[0]->setOrientation(glm::vec3(1, 0, 0));
+    m_walls[1]->setPosition(glm::vec3(0.1, 9, 100));
 
     m_bookStore = std::make_shared<BookStore>();
     m_bookStore->setParent(std::shared_ptr<Object>(this));
@@ -78,6 +89,7 @@ void Mall::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm:
     m_departmentStore->render(mvp, lightPos, lightColor, viewPos);
     m_fruitStore->render(mvp, lightPos, lightColor, viewPos);
     m_frontWall->render(mvp, lightPos, lightColor, viewPos);
+    m_walls[0]->render(mvp, lightPos, lightColor, viewPos);
 }
 void Mall::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
     m_fruitStore->onKeyEvent(key, scancode, action, mode);
