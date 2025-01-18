@@ -26,7 +26,7 @@ RenderRetail::RenderRetail() {
     m_mall->setPosition(glm::vec3(10.4907,0,0.0313));
 
     for (int i = 0; i < 10; i++) {
-        auto tree = std::make_shared<Model>("assets/objects/fur_tree/scene.gltf");
+        auto tree = std::make_shared<::Model>("assets/objects/fur_tree/scene.gltf");
         tree->setPosition(glm::vec3(6.65025,0.,21.9676-(i*3)));
         tree->setOrientation(glm::vec3(1, 0, 0));
         tree->setSize(glm::vec3(0.01));
@@ -35,7 +35,7 @@ RenderRetail::RenderRetail() {
     }
 
     for (int i = 0; i < 10; i++) {
-        auto tree = std::make_shared<Model>("assets/objects/fur_tree/scene.gltf");
+        auto tree = std::make_shared<::Model>("assets/objects/fur_tree/scene.gltf");
         tree->setPosition(glm::vec3(37.9363,0.,21.9676-(i*3)));
         tree->setOrientation(glm::vec3(1, 0, 0));
         tree->setSize(glm::vec3(0.01));
