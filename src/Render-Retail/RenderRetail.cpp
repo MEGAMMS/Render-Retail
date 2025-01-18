@@ -34,12 +34,9 @@ RenderRetail::RenderRetail() {
     m_street->setOrientation(glm::vec3(1, 0, 0));
     m_street->setPosition(glm::vec3(-1.9123,-.184925,22.4586));
     m_street->setTexture("assets/test-textures/Road007.png");
-
-    m_elevator = std::make_shared<Elevator>();
+    
     m_door = std::make_shared<Door>();
-    m_elevator->setPosition(glm::vec3(10, 0, 5));
-    m_elevator->setDoorTexture("assets/textures/lift.png");
-    m_elevator->setBodyTexture("assets/textures/titanium.png");
+
 }
 void RenderRetail::update(float dt) {
     m_cube->update(dt);
@@ -47,7 +44,6 @@ void RenderRetail::update(float dt) {
     std::cout << m_camera->getPosition().x << "," << m_camera->getPosition().y << "," << m_camera->getPosition().z
               << std::endl;
     m_VP = projection * m_camera->getViewMatrix();
-    m_elevator->update(dt);
     m_door->update(dt);
     m_mall->update(dt);
 }
@@ -65,14 +61,13 @@ void RenderRetail::render() {
     // m_rock->render(m_VP, lightPos, lightColor, viewPos);
     // m_cone->render(m_VP, lightPos, lightColor, viewPos);
     // m_sphere->render(m_VP, lightPos, lightColor, viewPos);
-    m_elevator->render(m_VP, lightPos, lightColor, viewPos);
+    
     m_door->render(m_VP, lightPos, lightColor, viewPos);
 }
 
 void RenderRetail::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
     m_camera->onKeyEvent(key, scancode, action, mode);
     m_mall->onKeyEvent(key, scancode, action, mode);
-    m_elevator->onKeyEvent(key, scancode, action, mode);
     m_door->onKeyEvent(key, scancode, action, mode);
     bool pressed = action == GLFW_PRESS;
 }
