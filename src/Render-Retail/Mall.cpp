@@ -14,6 +14,9 @@ Mall::Mall() {
     m_body->setTexture("assets/brick.png");
     m_body->setFaceTexture(Face::Down, "assets/test-textures/WoodFloor1.png", glm::vec2(2.6, 1) * glm::vec2(2.));
     m_body->setFaceTexture(Face::Up, "assets/test-textures/WoodFloor1.png", glm::vec2(2.6, 1) * glm::vec2(2.));
+    m_body->setFaceTexture(Face::Front, "assets/test-textures/glass.png", glm::vec2(2.6, 1) * glm::vec2(2.));
+    m_body->setFaceTexture(Face::Right, "assets/test-textures/glass.png", glm::vec2(2.6, 1) * glm::vec2(2.));
+    m_body->setFaceTexture(Face::Left, "assets/test-textures/glass.png", glm::vec2(2.6, 1) * glm::vec2(2.));
     m_body->setFaceVisibility(Face::Back, 0);
 
     m_frontWall = std::make_shared<FrontWall>();

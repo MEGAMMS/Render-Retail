@@ -15,10 +15,20 @@ RenderRetail::RenderRetail() {
 
     m_mall = std::make_shared<Mall>();
     m_mall->setSize(glm::vec3(0.2));
+    m_mall->setPosition(glm::vec3(10.4907,0,0.0313));
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 10; i++) {
         auto tree = std::make_shared<Model>("assets/objects/fur_tree/scene.gltf");
-        tree->setPosition(glm::vec3(5 - (5 * i), -0.2, -1));
+        tree->setPosition(glm::vec3(6.65025,0.,21.9676-(i*3)));
+        tree->setOrientation(glm::vec3(1, 0, 0));
+        tree->setSize(glm::vec3(0.01));
+
+        m_trees.push_back(tree);
+    }
+
+    for (int i = 0; i < 10; i++) {
+        auto tree = std::make_shared<Model>("assets/objects/fur_tree/scene.gltf");
+        tree->setPosition(glm::vec3(37.9363,0.,21.9676-(i*3)));
         tree->setOrientation(glm::vec3(1, 0, 0));
         tree->setSize(glm::vec3(0.01));
 
@@ -32,7 +42,7 @@ RenderRetail::RenderRetail() {
     m_plane->setPosition(glm::vec3(0));
 
     m_grass = std::make_shared<Box>();
-    m_grass->setSize(glm::vec3(40,0.2,44));
+    m_grass->setSize(glm::vec3(50,0.2,44));
     m_grass->setOrientation(glm::vec3(1, 0, 0));
     m_grass->setPosition(glm::vec3(-1.9123,-0.211544,26.7459));
     m_grass->setTexture("assets/test-textures/Grass001.png");
@@ -40,7 +50,7 @@ RenderRetail::RenderRetail() {
     m_street = std::make_shared<Box>();
     m_street->setSize(glm::vec3(3,0.2,44));
     m_street->setOrientation(glm::vec3(1, 0, 0));
-    m_street->setPosition(glm::vec3(-1.9123,-.184925,22.4586));
+    m_street->setPosition(glm::vec3(-1.9123,-.184925,26.4586));
     m_street->setTexture("assets/test-textures/Road007.png");
 
     m_elevator = std::make_shared<Elevator>();
@@ -65,14 +75,14 @@ void RenderRetail::render() {
     m_cube->render(projection * m_camera->getViewMatrix());
 
     m_mall->render(m_VP, lightPos, lightColor, viewPos);
-    // m_plane->render(m_VP, lightPos, lightColor, viewPos);
+
     m_street->render(m_VP, lightPos, lightColor, viewPos);
     m_grass->render(m_VP, lightPos, lightColor, viewPos);
-    // m_rock->render(m_VP, lightPos, lightColor, viewPos);
-    // m_cone->render(m_VP, lightPos, lightColor, viewPos);
-    // m_sphere->render(m_VP, lightPos, lightColor, viewPos);
+
     m_elevator->render(m_VP, lightPos, lightColor, viewPos);
-    m_door->render(m_VP, lightPos, lightColor, viewPos);
+    for (const auto& tree : m_trees) {
+        tree->render(m_VP, lightPos, lightColor, viewPos);
+    }
 }
 
 void RenderRetail::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
