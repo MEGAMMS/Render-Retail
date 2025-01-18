@@ -3,8 +3,8 @@
 #include "Application/Scene.h"
 #include "Challenges/Cubes/LightCube.h"
 #include "Objects/Cone.h"
-#include "Objects/Sphere.h"
 #include "Objects/Model.h"
+#include "Objects/Sphere.h"
 #include "Render-Retail/Mall.h"
 #include "Render-Retail/Objects/Door.h"
 #include "Render-Retail/Objects/Elevator.h"
@@ -19,7 +19,7 @@ public:
     void onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) override;
     void onCursorPositionEvent(double x, double y) override;
 
-private:
+   private:
     std::shared_ptr<Camera> m_camera;
     std::shared_ptr<LightCube> m_cube;
     std::shared_ptr<Mall> m_mall;
@@ -29,7 +29,6 @@ private:
     std::shared_ptr<::Model> m_plane;
     std::shared_ptr<Box> m_street;
     std::shared_ptr<Box> m_grass;
-    std::shared_ptr<Elevator> m_elevator;
     std::shared_ptr<Door> m_door;
 
     std::vector<std::shared_ptr<::Model>> m_trees;

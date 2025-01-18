@@ -12,8 +12,8 @@ Mall::Mall() {
     m_body->setSize(glm::vec3(120., 20, 90));
     // m_body->setOrientation(glm::vec3(0));
     m_body->setTexture("assets/brick.png");
-    m_body->setFaceTexture(Face::Down, "assets/test-textures/WoodFloor1.png", glm::vec2(2.6, 1) * glm::vec2(2.));
-    m_body->setFaceTexture(Face::Up, "assets/test-textures/WoodFloor1.png", glm::vec2(2.6, 1) * glm::vec2(2.));
+    m_body->setFaceTexture(Face::Down, "assets/textures/marble.png", glm::vec2(2.6, 1) * glm::vec2(2.));
+    m_body->setFaceTexture(Face::Up, "assets/textures/marble.png", glm::vec2(2.6, 1) * glm::vec2(2.));
     m_body->setFaceTexture(Face::Front, "assets/test-textures/glass.png");
     m_body->setFaceTexture(Face::Right, "assets/test-textures/glass.png");
     m_body->setFaceTexture(Face::Left, "assets/test-textures/glass.png");
@@ -35,7 +35,7 @@ Mall::Mall() {
     m_storey2->setFaceTexture(Face::Down, "assets/test-textures/WoodFloor1.png", glm::vec2(2.6, 1) * glm::vec2(2.));
     m_storey2->setFaceTexture(Face::Up, "assets/test-textures/WoodFloor1.png", glm::vec2(2.6, 1) * glm::vec2(2.));
 
-    for (int i = 0; i <2; i++) {
+    for (int i = 0; i < 2; i++) {
         auto m_wall = std::make_shared<Box>();
         m_wall->setParent(std::shared_ptr<Object>(this));
         m_wall->setSize(glm::vec3(9, 20,16));
@@ -61,7 +61,7 @@ Mall::Mall() {
     m_columns = std::make_shared<Columns>();
     m_columns->setParent(std::shared_ptr<Object>(this));
     m_columns->setPosition(glm::vec3(34, 0, 15));
-    m_columns->setSize(glm::vec3(1,1,1.5));
+    m_columns->setSize(glm::vec3(1, 1, 1.5));
 
     m_departmentStore = std::make_shared<DepartmentStore>();
     m_departmentStore->setParent(std::shared_ptr<Object>(this));
@@ -78,6 +78,19 @@ Mall::Mall() {
     m_fruitStore->setPosition(glm::vec3(119.9345, 8, 59.9));
     m_fruitStore->setSize(glm::vec3(1, 2, 1.5));
     m_fruitStore->setOrientation(glm::vec3(-1, 0, 0));
+
+    m_elevator = std::make_shared<Elevator>();
+    m_elevator->setParent(std::shared_ptr<Object>(this));
+    m_elevator->setPosition(glm::vec3(50, -0.2, 4));
+    m_elevator->setSize(glm::vec3(6));
+    m_elevator->setDoorTexture("assets/textures/lift.png");
+    m_elevator->setBodyTexture("assets/textures/titanium.png");
+
+    m_elevatorSpace = std::make_shared<StoreWalls>();
+    m_elevatorSpace->setParent(std::shared_ptr<Object>(this));
+    m_elevatorSpace->setPosition(glm::vec3(49.5, 7, 6));
+    m_elevatorSpace->setSize(glm::vec3(0.8, 5, 1));
+    m_elevatorSpace->setTexture("assets/textures/titanium.png");
 }
 
 void Mall::update(float dt) {
@@ -86,6 +99,8 @@ void Mall::update(float dt) {
     m_departmentStore->update(dt);
     m_bookStore->update(dt);
     m_frontWall->update(dt);
+    m_elevator->update(dt);
+    m_elevatorSpace->update(dt);
 }
 void Mall::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos) {
     m_body->render(mvp, lightPos, lightColor, viewPos);
@@ -97,6 +112,8 @@ void Mall::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm:
     m_fruitStore->render(mvp, lightPos, lightColor, viewPos);
     m_frontWall->render(mvp, lightPos, lightColor, viewPos);
     m_walls[0]->render(mvp, lightPos, lightColor, viewPos);
+    m_elevator->render(mvp, lightPos, lightColor, viewPos);
+    m_elevatorSpace->render(mvp, lightPos, lightColor, viewPos);
     m_walls[1]->render(mvp, lightPos, lightColor, viewPos);
 }
 void Mall::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
@@ -105,6 +122,9 @@ void Mall::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mod
     m_departmentStore->onKeyEvent(key, scancode, action, mode);
     m_bookStore->onKeyEvent(key, scancode, action, mode);
     m_frontWall->onKeyEvent(key, scancode, action, mode);
+    m_elevator->onKeyEvent(key, scancode, action, mode);
+    m_elevatorSpace->onKeyEvent(key, scancode, action, mode);
+
     bool pressed = action == GLFW_PRESS;
 }
 void Mall::onCursorPositionEvent(double x, double y) {}

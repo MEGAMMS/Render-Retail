@@ -11,7 +11,7 @@ Columns::Columns() {
         m_Column->setParent(std::shared_ptr<Object>(this));
         m_Column->setOrientation(glm::vec3(0., 0., 1));
         m_Column->setSize(glm::vec3(5, 20, 5));
-        m_Column->setTexture("assets/test-textures/WoodFloor1.png");
+        m_Column->setTexture("assets/textures/marble.png");
         m_Columns.push_back(m_Column);
     }
     float space=32;
