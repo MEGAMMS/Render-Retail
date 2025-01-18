@@ -30,4 +30,5 @@ class Mall : public Object {
     std::shared_ptr<FruitStore> m_fruitStore;
     std::shared_ptr<FrontWall> m_frontWall;
     std::shared_ptr<Elevator> m_elevator;
+    std::shared_ptr<StoreWalls> m_elevatorSpace;
 };
