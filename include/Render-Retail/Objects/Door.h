@@ -31,6 +31,7 @@ class Door : public Object {
     void update(float dt) override;
     void render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos);
     void onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) override;
+    void setTexture(const std::string& texturePath, glm::vec2 textureScale = glm::vec2(1.f));
     void onCursorPositionEvent(double x, double y) override;
 
    private:

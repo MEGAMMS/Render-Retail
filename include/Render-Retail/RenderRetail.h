@@ -12,8 +12,8 @@
 #include "core.h"
 #include "core/Camera.h"
 
-class RenderRetail : public Scene {
-   public:
+class RenderRetail : public ::Scene {
+public:
     RenderRetail();
     void update(float dt) override;
     void render() override;
@@ -26,13 +26,13 @@ class RenderRetail : public Scene {
     std::shared_ptr<Light> m_light;
     std::shared_ptr<Mall> m_mall;
     std::shared_ptr<Cone> m_cone;
-    std::shared_ptr<Sphere> m_sphere;
-    std::shared_ptr<Model> m_rock;
-    std::shared_ptr<Model> m_plane;
+    std::shared_ptr<::Sphere> m_sphere;
+    std::shared_ptr<::Model> m_rock;
+    std::shared_ptr<::Model> m_plane;
     std::shared_ptr<Box> m_street;
     std::shared_ptr<Box> m_grass;
-    std::shared_ptr<Elevator> m_elevator;
     std::shared_ptr<Door> m_door;
 
+    std::vector<std::shared_ptr<::Model>> m_trees;
     glm::mat4 m_VP = glm::mat4(1.);
 };
