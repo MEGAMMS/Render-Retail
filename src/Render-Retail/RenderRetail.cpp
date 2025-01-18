@@ -7,7 +7,15 @@
 #include "Render-Retail/Objects/Door.h"
 #include "glm/detail/type_vec.hpp"
 
+#include "External/include/Globals.hpp"
+#include "External/include/Textures.hpp"
+#include "External/include/Scene.hpp"
+
 RenderRetail::RenderRetail() {
+// Blending
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     m_camera = std::make_shared<Camera>();
     m_camera->setPosition(glm::vec3(12.3597, 2.82287, 35.3499));
 
@@ -36,7 +44,7 @@ RenderRetail::RenderRetail() {
     }
 
 
-    m_plane = std::make_shared<Model>("assets/objects/chêne/tree 1.obj");
+    m_plane = std::make_shared<::Model>("assets/objects/chêne/tree 1.obj");
     m_plane->setSize(glm::vec3(0.13));
     m_plane->setOrientation(glm::vec3(0, 1, 0));
     m_plane->setPosition(glm::vec3(0));
@@ -56,6 +64,10 @@ RenderRetail::RenderRetail() {
     m_elevator = std::make_shared<Elevator>();
     m_door = std::make_shared<Door>();
     m_elevator->setPosition(glm::vec3(10, 0, 5));
+
+    workspace::Shaders::compile();
+    workspace::Textures::load();
+    workspace::Scene::prepare();
 }
 void RenderRetail::update(float dt) {
     m_cube->update(dt);
@@ -72,6 +84,7 @@ void RenderRetail::render() {
     auto lightPos = m_cube->getLightPos();
     auto lightColor = m_cube->getLightColor();
     auto viewPos = m_camera->getPosition();
+
     m_cube->render(projection * m_camera->getViewMatrix());
 
     m_mall->render(m_VP, lightPos, lightColor, viewPos);
@@ -83,6 +96,8 @@ void RenderRetail::render() {
     for (const auto& tree : m_trees) {
         tree->render(m_VP, lightPos, lightColor, viewPos);
     }
+
+    workspace::Scene::draw(mat4(1),m_camera->getViewMatrix(),projection,m_camera->getPosition());
 }
 
 void RenderRetail::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) {
