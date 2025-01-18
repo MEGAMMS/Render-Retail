@@ -9,7 +9,7 @@ Mall::Mall() {
     m_body = std::make_shared<Box>();
     m_body->setParent(std::shared_ptr<Object>(this));
     m_body->setPosition(glm::vec3(0));
-    m_body->setSize(glm::vec3(110., 20, 60));
+    m_body->setSize(glm::vec3(110., 20, 90));
     // m_body->setOrientation(glm::vec3(0));
     m_body->setTexture("assets/brick.png");
     m_body->setFaceTexture(Face::Down, "assets/test-textures/WoodFloor1.png", glm::vec2(2.6, 1) * glm::vec2(2.));
@@ -18,7 +18,7 @@ Mall::Mall() {
 
     m_frontWall = std::make_shared<FrontWall>();
     m_frontWall->setParent(std::shared_ptr<Object>(this));
-    m_frontWall->setPosition(glm::vec3(0, 10, 60));
+    m_frontWall->setPosition(glm::vec3(0, 10, 90));
     m_frontWall->setSize(glm::vec3(11., 2, 6));
     m_frontWall->setOrientation(glm::vec3(0, 0, 1));
     // m_frontWall->setTexture("assets/textures/pbr/wall/albedo.png");
@@ -26,7 +26,7 @@ Mall::Mall() {
     m_storey2 = std::make_shared<Box>();
     m_storey2->setParent(std::shared_ptr<Object>(this));
     m_storey2->setPosition(glm::vec3(0, 20.1, 0));
-    m_storey2->setSize(glm::vec3(110., 20, 60));
+    m_storey2->setSize(glm::vec3(110., 20, 90));
     // m_storey2->setOrientation(glm::vec3(0));
     m_storey2->setTexture("assets/brick.png");
     m_storey2->setFaceTexture(Face::Down, "assets/test-textures/WoodFloor1.png", glm::vec2(2.6, 1) * glm::vec2(2.));
@@ -34,31 +34,31 @@ Mall::Mall() {
 
     m_clothingStore = std::make_shared<ClothingStore>();
     m_clothingStore->setParent(std::shared_ptr<Object>(this));
-    m_clothingStore->setPosition(glm::vec3(0.1, 9, 21));
-    m_clothingStore->setSize(glm::vec3(1.6, 1.8, 1.3));
+    m_clothingStore->setPosition(glm::vec3(0.1, 9, 29));
+    m_clothingStore->setSize(glm::vec3(2.2, 1.8, 1.5));
     m_clothingStore->setOrientation(glm::vec3(1, 0, 0));
 
     m_bookStore = std::make_shared<BookStore>();
     m_bookStore->setParent(std::shared_ptr<Object>(this));
     m_bookStore->setOrientation(glm::vec3(1, 0, 0));
-    m_bookStore->setSize(glm::vec3(1.5, 1.8, 1.));
-    m_bookStore->setPosition(glm::vec3(0.1, 9, 60));
+    m_bookStore->setSize(glm::vec3(2, 1.8, 1.2));
+    m_bookStore->setPosition(glm::vec3(0.1, 9, 90));
 
     m_columns = std::make_shared<Columns>();
     m_columns->setParent(std::shared_ptr<Object>(this));
-    m_columns->setPosition(glm::vec3(34, 0, 11));
-    m_columns->setSize(glm::vec3(1));
+    m_columns->setPosition(glm::vec3(34, 0, 15));
+    m_columns->setSize(glm::vec3(1,1,1.5));
 
     m_departmentStore = std::make_shared<DepartmentStore>();
     m_departmentStore->setParent(std::shared_ptr<Object>(this));
     m_departmentStore->setPosition(glm::vec3(109.9345, 8, 0.1));
-    m_departmentStore->setSize(glm::vec3(0.6, 2, 0.8));
+    m_departmentStore->setSize(glm::vec3(1, 2, 1));
     m_departmentStore->setOrientation(glm::vec3(-1, 0, 0));
 
     m_fruitStore = std::make_shared<FruitStore>();
     m_fruitStore->setParent(std::shared_ptr<Object>(this));
-    m_fruitStore->setPosition(glm::vec3(109.9345, 8, 29.9));
-    m_fruitStore->setSize(glm::vec3(1, 2, 1.2));
+    m_fruitStore->setPosition(glm::vec3(109.9345, 8, 59.9));
+    m_fruitStore->setSize(glm::vec3(1, 2, 1.5));
     m_fruitStore->setOrientation(glm::vec3(-1, 0, 0));
 }
 
