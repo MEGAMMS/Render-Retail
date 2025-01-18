@@ -47,10 +47,10 @@ RenderRetail::RenderRetail() {
     }
 
 
-    m_plane = std::make_shared<::Model>("assets/objects/chêne/tree 1.obj");
-    m_plane->setSize(glm::vec3(0.13));
-    m_plane->setOrientation(glm::vec3(0, 1, 0));
-    m_plane->setPosition(glm::vec3(0));
+    // m_plane = std::make_shared<::Model>("assets/objects/chêne/tree 1.obj");
+    // m_plane->setSize(glm::vec3(0.13));
+    // m_plane->setOrientation(glm::vec3(0, 1, 0));
+    // m_plane->setPosition(glm::vec3(0));
 
     m_grass = std::make_shared<Box>();
     m_grass->setSize(glm::vec3(50,0.2,44));

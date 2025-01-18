@@ -43,13 +43,13 @@ FruitStore::FruitStore() {
         m_legs.push_back(leg);
 
         // fruits
-        auto fruit = std::make_shared<Model>("assets/objects/banana/scene.gltf");
-        fruit->setParent(std::shared_ptr<Object>(this));
-        fruit->setSize(glm::vec3(0.07));
-        fruit->setOrientation(glm::vec3(0, 1, 1));
-        fruit->setPosition(glm::vec3((i >= 5) ? 3.6 - (0.275 * i) : 2.5, -0.07, (i >= 5) ? 0.5 : 1.6 - (0.275 * i)));
+        // auto fruit = std::make_shared<Model>("assets/objects/banana/scene.gltf");
+        // fruit->setParent(std::shared_ptr<Object>(this));
+        // fruit->setSize(glm::vec3(0.07));
+        // fruit->setOrientation(glm::vec3(0, 1, 1));
+        // fruit->setPosition(glm::vec3((i >= 5) ? 3.6 - (0.275 * i) : 2.5, -0.07, (i >= 5) ? 0.5 : 1.6 - (0.275 * i)));
 
-        m_fruits.push_back(fruit);
+        // m_fruits.push_back(fruit);
     }
 
     m_desk = std::make_shared<Table>();
