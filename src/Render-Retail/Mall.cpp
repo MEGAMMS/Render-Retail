@@ -14,9 +14,9 @@ Mall::Mall() {
     m_body->setTexture("assets/brick.png");
     m_body->setFaceTexture(Face::Down, "assets/test-textures/WoodFloor1.png", glm::vec2(2.6, 1) * glm::vec2(2.));
     m_body->setFaceTexture(Face::Up, "assets/test-textures/WoodFloor1.png", glm::vec2(2.6, 1) * glm::vec2(2.));
-    m_body->setFaceTexture(Face::Front, "assets/test-textures/glass.png", glm::vec2(2.6, 1) * glm::vec2(2.));
-    m_body->setFaceTexture(Face::Right, "assets/test-textures/glass.png", glm::vec2(2.6, 1) * glm::vec2(2.));
-    m_body->setFaceTexture(Face::Left, "assets/test-textures/glass.png", glm::vec2(2.6, 1) * glm::vec2(2.));
+    m_body->setFaceTexture(Face::Front, "assets/test-textures/glass.png");
+    m_body->setFaceTexture(Face::Right, "assets/test-textures/glass.png");
+    m_body->setFaceTexture(Face::Left, "assets/test-textures/glass.png");
     m_body->setFaceVisibility(Face::Back, 0);
 
     m_frontWall = std::make_shared<FrontWall>();
@@ -24,14 +24,14 @@ Mall::Mall() {
     m_frontWall->setPosition(glm::vec3(0, 10, 90));
     m_frontWall->setSize(glm::vec3(12., 2, 6));
     m_frontWall->setOrientation(glm::vec3(0, 0, 1));
-    // m_frontWall->setTexture("assets/textures/pbr/wall/albedo.png");
+    m_frontWall->setTexture("assets/test-textures/glass.png");
 
     m_storey2 = std::make_shared<Box>();
     m_storey2->setParent(std::shared_ptr<Object>(this));
     m_storey2->setPosition(glm::vec3(0, 20.1, 0));
     m_storey2->setSize(glm::vec3(120., 20, 90));
     // m_storey2->setOrientation(glm::vec3(0));
-    m_storey2->setTexture("assets/brick.png");
+    m_storey2->setTexture("assets/test-textures/glass.png");
     m_storey2->setFaceTexture(Face::Down, "assets/test-textures/WoodFloor1.png", glm::vec2(2.6, 1) * glm::vec2(2.));
     m_storey2->setFaceTexture(Face::Up, "assets/test-textures/WoodFloor1.png", glm::vec2(2.6, 1) * glm::vec2(2.));
 
