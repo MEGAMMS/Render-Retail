@@ -31,6 +31,7 @@ private:
     std::shared_ptr<Box> m_grass;
     std::shared_ptr<Elevator> m_elevator;
     std::shared_ptr<Door> m_door;
-
+    
+    std::vector<std::shared_ptr<Model>> m_trees;
     glm::mat4 m_VP = glm::mat4(1.);
 };

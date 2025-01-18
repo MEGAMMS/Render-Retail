@@ -16,7 +16,15 @@ RenderRetail::RenderRetail() {
     m_mall = std::make_shared<Mall>();
     m_mall->setSize(glm::vec3(0.2));
 
-    m_rock = std::make_shared<Model>("assets/objects/rock/rock.obj");
+    for (int i = 0; i < 5; i++) {
+        auto tree = std::make_shared<Model>("assets/objects/fur_tree/scene.gltf");
+        tree->setPosition(glm::vec3(5 - (5 * i), -0.2, -1));
+        tree->setOrientation(glm::vec3(1, 0, 0));
+        tree->setSize(glm::vec3(0.01));
+
+        m_trees.push_back(tree);
+    }
+
 
     m_plane = std::make_shared<Model>("assets/objects/chêne/tree 1.obj");
     m_plane->setSize(glm::vec3(0.13));
