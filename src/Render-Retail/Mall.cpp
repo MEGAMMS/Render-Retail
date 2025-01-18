@@ -2,10 +2,13 @@
 
 #include <memory>
 
+#include "Objects/Light.h"
 #include "Objects/Object.h"
 #include "glm/detail/type_vec.hpp"
 
 Mall::Mall() {
+    m_light = std::make_shared<Light>(glm::vec3(12, 90, 7), glm::vec3(1));
+
     m_body = std::make_shared<Box>();
     m_body->setParent(std::shared_ptr<Object>(this));
     m_body->setPosition(glm::vec3(0));
@@ -32,7 +35,7 @@ Mall::Mall() {
     m_storey2->setFaceTexture(Face::Down, "assets/test-textures/WoodFloor1.png", glm::vec2(2.6, 1) * glm::vec2(2.));
     m_storey2->setFaceTexture(Face::Up, "assets/test-textures/WoodFloor1.png", glm::vec2(2.6, 1) * glm::vec2(2.));
 
-    for (int i = 0; i <2; i++) {
+    for (int i = 0; i < 2; i++) {
         auto m_wall = std::make_shared<Box>();
         m_wall->setParent(std::shared_ptr<Object>(this));
         m_wall->setSize(glm::vec3(5, 20, 5));
@@ -58,7 +61,7 @@ Mall::Mall() {
     m_columns = std::make_shared<Columns>();
     m_columns->setParent(std::shared_ptr<Object>(this));
     m_columns->setPosition(glm::vec3(34, 0, 15));
-    m_columns->setSize(glm::vec3(1,1,1.5));
+    m_columns->setSize(glm::vec3(1, 1, 1.5));
 
     m_departmentStore = std::make_shared<DepartmentStore>();
     m_departmentStore->setParent(std::shared_ptr<Object>(this));
@@ -74,6 +77,7 @@ Mall::Mall() {
 }
 
 void Mall::update(float dt) {
+    m_light->update(dt);
     m_fruitStore->update(dt);
     m_clothingStore->update(dt);
     m_departmentStore->update(dt);
@@ -81,6 +85,11 @@ void Mall::update(float dt) {
     m_frontWall->update(dt);
 }
 void Mall::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos) {
+    m_light->render(mvp);
+    lightPos = m_light->getLightPos();
+    lightColor = m_light->getLightColor();
+    viewPos = m_light->position;
+
     m_body->render(mvp, lightPos, lightColor, viewPos);
     m_storey2->render(mvp, lightPos, lightColor, viewPos);
     m_clothingStore->render(mvp, lightPos, lightColor, viewPos);
