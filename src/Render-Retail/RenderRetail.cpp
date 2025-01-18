@@ -38,6 +38,8 @@ RenderRetail::RenderRetail() {
     m_elevator = std::make_shared<Elevator>();
     m_door = std::make_shared<Door>();
     m_elevator->setPosition(glm::vec3(10, 0, 5));
+    m_elevator->setDoorTexture("assets/textures/lift.png");
+    m_elevator->setBodyTexture("assets/textures/titanium.png");
 }
 void RenderRetail::update(float dt) {
     m_cube->update(dt);

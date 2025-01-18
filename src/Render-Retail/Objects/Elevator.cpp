@@ -31,4 +31,11 @@ void Elevator::onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t
     if (key == GLFW_KEY_U and pressed) status.chagneStatus();
     m_door->onKeyEvent(key, scancode, action, mode);
 }
+void Elevator::setDoorTexture(const std::string& texturePath, glm::vec2 textureScale) {
+    m_door->setTexture(texturePath, textureScale);
+}
+
+void Elevator::setBodyTexture(const std::string& texturePath, glm::vec2 textureScale) {
+    m_body->setTexture(texturePath, textureScale);
+}
 void Elevator::onCursorPositionEvent(double x, double y) {}
