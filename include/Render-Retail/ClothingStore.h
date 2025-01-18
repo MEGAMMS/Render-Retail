@@ -22,6 +22,7 @@ class ClothingStore : public Object {
     void onCursorPositionEvent(double x, double y) override;
 
    private:
+   
     std::shared_ptr<StoreWalls> m_room;
     std::shared_ptr<Table> m_desk;
     std::shared_ptr<Shelves> m_shelf;

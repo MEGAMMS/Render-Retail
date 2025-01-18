@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Objects/Box.h"
+#include "Objects/Light.h"
 #include "Objects/Object.h"
 #include "Render-Retail/BookStore.h"
 #include "Render-Retail/ClothingStore.h"
@@ -20,6 +21,7 @@ class Mall : public Object {
     void onCursorPositionEvent(double x, double y) override;
 
    private:
+    std::shared_ptr<Light> m_light;
     std::shared_ptr<Box> m_body;
     std::shared_ptr<Box> m_storey2;
     std::vector<std::shared_ptr<Box>> m_walls;
