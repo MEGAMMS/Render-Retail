@@ -8,3 +8,4 @@ assets/objects
 compile_commands.json
 lib/assimp
 assets/objects
+assets/external
