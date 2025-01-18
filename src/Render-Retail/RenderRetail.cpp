@@ -37,7 +37,7 @@ RenderRetail::RenderRetail() {
 
     m_elevator = std::make_shared<Elevator>();
     m_door = std::make_shared<Door>();
-    m_elevator->setPosition(glm::vec3(170, 0, 1));
+    m_elevator->setPosition(glm::vec3(10, 0, 5));
 }
 void RenderRetail::update(float dt) {
     m_cube->update(dt);
