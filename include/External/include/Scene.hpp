@@ -229,7 +229,7 @@ namespace workspace {
 
 		static void draw(mat4 model , mat4 view , mat4 perspect , vec3 cameraPos)
 		{
-			Scene::model = model * translate(mat4(1),vec3(28,4.25,16)) * scale(mat4(1),vec3(0.25)) * rotate(mat4(1),radians(90.0f),vec3(0,1,0));
+			Scene::model = model * translate(mat4(1),vec3(28,4.3,16)) * scale(mat4(1),vec3(0.25)) * rotate(mat4(1),radians(90.0f),vec3(0,1,0));
 			Scene::view = view;
 			Scene::perspect = perspect;
 			Scene::cameraPos = cameraPos;
