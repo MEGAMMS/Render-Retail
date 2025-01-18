@@ -21,7 +21,7 @@ class StoreWalls : public Object
         void onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) override;
         void onCursorPositionEvent(double x, double y) override;
 
-        void setWallTexture(Wall wall, const std::string& texturePath);
+        void setWallTexture(Wall wall, const std::string& texturePath,glm::vec2 textureScale = glm::vec2(1.f));
         void setTexture(const std::string& texturePath);
     private:
         std::vector<std::shared_ptr<Box>>frontWall;

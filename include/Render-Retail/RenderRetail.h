@@ -26,6 +26,9 @@ private:
     std::shared_ptr<Cone> m_cone;
     std::shared_ptr<Sphere> m_sphere;
     std::shared_ptr<Model> m_rock;
+    std::shared_ptr<Model> m_plane;
+    std::shared_ptr<Box> m_street;
+    std::shared_ptr<Box> m_grass;
     std::shared_ptr<Elevator> m_elevator;
     std::shared_ptr<Door> m_door;
 

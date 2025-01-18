@@ -11,11 +11,12 @@
 #include "Render-Retail/Objects/Wardrobe.h"
 #include "Render-Retail/Stores/StoreWalls.h"
 #include "Render-Retail/Stores/FrontWall.h"
+#include "Objects/Model.h"
 #include "core.h"
 
-class ClothingStore : public Object {
+class DepartmentStore : public Object {
    public:
-    ClothingStore();
+    DepartmentStore();
     void update(float dt) override;
     void render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos);
     void onKeyEvent(int32_t key, int32_t scancode, int32_t action, int32_t mode) override;
@@ -23,6 +24,8 @@ class ClothingStore : public Object {
 
    private:
     std::shared_ptr<StoreWalls> m_room;
+    std::vector<std::shared_ptr<Wardrobe>> m_wardrobes;
+    std::vector<std::shared_ptr<Model>> m_games;
     std::shared_ptr<Table> m_desk;
     std::shared_ptr<Shelves> m_shelf;
     std::shared_ptr<Lamp> m_lamp;

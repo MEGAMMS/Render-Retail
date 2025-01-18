@@ -28,7 +28,7 @@ Shelves::Shelves() {
 void Shelves::update(float dt) {}
 void Shelves::render(glm::mat4& mvp, glm::vec3 lightPos, glm::vec3 lightColor, glm::vec3 viewPos) {
     for (int i = 0; i < 3; ++i) {
-        //if (!shelfVisibility[i]) continue;
+        if (!shelfVisibility[i]) continue;
         m_shelves[i]->render(mvp, lightPos, lightColor, viewPos);
     }
 }

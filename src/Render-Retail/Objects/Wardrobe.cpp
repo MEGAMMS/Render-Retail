@@ -19,7 +19,6 @@ Wardrobe::Wardrobe(unsigned int ShelfCount) {
         shelf->setShelfVisibility(Shelf::Left, 0);
         shelf->setShelfVisibility(Shelf::Right, 0);
         shelf->setPosition(glm::vec3(1,5-(space*(i+1)*8), 2.5));
-        std::cerr << space*i << std::endl;
         m_shelves.push_back(shelf);
     }
 }
